@@ -1,0 +1,14 @@
+#navBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin: 0;
+  background-color: teal;
+  div {
+    padding: 10px 10px 10px 10px;
+    font-size: 1vw;
+  }
+  #LoginButton {
+    margin-left: auto;
+  }
+}

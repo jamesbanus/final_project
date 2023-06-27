@@ -1,0 +1,33 @@
+#sideBar {
+  margin: 0;
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 100vh;
+  background-color: teal;
+  text-align: center;
+  div {
+    text-align: center;
+
+    h1 {
+      width: 100%;
+      // font-size: 24px;
+      font-size: 2vw;
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #sideBar {
+    div {
+      text-align: center;
+      h1 {
+        width: 100%;
+        // font-size: 24px;
+        font-size: 3vw;
+        text-align: center;
+      }
+    }
+  }
+}

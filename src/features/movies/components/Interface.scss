@@ -1,0 +1,21 @@
+#sideAndMain {
+  display: flex;
+  flex-direction: row;
+  #sideBar {
+    width: 10%;
+  }
+  #mainContent {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    .subHeading {
+      padding: 10px 10px 10px 10px;
+      font-size: 1vw;
+    }
+    #popularMovies {
+      display: flex;
+      flex-direction: row;
+      overflow: scroll;
+    }
+  }
+}

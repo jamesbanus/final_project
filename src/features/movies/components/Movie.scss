@@ -1,0 +1,19 @@
+.movie {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 10px 10px 10px 10px;
+  .moviePoster {
+    height: auto;
+  }
+  .movieTitle {
+    font-size: 1vw;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .moviePoster {
+    width: 100px;
+    height: auto;
+  }
+}
