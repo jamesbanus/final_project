@@ -1,10 +1,11 @@
 import Movie from "./Movie";
 import Nav from "./Nav";
 import SideBar from "./SideBar";
+import Controls from "./Controls";
 import "./Interface.scss";
 
 const Interface = (props) => {
-  const { movies } = props;
+  const { movies, onPageNext, onPageBack, onPageReset, page } = props;
 
   return (
     <>
@@ -14,7 +15,7 @@ const Interface = (props) => {
         <div id="mainContent">
           <h1 className="subHeading">Popular</h1>
           <div id="popularMovies">
-            {movies?.map((item) => {
+            {movies?.results.map((item) => {
               return (
                 <Movie
                   title={item.title}
@@ -24,6 +25,12 @@ const Interface = (props) => {
               );
             })}
           </div>
+          <Controls
+            onPageNext={onPageNext}
+            onPageBack={onPageBack}
+            onPageReset={onPageReset}
+            page={page}
+          />
         </div>
       </div>
     </>

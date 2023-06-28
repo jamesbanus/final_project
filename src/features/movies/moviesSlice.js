@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchCount } from "./moviesAPI";
 
 const initialState = {
-  value: 0,
+  value: 1,
   status: "idle",
 };
 
@@ -28,11 +28,21 @@ export const moviesSlice = createSlice({
     setMovies: (state, action) => {
       state.movies = action.payload;
     },
+    increment: (state) => {
+      state.value += 1;
+    },
+    decrement: (state) => {
+      state.value -= 1;
+    },
+    reset: (state) => {
+      state.value = initialState.value;
+    },
   },
 });
 
-export const { setMovies } = moviesSlice.actions;
+export const { setMovies, increment, decrement, reset } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
+export const selectPage = (state) => state.movies.value;
 
 export default moviesSlice.reducer;
