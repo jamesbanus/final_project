@@ -7,9 +7,11 @@ const Controls = (props) => {
     return (
       <>
         <div id="nextPreviousButton">
-          <button onClick={onPageNext} id="nextPage">
-            Next
-          </button>
+          <div className="button">
+            <button onClick={onPageNext} id="nextPage">
+              Next
+            </button>
+          </div>
         </div>
       </>
     );
@@ -17,15 +19,16 @@ const Controls = (props) => {
     return (
       <>
         <div id="nextPreviousButton">
-          <button onClick={onPageBack} id="previousPage">
-            Back
-          </button>
-          <button onClick={onPageNext} id="nextPage">
-            Next
-          </button>
-          <button onClick={onPageReset} id="resetPage">
-            Reset
-          </button>
+          <div className="button">
+            <button onClick={onPageBack} id="previousPage">
+              Back
+            </button>
+          </div>
+          <div className="button">
+            <button onClick={onPageReset} id="resetPage">
+              Reset
+            </button>
+          </div>
         </div>
       </>
     );
@@ -33,15 +36,21 @@ const Controls = (props) => {
     return (
       <>
         <div id="nextPreviousButton">
-          <button onClick={onPageBack} id="previousPage">
-            Back
-          </button>
-          <button onClick={onPageNext} id="nextPage">
-            Next
-          </button>
-          <button onClick={onPageReset} id="resetPage">
-            Reset
-          </button>
+          <div className="button">
+            <button onClick={onPageBack} id="previousPage">
+              Back
+            </button>
+          </div>
+          <div className="button">
+            <button onClick={onPageNext} id="nextPage">
+              Next
+            </button>
+          </div>
+          <div className="button">
+            <button onClick={onPageReset} id="resetPage">
+              Reset
+            </button>
+          </div>
         </div>
       </>
     );

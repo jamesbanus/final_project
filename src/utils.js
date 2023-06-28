@@ -3,4 +3,13 @@ const allMoviesURL =
 
 const popularListURL = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=`;
 
-export { allMoviesURL, popularListURL };
+const searchMoviebyTitleURL1 = `https://api.themoviedb.org/3/search/movie?query=`;
+
+const searchMoviebyTitleURL2 = `s&include_adult=false&language=en-US&page=`;
+
+export {
+  allMoviesURL,
+  popularListURL,
+  searchMoviebyTitleURL1,
+  searchMoviebyTitleURL2,
+};

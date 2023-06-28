@@ -11,7 +11,7 @@ import {
   reset,
 } from "./features/movies/moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { allMoviesURL, popularListURL } from "./utils";
+import { popularListURL } from "./utils";
 
 const App = () => {
   const movies = useSelector(selectMovies);
@@ -19,7 +19,7 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const getData = useCallback(async () => {
+  const getPopularData = useCallback(async () => {
     console.log("get data ran", Date.now());
     try {
       const { data } = await axios.get(popularListURL + page, {
@@ -36,8 +36,8 @@ const App = () => {
   }, [dispatch, page]);
 
   useEffect(() => {
-    getData();
-  }, [getData]);
+    getPopularData();
+  }, [getPopularData]);
 
   const onPageNext = () => {
     dispatch(increment());

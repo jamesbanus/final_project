@@ -1,11 +1,20 @@
 import "./SideBar.scss";
 
-const SideBar = () => {
+const SideBar = (props) => {
+  const { onSearchInput, search } = props;
+
   return (
     <>
       <div id="sideBar">
         <div>
-          <h1>option1</h1>
+          <label htmlFor="movie">Search</label>
+          <input
+            value={search}
+            onInput={onSearchInput}
+            type="text"
+            name="movie"
+            id="movieSearch"
+          />
         </div>
         <div>
           <h1>option2</h1>

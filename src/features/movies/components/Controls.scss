@@ -1,3 +1,8 @@
 #nextPreviousButton {
   padding: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: row;
+  .button {
+    padding: 1px 1px 1px 1px;
+  }
 }

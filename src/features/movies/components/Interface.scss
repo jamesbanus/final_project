@@ -1,21 +1,44 @@
-#sideAndMain {
-  display: flex;
-  flex-direction: row;
-  #sideBar {
-    width: 10%;
-  }
-  #mainContent {
+@media only screen and (max-width: 400px) {
+  #sideAndMain {
     display: flex;
     flex-direction: column;
-    width: 90%;
-    .subHeading {
-      padding: 10px 10px 10px 10px;
-      font-size: 2vw;
-    }
-    #popularMovies {
+    #mainContent {
       display: flex;
-      flex-direction: row;
-      overflow: scroll;
+      flex-direction: column;
+      width: 90%;
+      .subHeading {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+      }
+      #popularMovies {
+        display: flex;
+        flex-direction: row;
+        overflow: scroll;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  #sideAndMain {
+    display: flex;
+    flex-direction: row;
+    #sideBar {
+      width: 10%;
+    }
+    #mainContent {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      .subHeading {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+      }
+      #popularMovies {
+        display: flex;
+        flex-direction: row;
+        overflow: scroll;
+      }
     }
   }
 }

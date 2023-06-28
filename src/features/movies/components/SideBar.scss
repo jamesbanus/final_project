@@ -1,32 +1,41 @@
-#sideBar {
-  margin: 0;
-  padding: 10px 10px 10px 10px;
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-  height: 100vh;
-  background-color: teal;
-  text-align: center;
-  div {
-    text-align: center;
-
-    h1 {
-      width: 100%;
-      // font-size: 24px;
-      font-size: 2vw;
-    }
-  }
-}
-
 @media only screen and (max-width: 400px) {
   #sideBar {
+    display: flex;
+    flex: row;
     div {
       text-align: center;
       h1 {
         width: 100%;
-        // font-size: 24px;
-        font-size: 3vw;
+        font-size: 16px;
         text-align: center;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  #sideBar {
+    margin: 0;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100vh;
+    background-color: teal;
+    text-align: center;
+    div {
+      text-align: center;
+      font-size: 16px;
+      #movieSearch {
+        width: 80%;
+        // font-size: 24px;
+        font-size: 16px;
+      }
+
+      h1 {
+        width: 100%;
+        // font-size: 24px;
+        font-size: 16px;
       }
     }
   }
