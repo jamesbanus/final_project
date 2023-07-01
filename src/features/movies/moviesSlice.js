@@ -4,6 +4,7 @@ import { fetchCount } from "./moviesAPI";
 const initialState = {
   value: 1,
   status: "idle",
+  screenMode: 0,
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -40,14 +41,34 @@ export const moviesSlice = createSlice({
     setSearch: (state, action) => {
       state.search = action.payload;
     },
+    setScreenMode: (state, action) => {
+      state.screenMode = action.payload;
+    },
+    setMovie: (state, action) => {
+      state.movie = action.payload;
+    },
+    setID: (state, action) => {
+      state.id = action.payload;
+    },
   },
 });
 
-export const { setMovies, increment, decrement, reset, setSearch } =
-  moviesSlice.actions;
+export const {
+  setMovies,
+  increment,
+  decrement,
+  reset,
+  setSearch,
+  setScreenMode,
+  setMovie,
+  setID,
+} = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
 export const selectPage = (state) => state.movies.value;
 export const selectSearch = (state) => state.movies.search;
+export const selectScreen = (state) => state.movies.screenMode;
+export const selectMovie = (state) => state.movies.movie;
+export const selectID = (state) => state.movies.id;
 
 export default moviesSlice.reducer;

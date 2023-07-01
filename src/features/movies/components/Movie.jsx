@@ -1,18 +1,24 @@
 import "./Movie.scss";
 
 const Movie = (props) => {
-  const { title, poster_path } = props;
+  const { movies, changeScreen } = props;
 
   return (
     <>
-      <div className="movie">
-        <img
-          className="moviePoster"
-          src={`https://image.tmdb.org/t/p/w185${poster_path}`}
-          alt={title}
-        />
-        <h1 className="movieTitle">{title}</h1>
-      </div>
+      {movies?.results.map((item) => {
+        return (
+          <div className="movie" key={item.id}>
+            <img
+              className="moviePoster"
+              src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+              alt={item.title}
+              id={item.id}
+              onClick={changeScreen}
+            />
+            <h1 className="movieTitle">{item.title}</h1>
+          </div>
+        );
+      })}
     </>
   );
 };

@@ -7,9 +7,14 @@ const searchMoviebyTitleURL1 = `https://api.themoviedb.org/3/search/movie?query=
 
 const searchMoviebyTitleURL2 = `s&include_adult=false&language=en-US&page=`;
 
+const movieByID1 = `https://api.themoviedb.org/3/movie/`;
+const movieByID2 = `?language=en-US`;
+
 export {
   allMoviesURL,
   popularListURL,
   searchMoviebyTitleURL1,
   searchMoviebyTitleURL2,
+  movieByID1,
+  movieByID2,
 };

@@ -1,0 +1,46 @@
+#backButton {
+  .button {
+    margin: 10px 10px 10px 10px;
+    padding: 1px 1px 1px 1px;
+    width: 100px;
+  }
+}
+
+#singleMovieContainer {
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  .singleMovie {
+    display: flex;
+    flex-direction: column;
+    max-width: 35%;
+    align-items: center;
+    padding: 10px 10px 10px 0;
+    .img {
+      max-width: 300px;
+      .moviePoster {
+        width: 100%;
+        height: auto;
+      }
+    }
+    .title {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .singleMovieInfo {
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    flex-direction: column;
+    max-width: 65%;
+    .overviewTitle {
+      padding: 10px 10px 10px 10px;
+      font-size: 16px;
+    }
+    .overview {
+      padding: 10px 10px 10px 10px;
+      font-size: 14px;
+    }
+  }
+}
