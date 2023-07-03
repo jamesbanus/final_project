@@ -11,7 +11,7 @@ import {
   reset,
 } from "./features/movies/moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { popularListURL } from "./utils";
+import { apiAuth, popularListURL } from "./utils";
 
 const App = () => {
   const movies = useSelector(selectMovies);
@@ -24,8 +24,7 @@ const App = () => {
     try {
       const { data } = await axios.get(popularListURL + page, {
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZDNjYzk1ZWE4Zjk5MWYxMDhkZWQxMjJhM2YwMzA3MCIsInN1YiI6IjY0OGM2ZDEwYzNjODkxMDBhZTUwMWJkNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LX3gcqEZAqxOq0UVFVSm_L9rWNhXF4JgEn48pkSa9Rg",
+          Authorization: apiAuth,
         },
       });
       console.log(data);

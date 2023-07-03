@@ -6,41 +6,63 @@
   }
 }
 
-#singleMovieContainer {
-  padding: 10px 10px 10px 10px;
-  display: flex;
-  flex-direction: row;
+#masterContainer {
   width: 100%;
-  .singleMovie {
+  position: relative;
+  .backDrop {
+    max-width: 100%;
+    height: auto;
+    opacity: 0.2;
+  }
+  #singleMovieContainer {
+    padding: 10px 10px 10px 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
-    flex-direction: column;
-    max-width: 35%;
-    align-items: center;
-    padding: 10px 10px 10px 0;
-    .img {
-      max-width: 300px;
-      .moviePoster {
-        width: 100%;
-        height: auto;
+    flex-direction: row;
+    width: 100%;
+    .singleMovie {
+      display: flex;
+      flex-direction: column;
+      max-width: 35%;
+      align-items: center;
+      padding: 10px 10px 10px 0;
+      .img {
+        max-width: 300px;
+        .moviePoster {
+          position: relative;
+          width: 100%;
+          height: auto;
+          z-index: 1;
+        }
       }
     }
-    .title {
-      width: 100%;
-      text-align: center;
-    }
-  }
-  .singleMovieInfo {
-    padding: 10px 10px 10px 10px;
-    display: flex;
-    flex-direction: column;
-    max-width: 65%;
-    .overviewTitle {
+    .singleMovieInfo {
       padding: 10px 10px 10px 10px;
-      font-size: 16px;
-    }
-    .overview {
-      padding: 10px 10px 10px 10px;
-      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      max-width: 65%;
+      .title {
+        padding: 10px 10px 10px 10px;
+        .movieTitle {
+          margin: 0;
+        }
+      }
+      .overviewTitle {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+        h2 {
+          margin: 0;
+        }
+      }
+      .overview {
+        padding: 10px 10px 10px 10px;
+        font-size: 14px;
+        h3 {
+          margin: 0;
+        }
+      }
     }
   }
 }

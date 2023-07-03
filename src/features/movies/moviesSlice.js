@@ -50,6 +50,9 @@ export const moviesSlice = createSlice({
     setID: (state, action) => {
       state.id = action.payload;
     },
+    setCert: (state, action) => {
+      state.cert = action.payload;
+    },
   },
 });
 
@@ -62,6 +65,7 @@ export const {
   setScreenMode,
   setMovie,
   setID,
+  setCert,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
@@ -70,5 +74,6 @@ export const selectSearch = (state) => state.movies.search;
 export const selectScreen = (state) => state.movies.screenMode;
 export const selectMovie = (state) => state.movies.movie;
 export const selectID = (state) => state.movies.id;
+export const selectCert = (state) => state.movies.cert;
 
 export default moviesSlice.reducer;

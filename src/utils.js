@@ -10,11 +10,18 @@ const searchMoviebyTitleURL2 = `s&include_adult=false&language=en-US&page=`;
 const movieByID1 = `https://api.themoviedb.org/3/movie/`;
 const movieByID2 = `?language=en-US`;
 
+const releaseDate2 = `/release_dates`;
+
+const apiAuth =
+  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZDNjYzk1ZWE4Zjk5MWYxMDhkZWQxMjJhM2YwMzA3MCIsInN1YiI6IjY0OGM2ZDEwYzNjODkxMDBhZTUwMWJkNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LX3gcqEZAqxOq0UVFVSm_L9rWNhXF4JgEn48pkSa9Rg";
+
 export {
+  apiAuth,
   allMoviesURL,
   popularListURL,
   searchMoviebyTitleURL1,
   searchMoviebyTitleURL2,
   movieByID1,
   movieByID2,
+  releaseDate2,
 };
