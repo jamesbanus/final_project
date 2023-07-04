@@ -11,22 +11,46 @@ const SingleMovie = (props) => {
   const cert = useSelector(selectCert);
   const releaseDate = new Date(movie?.release_date).getFullYear();
 
+  let certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "GB");
+
+  if (certInfo === undefined) {
+    certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "US");
+  }
+  // else {
+  //   certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "GB");
+  // }
+
+  const certificate = certInfo?.release_dates.find(
+    (certificate) => certificate.certification !== ""
+  );
+
+  console.log(certificate);
+
   const dispatch = useDispatch();
+
+  let endpoints = [
+    movieByID1 + id + movieByID2,
+    movieByID1 + id + releaseDate2,
+  ];
+
+  const axiosInstance = axios.create({
+    headers: {
+      Authorization: apiAuth,
+    },
+  });
 
   const getMovieData = useCallback(async () => {
     console.log("get movie ran", Date.now(), id);
-    let endpoints = [
-      movieByID1 + id + movieByID2,
-      movieByID1 + id + releaseDate2,
-    ];
     try {
-      axios.all(endpoints.map((endpoints) => axios.get(endpoints))).then(
-        axios.spread(({ data: movieData }, { data: certData }) => {
-          console.log({ movieData, certData });
-          dispatch(setCert(certData));
-          dispatch(setMovie(movieData));
-        })
-      );
+      axios
+        .all(endpoints.map((endpoints) => axiosInstance.get(endpoints)))
+        .then(
+          axios.spread(({ data: movieData }, { data: certData }) => {
+            console.log({ movieData, certData });
+            dispatch(setCert(certData.results));
+            dispatch(setMovie(movieData));
+          })
+        );
     } catch (error) {
       console.log(error, id);
     }
@@ -65,6 +89,9 @@ const SingleMovie = (props) => {
               <h1 className="movieTitle">
                 {movie?.title + " (" + releaseDate + ")"}
               </h1>
+            </div>
+            <div className="subInfo">
+              <h3>{certificate?.certification}</h3>
             </div>
             <div className="overviewTitle">
               <h2>Overview</h2>
