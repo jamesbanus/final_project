@@ -48,7 +48,9 @@ export const moviesSlice = createSlice({
       state.movie = action.payload;
     },
     setID: (state, action) => {
+      console.log(action.payload);
       state.id = action.payload;
+      state.screenMode = 1;
     },
     setCert: (state, action) => {
       state.cert = action.payload;

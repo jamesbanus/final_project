@@ -16,14 +16,16 @@ const Interface = (props) => {
   const dispatch = useDispatch();
 
   const changeScreen = (e) => {
-    if (screenMode === 0) {
-      dispatch(setScreenMode(1));
+    console.log(e.target.id);
+    if (e.target.id) {
+      dispatch(setID(e.target.id));
     } else {
+      dispatch(setID(""));
       dispatch(setScreenMode(0));
+      console.log(id);
     }
-    dispatch(setID(e.target.id));
   };
-
+  console.log(screenMode);
   return (
     <>
       <Nav />

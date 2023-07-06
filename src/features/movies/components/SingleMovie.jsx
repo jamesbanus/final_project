@@ -11,11 +11,26 @@ const SingleMovie = (props) => {
   const cert = useSelector(selectCert);
   const releaseDate = new Date(movie?.release_date).getFullYear();
 
+  const result = {};
+
+  for (let index = 0; index < cert?.length; index++) {
+    const element = cert[index];
+    const country = element.iso_3166_1;
+    for (let index = 0; index < element?.release_dates.length; index++) {
+      const innerElement = element.release_dates[index];
+      if (innerElement.certification) {
+        result[country] = innerElement.certification;
+      }
+    }
+  }
+
+  // console.log(result);
+
   let certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "GB");
 
-  if (certInfo === undefined) {
-    certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "US");
-  }
+  // if (certInfo === undefined) {
+  //   certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "US");
+  // }
   // else {
   //   certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "GB");
   // }
@@ -24,7 +39,7 @@ const SingleMovie = (props) => {
     (certificate) => certificate.certification !== ""
   );
 
-  console.log(certificate);
+  // console.log(certInfo, certificate);
 
   const dispatch = useDispatch();
 
@@ -40,6 +55,10 @@ const SingleMovie = (props) => {
   });
 
   const getMovieData = useCallback(async () => {
+    console.log(id);
+    if (!id) {
+      return;
+    }
     console.log("get movie ran", Date.now(), id);
     try {
       axios
@@ -59,6 +78,19 @@ const SingleMovie = (props) => {
   useEffect(() => {
     getMovieData();
   }, [getMovieData]);
+
+  const getAge = () => {
+    if (result["GB"]) {
+      return result["GB"];
+    }
+    if (result["US"]) {
+      return result["US"];
+    }
+    const array = Object.values(result);
+    return array[0];
+  };
+
+  console.log(movie, new Date());
 
   return (
     <>
@@ -91,7 +123,7 @@ const SingleMovie = (props) => {
               </h1>
             </div>
             <div className="subInfo">
-              <h3>{certificate?.certification}</h3>
+              <h3>{getAge()}</h3>
             </div>
             <div className="overviewTitle">
               <h2>Overview</h2>
