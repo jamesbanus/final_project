@@ -4,7 +4,14 @@ import SideBar from "./SideBar";
 import Controls from "./Controls";
 import SingleMovie from "./SingleMovie";
 import "./Interface.scss";
-import { setScreenMode, selectScreen, setID, selectID } from "../moviesSlice";
+import {
+  setScreenMode,
+  selectScreen,
+  setID,
+  selectID,
+  clearCert,
+  clearMovie,
+} from "../moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const Interface = (props) => {
@@ -20,8 +27,9 @@ const Interface = (props) => {
     if (e.target.id) {
       dispatch(setID(e.target.id));
     } else {
-      dispatch(setID(undefined));
       dispatch(setScreenMode(0));
+      dispatch(clearCert());
+      dispatch(clearMovie());
       console.log(id);
     }
   };

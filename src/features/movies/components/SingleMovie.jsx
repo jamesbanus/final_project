@@ -116,6 +116,9 @@ const SingleMovie = (props) => {
 
   const genres = genresResults.join(", ");
 
+  if (!movie | !cert) {
+    return;
+  }
   return (
     <>
       <div id="backButton">

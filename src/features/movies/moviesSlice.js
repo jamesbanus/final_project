@@ -55,6 +55,12 @@ export const moviesSlice = createSlice({
     setCert: (state, action) => {
       state.cert = action.payload;
     },
+    clearCert: (state) => {
+      state.cert = undefined;
+    },
+    clearMovie: (state) => {
+      state.movie = undefined;
+    },
   },
 });
 
@@ -68,6 +74,8 @@ export const {
   setMovie,
   setID,
   setCert,
+  clearCert,
+  clearMovie,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
