@@ -20,7 +20,7 @@ const Interface = (props) => {
     if (e.target.id) {
       dispatch(setID(e.target.id));
     } else {
-      dispatch(setID(""));
+      dispatch(setID(undefined));
       dispatch(setScreenMode(0));
       console.log(id);
     }

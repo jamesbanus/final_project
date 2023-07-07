@@ -7,52 +7,30 @@ import { useSelector, useDispatch } from "react-redux";
 
 const SingleMovie = (props) => {
   const { changeScreen, id } = props;
-  const movie = useSelector(selectMovie);
-  const cert = useSelector(selectCert);
-  const releaseDate = new Date(movie?.release_date).getFullYear();
-
-  const result = {};
-
-  for (let index = 0; index < cert?.length; index++) {
-    const element = cert[index];
-    const country = element.iso_3166_1;
-    for (let index = 0; index < element?.release_dates.length; index++) {
-      const innerElement = element.release_dates[index];
-      if (innerElement.certification) {
-        result[country] = innerElement.certification;
-      }
-    }
-  }
-
-  // console.log(result);
-
-  let certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "GB");
-
-  // if (certInfo === undefined) {
-  //   certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "US");
-  // }
-  // else {
-  //   certInfo = cert?.find((certificate) => certificate.iso_3166_1 === "GB");
-  // }
-
-  const certificate = certInfo?.release_dates.find(
-    (certificate) => certificate.certification !== ""
-  );
-
-  // console.log(certInfo, certificate);
 
   const dispatch = useDispatch();
+
+  // Store Api Data for movie and certification
+
+  const movie = useSelector(selectMovie);
+  const cert = useSelector(selectCert);
+
+  // set endpointns for the api (URLS from utils)
 
   let endpoints = [
     movieByID1 + id + movieByID2,
     movieByID1 + id + releaseDate2,
   ];
 
+  // create an insteance with headers so we only have to authorise once
+
   const axiosInstance = axios.create({
     headers: {
       Authorization: apiAuth,
     },
   });
+
+  // call the apis
 
   const getMovieData = useCallback(async () => {
     console.log(id);
@@ -66,8 +44,8 @@ const SingleMovie = (props) => {
         .then(
           axios.spread(({ data: movieData }, { data: certData }) => {
             console.log({ movieData, certData });
-            dispatch(setCert(certData.results));
             dispatch(setMovie(movieData));
+            dispatch(setCert(certData.results));
           })
         );
     } catch (error) {
@@ -79,18 +57,64 @@ const SingleMovie = (props) => {
     getMovieData();
   }, [getMovieData]);
 
+  // Find the release date year
+
+  const releaseDate = new Date(movie?.release_date).getFullYear();
+
+  // Calculate movie runtime in hours and minutes
+
+  const runTime = movie?.runtime;
+  const hours = Math.floor(runTime / 60);
+  const minutes = runTime % 60;
+
+  // create empty object to store stripped out certification results
+
+  const certificateResults = {};
+
+  // loop through each country of the results, and then through the inner results. If there is a certificate add it to the above object
+
+  for (let index = 0; index < cert?.length; index++) {
+    const element = cert[index];
+    const country = element.iso_3166_1;
+    for (let index = 0; index < element?.release_dates.length; index++) {
+      const innerElement = element.release_dates[index];
+      if (innerElement.certification) {
+        certificateResults[country] = innerElement.certification;
+      }
+    }
+  }
+
+  // if our object has an age rating for GB, use that. If not then US, and if not then the first one.
+
   const getAge = () => {
-    if (result["GB"]) {
-      return result["GB"];
+    if (certificateResults["GB"]) {
+      return certificateResults["GB"];
     }
-    if (result["US"]) {
-      return result["US"];
+    if (certificateResults["US"]) {
+      return certificateResults["US"];
     }
-    const array = Object.values(result);
+    const array = Object.values(certificateResults);
     return array[0];
   };
 
-  console.log(movie, new Date());
+  // Create empty array to store the genres, n will be the index
+
+  const genresResults = [];
+  let n = 0;
+
+  // loop over the movie data and store each genre
+
+  for (let index = 0; index < movie?.genres.length; index++) {
+    const element = movie.genres[index];
+    if (element.name) {
+      genresResults[n] = element.name;
+      n++;
+    }
+  }
+
+  // convert array to string
+
+  const genres = genresResults.join(", ");
 
   return (
     <>
@@ -123,13 +147,20 @@ const SingleMovie = (props) => {
               </h1>
             </div>
             <div className="subInfo">
-              <h3>{getAge()}</h3>
+              <h3 className="cert">{getAge()}</h3>
+              <ul className="moreInfo">
+                <li>{genres}</li>
+                <li>{hours + "h " + minutes + "m"}</li>
+              </ul>
+            </div>
+            <div className="taglineDiv">
+              <p className="tagLine">{movie?.tagline}</p>
             </div>
             <div className="overviewTitle">
               <h2>Overview</h2>
             </div>
             <div className="overview">
-              <h3 className="movieOverview">{movie?.overview}</h3>
+              <p className="movieOverview">{movie?.overview}</p>
             </div>
           </div>
         </div>
