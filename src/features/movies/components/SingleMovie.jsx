@@ -1,9 +1,24 @@
 import "./SingleMovie.scss";
-import { apiAuth, movieByID1, movieByID2, releaseDate2 } from "../../../utils";
+import {
+  apiAuth,
+  movieByID1,
+  movieByID2,
+  releaseDate2,
+  apiVideos,
+} from "../../../utils";
 import React, { useEffect, useCallback } from "react";
 import axios from "axios";
-import { selectMovie, setMovie, selectCert, setCert } from "../moviesSlice";
+import {
+  selectMovie,
+  setMovie,
+  selectCert,
+  setCert,
+  selectVideos,
+  setVideos,
+} from "../moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
+import Modal from "./Modal";
+import { openModal } from "../modalSlice";
 
 const SingleMovie = (props) => {
   const { changeScreen, id } = props;
@@ -14,12 +29,15 @@ const SingleMovie = (props) => {
 
   const movie = useSelector(selectMovie);
   const cert = useSelector(selectCert);
+  const videos = useSelector(selectVideos);
+  const { isOpen } = useSelector((store) => store.modal);
 
   // set endpointns for the api (URLS from utils)
 
   let endpoints = [
     movieByID1 + id + movieByID2,
     movieByID1 + id + releaseDate2,
+    movieByID1 + id + apiVideos,
   ];
 
   // create an insteance with headers so we only have to authorise once
@@ -42,11 +60,14 @@ const SingleMovie = (props) => {
       axios
         .all(endpoints.map((endpoints) => axiosInstance.get(endpoints)))
         .then(
-          axios.spread(({ data: movieData }, { data: certData }) => {
-            console.log({ movieData, certData });
-            dispatch(setMovie(movieData));
-            dispatch(setCert(certData.results));
-          })
+          axios.spread(
+            ({ data: movieData }, { data: certData }, { data: videoData }) => {
+              console.log({ movieData, certData, videoData });
+              dispatch(setMovie(movieData));
+              dispatch(setCert(certData.results));
+              dispatch(setVideos(videoData.results));
+            }
+          )
         );
     } catch (error) {
       console.log(error, id);
@@ -116,6 +137,32 @@ const SingleMovie = (props) => {
 
   const genres = genresResults.join(", ");
 
+  // create empty object to store stripped out video results
+
+  const videosResults = {};
+
+  for (let index = 0; index < videos?.length; index++) {
+    const element = videos[index];
+    const videoName = element.name;
+    if (element.key) {
+      videosResults[videoName] = element.key;
+    }
+  }
+
+  const getTrailerKey = () => {
+    for (let k in videosResults) {
+      if (k.toLowerCase().indexOf("Official Trailer".toLowerCase()) !== -1)
+        return videosResults[k];
+    }
+    return null;
+  };
+
+  console.log(getTrailerKey());
+
+  const trailerKey = getTrailerKey();
+
+  console.log(videosResults);
+
   if (!movie | !cert) {
     return;
   }
@@ -127,6 +174,7 @@ const SingleMovie = (props) => {
         </button>
       </div>
       <div id="masterContainer">
+        {isOpen && <Modal trailerKey={trailerKey} />}
         <img
           className="backDrop"
           src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
@@ -164,6 +212,15 @@ const SingleMovie = (props) => {
             </div>
             <div className="overview">
               <p className="movieOverview">{movie?.overview}</p>
+            </div>
+            <div className="playButtonDiv">
+              <button
+                type="button"
+                className="playButton"
+                onClick={() => dispatch(openModal())}
+              >
+                Play Trailer
+              </button>
             </div>
           </div>
         </div>

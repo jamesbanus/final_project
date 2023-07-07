@@ -12,6 +12,8 @@ const movieByID2 = `?language=en-US`;
 
 const releaseDate2 = `/release_dates`;
 
+const apiVideos = `/videos?language=en-US`;
+
 const apiAuth =
   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZDNjYzk1ZWE4Zjk5MWYxMDhkZWQxMjJhM2YwMzA3MCIsInN1YiI6IjY0OGM2ZDEwYzNjODkxMDBhZTUwMWJkNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LX3gcqEZAqxOq0UVFVSm_L9rWNhXF4JgEn48pkSa9Rg";
 
@@ -24,4 +26,5 @@ export {
   movieByID1,
   movieByID2,
   releaseDate2,
+  apiVideos,
 };

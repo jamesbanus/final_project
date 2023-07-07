@@ -13,6 +13,7 @@ import {
   clearMovie,
 } from "../moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { closeModal } from "../modalSlice";
 
 const Interface = (props) => {
   const { movies, onPageNext, onPageBack, onPageReset, page } = props;
@@ -30,6 +31,7 @@ const Interface = (props) => {
       dispatch(setScreenMode(0));
       dispatch(clearCert());
       dispatch(clearMovie());
+      dispatch(closeModal());
       console.log(id);
     }
   };

@@ -48,7 +48,6 @@ export const moviesSlice = createSlice({
       state.movie = action.payload;
     },
     setID: (state, action) => {
-      console.log(action.payload);
       state.id = action.payload;
       state.screenMode = 1;
     },
@@ -60,6 +59,9 @@ export const moviesSlice = createSlice({
     },
     clearMovie: (state) => {
       state.movie = undefined;
+    },
+    setVideos: (state, action) => {
+      state.videos = action.payload;
     },
   },
 });
@@ -76,6 +78,7 @@ export const {
   setCert,
   clearCert,
   clearMovie,
+  setVideos,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
@@ -85,5 +88,6 @@ export const selectScreen = (state) => state.movies.screenMode;
 export const selectMovie = (state) => state.movies.movie;
 export const selectID = (state) => state.movies.id;
 export const selectCert = (state) => state.movies.cert;
+export const selectVideos = (state) => state.movies.videos;
 
 export default moviesSlice.reducer;
