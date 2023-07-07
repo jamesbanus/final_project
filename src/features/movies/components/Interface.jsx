@@ -24,7 +24,6 @@ const Interface = (props) => {
   const dispatch = useDispatch();
 
   const changeScreen = (e) => {
-    console.log(e.target.id);
     if (e.target.id) {
       dispatch(setID(e.target.id));
     } else {
@@ -35,7 +34,7 @@ const Interface = (props) => {
       console.log(id);
     }
   };
-  console.log(screenMode);
+
   return (
     <>
       <Nav />

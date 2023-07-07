@@ -1,8 +1,99 @@
 #backButton {
+  max-width: 100%;
   .button {
     margin: 10px 10px 10px 10px;
     padding: 1px 1px 1px 1px;
     width: 100px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #masterContainer {
+    max-width: 100%;
+    position: relative;
+    padding: 10px 10px 10px 10px;
+    height: 100%;
+    .backDrop {
+      max-width: 100%;
+      height: auto;
+      opacity: 0.2;
+    }
+    #singleMovieContainer {
+      padding: 10px 10px 10px 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      .singleMovie {
+        max-width: 35%;
+        padding: 10px 10px 10px 0;
+        .img {
+          max-width: 300px;
+          .moviePoster {
+            position: relative;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+          }
+        }
+      }
+      .singleMovieInfo {
+        padding: 10px 10px 10px 10px;
+        max-width: 65%;
+        .title {
+          padding: 10px 10px 10px 10px;
+          .movieTitle {
+            margin: 0;
+          }
+        }
+        .subInfo {
+          padding: 10px 10px 10px 10px;
+          width: max-content;
+          display: flex;
+          flex-direction: row;
+          .cert {
+            margin: 0;
+            border-style: solid;
+            padding: 1px 1px 1px 1px;
+          }
+          .moreInfo {
+            margin: 0;
+            padding: 4px 4px 4px 4px;
+            li {
+              list-style: none;
+              display: inline;
+              margin-left: 5px;
+            }
+            li:after {
+              content: " \2022";
+            }
+            li:last-child:after {
+              content: none;
+            }
+          }
+        }
+        .taglineDiv {
+          padding: 10px 10px 10px 10px;
+          .tagLine {
+            margin: 0;
+          }
+        }
+        .overviewTitle {
+          padding: 10px 10px 10px 10px;
+          font-size: 16px;
+          h2 {
+            margin: 0;
+          }
+        }
+        .overview {
+          padding: 10px 10px 10px 10px;
+          font-size: 14px;
+          .movieOverview {
+            margin: 0;
+          }
+        }
+      }
+    }
   }
 }
 

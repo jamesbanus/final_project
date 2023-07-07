@@ -51,7 +51,6 @@ const SingleMovie = (props) => {
   // call the apis
 
   const getMovieData = useCallback(async () => {
-    console.log(id);
     if (!id) {
       return;
     }
@@ -151,17 +150,21 @@ const SingleMovie = (props) => {
 
   const getTrailerKey = () => {
     for (let k in videosResults) {
-      if (k.toLowerCase().indexOf("Official Trailer".toLowerCase()) !== -1)
+      if (k.toLowerCase().indexOf("Official Trailer".toLowerCase()) !== -1) {
         return videosResults[k];
+      } else if (
+        k.toLowerCase().indexOf("Teaser Trailer".toLowerCase()) !== -1
+      ) {
+        return videosResults[k];
+      } else if (k.toLowerCase().indexOf("Trailer".toLowerCase()) !== -1) {
+        return videosResults[k];
+      }
     }
+
     return null;
   };
 
-  console.log(getTrailerKey());
-
   const trailerKey = getTrailerKey();
-
-  console.log(videosResults);
 
   if (!movie | !cert) {
     return;
