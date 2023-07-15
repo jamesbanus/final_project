@@ -10,7 +10,7 @@ const Movie = (props) => {
           <div className="movie" key={item.id}>
             <img
               className="moviePoster"
-              src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
               alt={item.title}
               id={item.id}
               onClick={changeScreen}

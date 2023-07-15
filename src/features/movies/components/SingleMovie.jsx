@@ -171,8 +171,8 @@ const SingleMovie = (props) => {
   }
   return (
     <>
-      <div id="backButton">
-        <button className="button" onClick={changeScreen}>
+      <div id="backButtonDiv">
+        <button className="backButton" onClick={changeScreen}>
           Back
         </button>
       </div>
@@ -183,37 +183,36 @@ const SingleMovie = (props) => {
           src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
           alt={movie?.title}
         />
-
         <div id="singleMovieContainer">
-          <div className="singleMovie">
-            <div className="img">
-              <img
-                className="moviePoster"
-                src={`https://image.tmdb.org/t/p/w780${movie?.poster_path}`}
-                alt={movie?.title}
-              />
-            </div>
+          <div className="moviePosterDiv">
+            <img
+              className="moviePoster"
+              src={`https://image.tmdb.org/t/p/w780${movie?.poster_path}`}
+              alt={movie?.title}
+            />
           </div>
-          <div className="singleMovieInfo">
-            <div className="title">
+          <div className="singleMovieInfoContainer">
+            <div className="movieTitleDiv">
               <h1 className="movieTitle">
                 {movie?.title + " (" + releaseDate + ")"}
               </h1>
             </div>
-            <div className="subInfo">
+            <div className="subInfoDiv">
               <h3 className="cert">{getAge()}</h3>
               <ul className="moreInfo">
                 <li>{genres}</li>
                 <li>{hours + "h " + minutes + "m"}</li>
               </ul>
             </div>
-            <div className="taglineDiv">
-              <p className="tagLine">{movie?.tagline}</p>
-            </div>
-            <div className="overviewTitle">
+            {movie?.tagline && (
+              <div className="taglineDiv">
+                <p className="tagLine">{movie?.tagline}</p>
+              </div>
+            )}
+            <div className="overviewTitleDiv">
               <h2>Overview</h2>
             </div>
-            <div className="overview">
+            <div className="movieOverviewDiv">
               <p className="movieOverview">{movie?.overview}</p>
             </div>
             <div className="playButtonDiv">

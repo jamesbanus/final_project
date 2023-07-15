@@ -1,6 +1,6 @@
-#backButton {
+#backButtonDiv {
   max-width: 100%;
-  .button {
+  .backButton {
     margin: 10px 10px 10px 10px;
     padding: 1px 1px 1px 1px;
     width: 100px;
@@ -10,44 +10,41 @@
 @media only screen and (max-width: 400px) {
   #masterContainer {
     max-width: 100%;
-    position: relative;
-    padding: 10px 10px 10px 10px;
     height: 100%;
+    position: relative;
     .backDrop {
       max-width: 100%;
       height: auto;
-      opacity: 0.2;
+      opacity: 1;
     }
     #singleMovieContainer {
-      padding: 10px 10px 10px 10px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      .singleMovie {
-        max-width: 35%;
-        padding: 10px 10px 10px 0;
-        .img {
-          max-width: 300px;
-          .moviePoster {
-            position: relative;
-            width: 100%;
-            height: auto;
-            z-index: 1;
-          }
+      max-width: 100%;
+      .moviePosterDiv {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 35%;
+        .moviePoster {
+          max-width: 100px;
+          width: 100%;
+          height: auto;
+          z-index: 1;
         }
       }
-      .singleMovieInfo {
-        padding: 10px 10px 10px 10px;
-        max-width: 65%;
-        .title {
+      .singleMovieInfoContainer {
+        max-width: 100%;
+        background-color: white;
+        .movieTitleDiv {
           padding: 10px 10px 10px 10px;
+          // color: white;
+          // background-color: black;
           .movieTitle {
             margin: 0;
           }
         }
-        .subInfo {
+        .subInfoDiv {
           padding: 10px 10px 10px 10px;
+          max-width: 100%;
           width: max-content;
           display: flex;
           flex-direction: row;
@@ -78,19 +75,22 @@
             margin: 0;
           }
         }
-        .overviewTitle {
+        .overviewTitleDiv {
           padding: 10px 10px 10px 10px;
           font-size: 16px;
           h2 {
             margin: 0;
           }
         }
-        .overview {
+        .movieOverviewDiv {
           padding: 10px 10px 10px 10px;
           font-size: 14px;
           .movieOverview {
             margin: 0;
           }
+        }
+        .playButtonDiv {
+          padding: 10px 10px 10px 10px;
         }
       }
     }
@@ -108,40 +108,35 @@
     }
     #singleMovieContainer {
       padding: 10px 10px 10px 10px;
-      position: absolute;
-      top: 0;
-      left: 0;
       display: flex;
       flex-direction: row;
       width: 100%;
-      .singleMovie {
-        display: flex;
-        flex-direction: column;
+      position: absolute;
+      top: 0;
+      left: 0;
+      .moviePosterDiv {
         max-width: 35%;
-        align-items: center;
         padding: 10px 10px 10px 0;
-        .img {
+        .moviePoster {
           max-width: 300px;
-          .moviePoster {
-            position: relative;
-            width: 100%;
-            height: auto;
-            z-index: 1;
-          }
+          position: relative;
+          width: 100%;
+          height: auto;
+          z-index: 1;
         }
       }
-      .singleMovieInfo {
+      .singleMovieInfoContainer {
         padding: 10px 10px 10px 10px;
         display: flex;
         flex-direction: column;
         max-width: 65%;
-        .title {
+        .movieTitleDiv {
           padding: 10px 10px 10px 10px;
           .movieTitle {
             margin: 0;
           }
         }
-        .subInfo {
+        .subInfoDiv {
           padding: 10px 10px 10px 10px;
           width: max-content;
           display: flex;
@@ -173,19 +168,22 @@
             margin: 0;
           }
         }
-        .overviewTitle {
+        .overviewTitleDiv {
           padding: 10px 10px 10px 10px;
           font-size: 16px;
           h2 {
             margin: 0;
           }
         }
-        .overview {
+        .movieOverviewDiv {
           padding: 10px 10px 10px 10px;
           font-size: 14px;
           .movieOverview {
             margin: 0;
           }
+        }
+        .playButtonDiv {
+          padding: 10px 10px 10px 10px;
         }
       }
     }

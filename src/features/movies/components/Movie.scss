@@ -1,20 +1,31 @@
-.movie {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 10px 10px 10px 10px;
-  .moviePoster {
-    max-width: 185px;
-    height: auto;
-  }
-  .movieTitle {
-    font-size: 16px;
+@media only screen and (max-width: 400px) {
+  .movie {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 5px 5px 5px 5px;
+    .moviePoster {
+      max-width: 100px;
+      height: auto;
+    }
+    .movieTitle {
+      font-size: 12px;
+    }
   }
 }
 
-@media only screen and (max-width: 400px) {
-  .moviePoster {
-    max-width: 100px;
-    height: auto;
+@media only screen and (min-width: 400px) {
+  .movie {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+    .moviePoster {
+      max-width: 185px;
+      height: auto;
+    }
+    .movieTitle {
+      font-size: 16px;
+    }
   }
 }

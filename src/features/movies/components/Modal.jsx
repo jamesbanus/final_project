@@ -20,8 +20,6 @@ const Modal = (props) => {
             </button>
           </div>
           <iframe
-            width="560"
-            height="315"
             className="video"
             title="Youtube player"
             allowFullScreen
