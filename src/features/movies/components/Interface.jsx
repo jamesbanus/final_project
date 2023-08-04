@@ -47,7 +47,12 @@ const Interface = (props) => {
     <>
       <Nav />
       <div id="sideAndMain">
-        <SideBar onSearchInput={onSearchInput} search={search} />
+        <SideBar
+          onSearchInput={onSearchInput}
+          search={search}
+          screenMode={screenMode}
+          changeScreen={changeScreen}
+        />
         <div id="mainContent">
           {screenMode === 0 && (
             <>
