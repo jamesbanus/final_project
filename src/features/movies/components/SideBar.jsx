@@ -9,7 +9,7 @@ const SideBar = (props) => {
         <div>
           <label htmlFor="movie">Search</label>
           <input
-            value={search}
+            value={search || ""}
             onInput={onSearchInput}
             type="text"
             name="movie"

@@ -63,6 +63,9 @@ export const moviesSlice = createSlice({
     setVideos: (state, action) => {
       state.videos = action.payload;
     },
+    setSearchResults: (state, action) => {
+      state.searchResults = action.payload;
+    },
   },
 });
 
@@ -79,6 +82,7 @@ export const {
   clearCert,
   clearMovie,
   setVideos,
+  setSearchResults,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
@@ -89,5 +93,6 @@ export const selectMovie = (state) => state.movies.movie;
 export const selectID = (state) => state.movies.id;
 export const selectCert = (state) => state.movies.cert;
 export const selectVideos = (state) => state.movies.videos;
+export const selectSearchResults = (state) => state.movies.searchResults;
 
 export default moviesSlice.reducer;

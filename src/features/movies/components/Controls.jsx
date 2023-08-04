@@ -1,9 +1,17 @@
 import "./Controls.scss";
 
 const Controls = (props) => {
-  const { onPageBack, onPageNext, onPageReset, page } = props;
+  const { onPageBack, onPageNext, onPageReset, page, totalPages } = props;
 
-  if (page === 1) {
+  if (page === 1 && page === totalPages) {
+    return (
+      <>
+        <div id="nextPreviousButton">
+          <div className="button"></div>
+        </div>
+      </>
+    );
+  } else if (page === 1) {
     return (
       <>
         <div id="nextPreviousButton">
@@ -15,7 +23,7 @@ const Controls = (props) => {
         </div>
       </>
     );
-  } else if (page === 500) {
+  } else if (page === 500 || page === totalPages) {
     return (
       <>
         <div id="nextPreviousButton">

@@ -16,7 +16,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { closeModal } from "../modalSlice";
 
 const Interface = (props) => {
-  const { movies, onPageNext, onPageBack, onPageReset, page } = props;
+  const {
+    movies,
+    onPageNext,
+    onPageBack,
+    onPageReset,
+    page,
+    onSearchInput,
+    search,
+    totalPages,
+  } = props;
 
   const screenMode = useSelector(selectScreen);
   const id = useSelector(selectID);
@@ -31,7 +40,6 @@ const Interface = (props) => {
       dispatch(clearCert());
       dispatch(clearMovie());
       dispatch(closeModal());
-      console.log(id);
     }
   };
 
@@ -39,7 +47,7 @@ const Interface = (props) => {
     <>
       <Nav />
       <div id="sideAndMain">
-        <SideBar />
+        <SideBar onSearchInput={onSearchInput} search={search} />
         <div id="mainContent">
           {screenMode === 0 && (
             <>
@@ -52,6 +60,7 @@ const Interface = (props) => {
                 onPageBack={onPageBack}
                 onPageReset={onPageReset}
                 page={page}
+                totalPages={totalPages}
               />
             </>
           )}

@@ -3,9 +3,17 @@ import "./Movie.scss";
 const Movie = (props) => {
   const { movies, changeScreen } = props;
 
+  const obj = movies?.results;
+
+  const newArray = obj?.filter((el) => {
+    return el.poster_path !== null && el.backdrop_path !== null;
+  });
+
+  console.log(newArray);
+
   return (
     <>
-      {movies?.results.map((item) => {
+      {newArray?.map((item) => {
         return (
           <div className="movie" key={item.id}>
             <img

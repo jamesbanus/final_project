@@ -9,34 +9,68 @@ import {
   increment,
   decrement,
   reset,
+  setSearch,
+  selectSearch,
+  setSearchResults,
+  selectSearchResults,
 } from "./features/movies/moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { apiAuth, popularListURL } from "./utils";
+import {
+  apiAuth,
+  popularListURL,
+  searchMoviebyTitleURL1,
+  searchMoviebyTitleURL2,
+} from "./utils";
 
 const App = () => {
-  const movies = useSelector(selectMovies);
+  let movies = useSelector(selectMovies);
   const page = useSelector(selectPage);
+  const search = useSelector(selectSearch);
+  const searchResults = useSelector(selectSearchResults);
 
   const dispatch = useDispatch();
 
-  const getPopularData = useCallback(async () => {
-    console.log("get data ran", Date.now());
+  // set endpointns for the api (URLS from utils)
+
+  let endpoints = [
+    popularListURL + page,
+    searchMoviebyTitleURL1 + search + searchMoviebyTitleURL2 + page,
+  ];
+
+  // create an insteance with headers so we only have to authorise once
+
+  const axiosInstance = axios.create({
+    headers: {
+      Authorization: apiAuth,
+    },
+  });
+
+  // call the apis
+
+  const getMainData = useCallback(async () => {
     try {
-      const { data } = await axios.get(popularListURL + page, {
-        headers: {
-          Authorization: apiAuth,
-        },
-      });
-      console.log(data);
-      dispatch(setMovies(data));
+      axios
+        .all(endpoints.map((endpoints) => axiosInstance.get(endpoints)))
+        .then(
+          axios.spread(({ data: movieData }, { data: searchData }) => {
+            // console.log({ searchData });
+            dispatch(setMovies(movieData));
+            dispatch(setSearchResults(searchData));
+          })
+        );
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch, page]);
+  }, [dispatch, page, search]);
 
   useEffect(() => {
-    getPopularData();
-  }, [getPopularData]);
+    getMainData();
+  }, [getMainData]);
+
+  const onSearchInput = async (e) => {
+    dispatch(setSearch(e.target.value));
+    dispatch(reset());
+  };
 
   const onPageNext = () => {
     dispatch(increment());
@@ -50,14 +84,29 @@ const App = () => {
     dispatch(reset());
   };
 
+  //choose what api to display depending on if there is a search result
+
+  if (!search) {
+    movies = movies;
+  } else {
+    movies = searchResults;
+  }
+
+  const totalPages = movies?.total_pages;
+
+  // console.log(movies);
+
   return (
     <>
       <Interface
         movies={movies}
+        onSearchInput={onSearchInput}
+        search={search}
         onPageNext={onPageNext}
         onPageBack={onPageBack}
         onPageReset={onPageReset}
         page={page}
+        totalPages={totalPages}
       />
     </>
   );

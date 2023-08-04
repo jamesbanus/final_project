@@ -20,9 +20,10 @@
     flex-direction: column;
     text-align: center;
     padding: 10px 10px 10px 10px;
+    max-width: 185px;
     .moviePoster {
       max-width: 185px;
-      height: auto;
+      max-height: 278px;
     }
     .movieTitle {
       font-size: 16px;

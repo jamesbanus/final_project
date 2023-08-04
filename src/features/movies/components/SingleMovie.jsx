@@ -18,7 +18,7 @@ import {
 } from "../moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "./Modal";
-import { openModal } from "../modalSlice";
+import { openModal, selectOpen } from "../modalSlice";
 
 const SingleMovie = (props) => {
   const { changeScreen, id } = props;
@@ -30,7 +30,7 @@ const SingleMovie = (props) => {
   const movie = useSelector(selectMovie);
   const cert = useSelector(selectCert);
   const videos = useSelector(selectVideos);
-  const { isOpen } = useSelector((store) => store.modal);
+  const isOpen = useSelector(selectOpen);
 
   // set endpointns for the api (URLS from utils)
 
@@ -54,14 +54,13 @@ const SingleMovie = (props) => {
     if (!id) {
       return;
     }
-    console.log("get movie ran", Date.now(), id);
     try {
       axios
         .all(endpoints.map((endpoints) => axiosInstance.get(endpoints)))
         .then(
           axios.spread(
             ({ data: movieData }, { data: certData }, { data: videoData }) => {
-              console.log({ movieData, certData, videoData });
+              // console.log({ movieData, certData, videoData });
               dispatch(setMovie(movieData));
               dispatch(setCert(certData.results));
               dispatch(setVideos(videoData.results));
@@ -149,18 +148,21 @@ const SingleMovie = (props) => {
   }
 
   const getTrailerKey = () => {
-    for (let k in videosResults) {
-      if (k.toLowerCase().indexOf("Official Trailer".toLowerCase()) !== -1) {
-        return videosResults[k];
-      } else if (
-        k.toLowerCase().indexOf("Teaser Trailer".toLowerCase()) !== -1
-      ) {
-        return videosResults[k];
-      } else if (k.toLowerCase().indexOf("Trailer".toLowerCase()) !== -1) {
-        return videosResults[k];
-      }
+    if (videosResults["Official Trailer"]) {
+      return videosResults["Official Trailer"];
     }
-
+    if (videosResults["Main Trailer"]) {
+      return videosResults["Main Trailer"];
+    }
+    if (videosResults["Teaser Trailer"]) {
+      return videosResults["Teaser Trailer"];
+    }
+    const keys = Object.keys(videosResults);
+    const indexof = keys.findIndex((item) => item.includes("Trailer"));
+    if (indexof) {
+      return videosResults[keys[indexof]];
+    }
+    console.log(keys, indexof);
     return null;
   };
 
