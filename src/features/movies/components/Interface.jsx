@@ -25,6 +25,7 @@ const Interface = (props) => {
     onSearchInput,
     search,
     totalPages,
+    genreApiList,
   } = props;
 
   const screenMode = useSelector(selectScreen);
@@ -52,6 +53,7 @@ const Interface = (props) => {
           search={search}
           screenMode={screenMode}
           changeScreen={changeScreen}
+          genreApiList={genreApiList}
         />
         <div id="mainContent">
           {screenMode === 0 && (
@@ -67,6 +69,7 @@ const Interface = (props) => {
                 page={page}
                 totalPages={totalPages}
               />
+              <h1 className="subHeading">Favourites</h1>
             </>
           )}
           {screenMode === 1 && (

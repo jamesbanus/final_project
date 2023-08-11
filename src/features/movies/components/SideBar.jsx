@@ -1,7 +1,44 @@
 import "./SideBar.scss";
+import { selectGenres, setCheckedGenres } from "../moviesSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const SideBar = (props) => {
-  const { onSearchInput, search, screenMode, changeScreen } = props;
+  const { onSearchInput, search, screenMode, changeScreen, genreApiList } =
+    props;
+
+  const dispatch = useDispatch();
+
+  const genreChecked = useSelector(selectGenres);
+
+  console.log(genreChecked);
+
+  const isChecked = (id) => {
+    const indexOf = genreChecked?.indexOf(id);
+    if (indexOf === -1 || indexOf === undefined || id === -1) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  // const genre = useSelector(selectGenres);
+
+  const genreArray = genreApiList?.genres;
+
+  const checkBoxes = genreArray?.map((item) => (
+    <label key={item.id}>
+      {item.name}
+      <input
+        writable="true"
+        type="checkbox"
+        className="checkBox"
+        onChange={() => {
+          dispatch(setCheckedGenres(item.id));
+        }}
+        checked={isChecked(item.id) || false}
+      />
+    </label>
+  ));
 
   return (
     <>
@@ -13,16 +50,14 @@ const SideBar = (props) => {
               <input
                 value={search || ""}
                 onInput={onSearchInput}
-                type="text"
+                type="search"
                 name="movie"
                 id="movieSearch"
               />
-            </div>
-            <div>
-              <h1>option2</h1>
-            </div>
-            <div>
-              <h1>option3</h1>
+              {checkBoxes}
+              <label className="clearCheckBox">
+                {/* <button onClick={clearChecked}>Clear</button> */}
+              </label>
             </div>
           </>
         )}

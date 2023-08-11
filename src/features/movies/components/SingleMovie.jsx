@@ -173,11 +173,6 @@ const SingleMovie = (props) => {
   }
   return (
     <>
-      <div id="backButtonDiv">
-        <button className="backButton" onClick={changeScreen}>
-          Back
-        </button>
-      </div>
       <div id="masterContainer">
         {isOpen && <Modal trailerKey={trailerKey} />}
         <img

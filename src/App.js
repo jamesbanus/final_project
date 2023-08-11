@@ -13,6 +13,9 @@ import {
   selectSearch,
   setSearchResults,
   selectSearchResults,
+  setGenreApiResults,
+  genreApiResults,
+  selectGenres,
 } from "./features/movies/moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -20,6 +23,8 @@ import {
   popularListURL,
   searchMoviebyTitleURL1,
   searchMoviebyTitleURL2,
+  popularListURL2,
+  genreList,
 } from "./utils";
 
 const App = () => {
@@ -27,15 +32,26 @@ const App = () => {
   const page = useSelector(selectPage);
   const search = useSelector(selectSearch);
   const searchResults = useSelector(selectSearchResults);
+  const genreApiList = useSelector(genreApiResults);
+  const genre = useSelector(selectGenres);
 
   const dispatch = useDispatch();
+
+  const genreString = genre?.toString();
+  let genreApiString = genreString?.replace(/\,/g, "|");
+  // console.log(genreString, genreApiString);
 
   // set endpointns for the api (URLS from utils)
 
   let endpoints = [
-    popularListURL + page,
+    popularListURL + page + popularListURL2 + genreApiString,
     searchMoviebyTitleURL1 + search + searchMoviebyTitleURL2 + page,
+    genreList,
   ];
+
+  // console.log(endpoints);
+
+  // console.log(endpoints);
 
   // create an insteance with headers so we only have to authorise once
 
@@ -52,16 +68,23 @@ const App = () => {
       axios
         .all(endpoints.map((endpoints) => axiosInstance.get(endpoints)))
         .then(
-          axios.spread(({ data: movieData }, { data: searchData }) => {
-            // console.log({ searchData });
-            dispatch(setMovies(movieData));
-            dispatch(setSearchResults(searchData));
-          })
+          axios.spread(
+            (
+              { data: movieData },
+              { data: searchData },
+              { data: genreData }
+            ) => {
+              // console.log({ genreData });
+              dispatch(setMovies(movieData));
+              dispatch(setSearchResults(searchData));
+              dispatch(setGenreApiResults(genreData));
+            }
+          )
         );
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch, page, search]);
+  }, [dispatch, page, search, genre]);
 
   useEffect(() => {
     getMainData();
@@ -94,8 +117,6 @@ const App = () => {
 
   const totalPages = movies?.total_pages;
 
-  // console.log(movies);
-
   return (
     <>
       <Interface
@@ -107,6 +128,7 @@ const App = () => {
         onPageReset={onPageReset}
         page={page}
         totalPages={totalPages}
+        genreApiList={genreApiList}
       />
     </>
   );

@@ -9,8 +9,6 @@ const Movie = (props) => {
     return el.poster_path !== null && el.backdrop_path !== null;
   });
 
-  console.log(newArray);
-
   return (
     <>
       {newArray?.map((item) => {
