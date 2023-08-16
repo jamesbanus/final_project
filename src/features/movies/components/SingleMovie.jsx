@@ -223,6 +223,12 @@ const SingleMovie = (props) => {
             </div>
           </div>
         </div>
+        <div className="overviewTitleDiv2">
+          <h2>Overview</h2>
+        </div>
+        <div className="movieOverviewDiv2">
+          <p className="movieOverview2">{movie?.overview}</p>
+        </div>
       </div>
     </>
   );

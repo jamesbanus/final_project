@@ -46,7 +46,9 @@ const SideBar = (props) => {
         {screenMode === 0 && (
           <>
             <div>
-              <label htmlFor="movie">Search</label>
+              <label htmlFor="movie" id="searchLabel">
+                Search
+              </label>
               <input
                 value={search || ""}
                 onInput={onSearchInput}
@@ -55,9 +57,9 @@ const SideBar = (props) => {
                 id="movieSearch"
               />
               {checkBoxes}
-              <label className="clearCheckBox">
-                {/* <button onClick={clearChecked}>Clear</button> */}
-              </label>
+              {/* <label className="clearCheckBox">
+                <button onClick={clearChecked}>Clear</button>
+              </label> */}
             </div>
           </>
         )}

@@ -1,4 +1,4 @@
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 900px) {
   #sideBar {
     display: flex;
     flex-direction: row;
@@ -18,14 +18,14 @@
   }
 }
 
-@media only screen and (min-width: 400px) {
+@media only screen and (min-width: 900px) {
   #sideBar {
     margin: 0;
     padding: 10px 10px 10px 10px;
     display: flex;
     flex-direction: column;
     width: 20%;
-    height: 100vh;
+    height: calc(100vh - 110px);
     background-color: #000000;
     color: #13dafb;
     text-align: left;
@@ -34,6 +34,9 @@
       font-size: 16px;
       display: flex;
       flex-direction: column;
+      #searchLabel {
+        padding: 0;
+      }
       #movieSearch {
         width: 80%;
         // font-size: 24px;

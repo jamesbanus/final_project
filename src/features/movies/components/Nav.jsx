@@ -1,23 +1,16 @@
 import "./Nav.scss";
+import logo from "./../../../assets/Logo.png";
+import login from "./../../../assets/login.png";
 
 const Nav = () => {
   return (
     <>
       <div id="navBar">
-        <div>
-          <h1>Logo</h1>
-        </div>
-        <div>
-          <h1>Movies</h1>
-        </div>
-        <div>
-          <h1>TV</h1>
-        </div>
-        <div>
-          <h1>Games</h1>
+        <div className="logoDiv">
+          <img className="logo" src={logo} alt="siteLogo" />
         </div>
         <div id="LoginButton">
-          <h1>Log In</h1>
+          <img className="login" src={login} alt="loginLogo" />
         </div>
       </div>
     </>
