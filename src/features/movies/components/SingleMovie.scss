@@ -1,21 +1,28 @@
-#backButtonDiv {
-  max-width: 100%;
-  .backButton {
-    margin: 10px 10px 10px 10px;
-    padding: 1px 1px 1px 1px;
-    width: 100px;
+#sideBar {
+  #backButtonDiv {
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    .backButton {
+      margin: 10px 10px 10px 10px;
+      padding: 1px 1px 1px 1px;
+      width: 100px;
+    }
   }
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 899px) {
   #masterContainer {
     max-width: 100%;
-    height: 100%;
     position: relative;
-    .backDrop {
-      max-width: 100%;
-      height: auto;
-      opacity: 1;
+    .backDropContainer {
+      width: 100%;
+      max-height: 185px;
+      overflow: hidden;
+      .backDrop {
+        width: 100%;
+        opacity: 1;
+      }
     }
     #singleMovieContainer {
       max-width: 100%;
@@ -107,11 +114,12 @@
     width: 100%;
     position: relative;
     height: auto;
-    .backDrop {
-      max-width: 100%;
-      height: auto;
-      opacity: 0.2;
-      max-height: inherit;
+    .backDropContainer {
+      .backDrop {
+        width: 100%;
+        height: auto;
+        opacity: 0.2;
+      }
     }
     #singleMovieContainer {
       padding: 10px 10px 10px 10px;
@@ -209,11 +217,14 @@
     width: 100%;
     position: relative;
     height: auto;
-    .backDrop {
-      max-width: 100%;
-      height: auto;
-      opacity: 0.2;
-      max-height: inherit;
+    .backDropContainer {
+      width: 100%;
+      max-height: 530px;
+      overflow: hidden;
+      .backDrop {
+        width: 100%;
+        opacity: 0.2;
+      }
     }
     #singleMovieContainer {
       padding: 10px 10px 10px 10px;

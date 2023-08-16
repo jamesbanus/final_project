@@ -175,11 +175,13 @@ const SingleMovie = (props) => {
     <>
       <div id="masterContainer">
         {isOpen && <Modal trailerKey={trailerKey} />}
-        <img
-          className="backDrop"
-          src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
-          alt={movie?.title}
-        />
+        <div className="backDropContainer">
+          <img
+            className="backDrop"
+            src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
+            alt={movie?.title}
+          />
+        </div>
         <div id="singleMovieContainer">
           <div className="moviePosterDiv">
             <img
