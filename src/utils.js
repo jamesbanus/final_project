@@ -10,6 +10,10 @@ const searchMoviebyTitleURL2 = `&include_adult=false&language=en-US&page=`;
 const movieByID1 = `https://api.themoviedb.org/3/movie/`;
 const movieByID2 = `?language=en-US`;
 
+const getMoviebyID = (id) => {
+  return `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+};
+
 const recommendationsApi = `/recommendations`;
 
 const releaseDate2 = `/release_dates`;
@@ -34,4 +38,5 @@ export {
   popularListURL2,
   genreList,
   recommendationsApi,
+  getMoviebyID,
 };

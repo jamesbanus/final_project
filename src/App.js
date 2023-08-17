@@ -15,7 +15,7 @@ import {
   selectSearchResults,
   setGenreApiResults,
   genreApiResults,
-  selectGenres,
+  selectCheckedGenreArray,
 } from "./features/movies/moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -33,7 +33,7 @@ const App = () => {
   const search = useSelector(selectSearch);
   const searchResults = useSelector(selectSearchResults);
   const genreApiList = useSelector(genreApiResults);
-  const genre = useSelector(selectGenres);
+  const genre = useSelector(selectCheckedGenreArray);
 
   const dispatch = useDispatch();
 

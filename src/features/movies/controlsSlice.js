@@ -8,13 +8,13 @@ const controlsSlice = createSlice({
   name: "controls",
   initialState,
   reducers: {
-    setOpen: (state, action) => {
-      state.toggle = true;
+    setToggle: (state) => {
+      state.toggle = !state.toggle;
     },
   },
 });
 
-export const { setOpen } = controlsSlice.actions;
+export const { setToggle } = controlsSlice.actions;
 
 export const selectToggle = (state) => state.controls.toggle;
 

@@ -1,6 +1,10 @@
 import "./SideBar.scss";
-import { selectGenres, setCheckedGenres } from "../moviesSlice";
-import { setOpen, selectToggle } from "../controlsSlice";
+import {
+  selectCheckedGenreArray,
+  setCheckedGenres,
+  setClearCheck,
+} from "../moviesSlice";
+import { setToggle, selectToggle } from "../controlsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const SideBar = (props) => {
@@ -9,16 +13,11 @@ const SideBar = (props) => {
 
   const dispatch = useDispatch();
 
-  const genreChecked = useSelector(selectGenres);
-  // const toggle = useSelector(selectToggle);
+  const checkedGenreArray = useSelector(selectCheckedGenreArray);
+  const toggle = useSelector(selectToggle);
 
   const isChecked = (id) => {
-    const indexOf = genreChecked?.indexOf(id);
-    if (indexOf === -1 || indexOf === undefined || id === -1) {
-      return false;
-    } else {
-      return true;
-    }
+    return checkedGenreArray.includes(id);
   };
 
   const genreArray = genreApiList?.genres;
@@ -38,19 +37,24 @@ const SideBar = (props) => {
     </label>
   ));
 
-  // const showCollapsible = (
-  //   <button onClick={() => dispatch(setOpen)} className="showCollapsible">
-  //     Genres ▽{" "}
-  //   </button>
-  // );
+  const showCollapsible = (
+    <div id="showCollapsible">
+      <button onClick={() => dispatch(setToggle())} className="showCollapsible">
+        Genres ▽{" "}
+      </button>
+    </div>
+  );
 
-  // const hideCollapsible = (
-  //   <button onClick={() => dispatch(setOpen)} className="hideCollapsible">
-  //     Genres △{" "}
-  //   </button>
-  // );
+  const hideCollapsible = (
+    <div id="hideCollapsible">
+      <button onClick={() => dispatch(setToggle())} className="hideCollapsible">
+        Genres △{" "}
+      </button>
+      <div className="checkBoxDiv">{checkBoxes}</div>
+    </div>
+  );
 
-  // console.log(toggle);
+  console.log(toggle);
   return (
     <>
       <div id="sideBar">
@@ -69,13 +73,11 @@ const SideBar = (props) => {
                 id="movieSearch"
               />
             </div>
-            {/* <div id="showCollapsible">{!toggle && showCollapsible}</div>
-            <div id="hideCollapsible">{toggle && hideCollapsible}</div> */}
+            {!toggle ? showCollapsible : hideCollapsible}
 
-            <div className="checkBoxDiv">{checkBoxes}</div>
-            {/* <label className="clearCheckBox">
-                <button onClick={clearChecked}>Clear</button>
-              </label> */}
+            <label className="clearCheckBox">
+              <button onClick={() => dispatch(setClearCheck())}>Clear</button>
+            </label>
           </>
         )}
         {screenMode === 1 && (

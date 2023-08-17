@@ -6,6 +6,7 @@ import {
   releaseDate2,
   apiVideos,
   recommendationsApi,
+  getMoviebyID,
 } from "../../../utils";
 import React, { useEffect, useCallback } from "react";
 import axios from "axios";
@@ -40,7 +41,7 @@ const SingleMovie = (props) => {
   // set endpointns for the api (URLS from utils)
 
   let endpoints = [
-    movieByID1 + id + movieByID2,
+    getMoviebyID(id),
     movieByID1 + id + releaseDate2,
     movieByID1 + id + apiVideos,
     movieByID1 + id + recommendationsApi,

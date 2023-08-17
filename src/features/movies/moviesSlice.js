@@ -5,6 +5,7 @@ const initialState = {
   value: 1,
   status: "idle",
   screenMode: 0,
+  checkedGenreArray: [],
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -20,8 +21,6 @@ export const incrementAsync = createAsyncThunk(
     return response.data;
   }
 );
-
-let checkedGenreArray = [];
 
 export const moviesSlice = createSlice({
   name: "movies",
@@ -72,19 +71,20 @@ export const moviesSlice = createSlice({
       state.genreApiResults = action.payload;
     },
     setCheckedGenres: (state, action) => {
-      checkedGenreArray = [...checkedGenreArray];
       const genreId = action.payload;
-      const indexOf = checkedGenreArray.indexOf(genreId);
+      const indexOf = state.checkedGenreArray.indexOf(genreId);
 
       if (indexOf === -1) {
-        checkedGenreArray.push(genreId);
+        state.checkedGenreArray.push(genreId);
       } else {
-        checkedGenreArray.splice(indexOf, 1);
+        state.checkedGenreArray.splice(indexOf, 1);
       }
-      state.checkedGenres = checkedGenreArray;
     },
     setRecommendationsApiResults: (state, action) => {
       state.recommendationApiResults = action.payload;
+    },
+    setClearCheck: (state, action) => {
+      state.checkedGenreArray = [];
     },
   },
 });
@@ -106,6 +106,7 @@ export const {
   setGenreApiResults,
   setCheckedGenres,
   setRecommendationsApiResults,
+  setClearCheck,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
@@ -118,7 +119,8 @@ export const selectCert = (state) => state.movies.cert;
 export const selectVideos = (state) => state.movies.videos;
 export const selectSearchResults = (state) => state.movies.searchResults;
 export const genreApiResults = (state) => state.movies.genreApiResults;
-export const selectGenres = (state) => state.movies.checkedGenres;
+export const selectCheckedGenreArray = (state) =>
+  state.movies.checkedGenreArray;
 export const selectRecommendations = (state) =>
   state.movies.recommendationApiResults;
 
