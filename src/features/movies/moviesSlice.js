@@ -83,6 +83,9 @@ export const moviesSlice = createSlice({
       }
       state.checkedGenres = checkedGenreArray;
     },
+    setRecommendationsApiResults: (state, action) => {
+      state.recommendationApiResults = action.payload;
+    },
   },
 });
 
@@ -102,6 +105,7 @@ export const {
   setSearchResults,
   setGenreApiResults,
   setCheckedGenres,
+  setRecommendationsApiResults,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
@@ -115,5 +119,7 @@ export const selectVideos = (state) => state.movies.videos;
 export const selectSearchResults = (state) => state.movies.searchResults;
 export const genreApiResults = (state) => state.movies.genreApiResults;
 export const selectGenres = (state) => state.movies.checkedGenres;
+export const selectRecommendations = (state) =>
+  state.movies.recommendationApiResults;
 
 export default moviesSlice.reducer;

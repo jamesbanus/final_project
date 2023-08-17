@@ -1,5 +1,6 @@
 import "./SideBar.scss";
 import { selectGenres, setCheckedGenres } from "../moviesSlice";
+import { setOpen, selectToggle } from "../controlsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const SideBar = (props) => {
@@ -9,8 +10,7 @@ const SideBar = (props) => {
   const dispatch = useDispatch();
 
   const genreChecked = useSelector(selectGenres);
-
-  console.log(genreChecked);
+  // const toggle = useSelector(selectToggle);
 
   const isChecked = (id) => {
     const indexOf = genreChecked?.indexOf(id);
@@ -20,8 +20,6 @@ const SideBar = (props) => {
       return true;
     }
   };
-
-  // const genre = useSelector(selectGenres);
 
   const genreArray = genreApiList?.genres;
 
@@ -40,15 +38,29 @@ const SideBar = (props) => {
     </label>
   ));
 
+  // const showCollapsible = (
+  //   <button onClick={() => dispatch(setOpen)} className="showCollapsible">
+  //     Genres ▽{" "}
+  //   </button>
+  // );
+
+  // const hideCollapsible = (
+  //   <button onClick={() => dispatch(setOpen)} className="hideCollapsible">
+  //     Genres △{" "}
+  //   </button>
+  // );
+
+  // console.log(toggle);
   return (
     <>
       <div id="sideBar">
         {screenMode === 0 && (
           <>
-            <div>
+            <div className="searchBoxDiv">
               <label htmlFor="movie" id="searchLabel">
                 Search
               </label>
+
               <input
                 value={search || ""}
                 onInput={onSearchInput}
@@ -56,11 +68,14 @@ const SideBar = (props) => {
                 name="movie"
                 id="movieSearch"
               />
-              {checkBoxes}
-              {/* <label className="clearCheckBox">
+            </div>
+            {/* <div id="showCollapsible">{!toggle && showCollapsible}</div>
+            <div id="hideCollapsible">{toggle && hideCollapsible}</div> */}
+
+            <div className="checkBoxDiv">{checkBoxes}</div>
+            {/* <label className="clearCheckBox">
                 <button onClick={clearChecked}>Clear</button>
               </label> */}
-            </div>
           </>
         )}
         {screenMode === 1 && (

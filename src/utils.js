@@ -5,11 +5,12 @@ const popularListURL = `https://api.themoviedb.org/3/movie/popular?language=en-U
 const popularListURL2 = `&with_genres=`;
 
 const searchMoviebyTitleURL1 = `https://api.themoviedb.org/3/search/movie?query=`;
-
 const searchMoviebyTitleURL2 = `&include_adult=false&language=en-US&page=`;
 
 const movieByID1 = `https://api.themoviedb.org/3/movie/`;
 const movieByID2 = `?language=en-US`;
+
+const recommendationsApi = `/recommendations`;
 
 const releaseDate2 = `/release_dates`;
 
@@ -32,4 +33,5 @@ export {
   apiVideos,
   popularListURL2,
   genreList,
+  recommendationsApi,
 };

@@ -5,6 +5,7 @@ import {
   movieByID2,
   releaseDate2,
   apiVideos,
+  recommendationsApi,
 } from "../../../utils";
 import React, { useEffect, useCallback } from "react";
 import axios from "axios";
@@ -15,9 +16,12 @@ import {
   setCert,
   selectVideos,
   setVideos,
+  setRecommendationsApiResults,
+  selectRecommendations,
 } from "../moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "./Modal";
+import RecMovies from "./RecMovies";
 import { openModal, selectOpen } from "../modalSlice";
 
 const SingleMovie = (props) => {
@@ -31,6 +35,7 @@ const SingleMovie = (props) => {
   const cert = useSelector(selectCert);
   const videos = useSelector(selectVideos);
   const isOpen = useSelector(selectOpen);
+  const recommendations = useSelector(selectRecommendations);
 
   // set endpointns for the api (URLS from utils)
 
@@ -38,6 +43,7 @@ const SingleMovie = (props) => {
     movieByID1 + id + movieByID2,
     movieByID1 + id + releaseDate2,
     movieByID1 + id + apiVideos,
+    movieByID1 + id + recommendationsApi,
   ];
 
   // create an insteance with headers so we only have to authorise once
@@ -59,11 +65,17 @@ const SingleMovie = (props) => {
         .all(endpoints.map((endpoints) => axiosInstance.get(endpoints)))
         .then(
           axios.spread(
-            ({ data: movieData }, { data: certData }, { data: videoData }) => {
-              // console.log({ movieData, certData, videoData });
+            (
+              { data: movieData },
+              { data: certData },
+              { data: videoData },
+              { data: recData }
+            ) => {
+              console.log({ recData });
               dispatch(setMovie(movieData));
               dispatch(setCert(certData.results));
               dispatch(setVideos(videoData.results));
+              dispatch(setRecommendationsApiResults(recData));
             }
           )
         );
@@ -226,11 +238,21 @@ const SingleMovie = (props) => {
           </div>
         </div>
         <div className="overviewTitleDiv2">
-          <h2>Overview</h2>
+          <h2 id="overview2">Overview</h2>
         </div>
         <div className="movieOverviewDiv2">
-          <p className="movieOverview2">{movie?.overview}</p>
+          <p id="movieOverview2">{movie?.overview}</p>
         </div>
+        <div className="userControls">Play Fave Rate</div>
+      </div>
+      <div id="relFilmHeading">
+        <p>Other Films For You</p>
+      </div>
+      <div className="relatedFilmsDiv">
+        <RecMovies
+          recommendations={recommendations}
+          changeScreen={changeScreen}
+        />
       </div>
     </>
   );
