@@ -15,12 +15,75 @@
         text-align: center;
         padding-right: 10px;
       }
-    }
-    .checkBoxDiv {
-      padding: 0px 10px 10px 10px;
-      label {
+      #movieSearch {
+        width: 30%;
         font-size: 16px;
-        padding: 1px 1px 1px 1px;
+        padding: 5px;
+        border: 1px;
+        border-style: solid;
+        border-color: #13dafb;
+      }
+      #movieSearch:focus {
+        outline: none;
+        border: 1px solid #13dafb;
+        box-shadow: 0 0 10px #13dafb;
+      }
+    }
+    #showCollapsible {
+      padding: 10px 10px 10px 5px;
+      .showCollapsible {
+        text-align: left;
+        background-color: #000000;
+        color: #13dafb;
+        font-size: 16px;
+        padding: 5px;
+        border: 1px;
+        border-color: #13dafb;
+        border-style: solid;
+      }
+      .showCollapsible:hover {
+        background-color: #13dafb;
+        color: #000000;
+      }
+    }
+    #hideCollapsible {
+      padding: 10px 10px 10px 5px;
+      .hideCollapsible {
+        text-align: left;
+        background-color: #000000;
+        color: #13dafb;
+        font-size: 16px;
+        padding: 5px;
+        border: 1px;
+        border-color: #13dafb;
+        border-style: solid;
+      }
+      .hideCollapsible:hover {
+        background-color: #13dafb;
+        color: #000000;
+      }
+      .checkBoxDiv {
+        padding: 10px 10px 10px 10px;
+        label {
+          font-size: 16px;
+          padding: 1px 1px 1px 1px;
+        }
+      }
+      .clearCheckBox {
+        button {
+          padding: 1px 5px 0px 5px;
+          text-align: center;
+          background-color: #000000;
+          color: #13dafb;
+          font-size: 16px;
+          border: 1px;
+          border-color: #13dafb;
+          border-style: solid;
+        }
+        button:hover {
+          background-color: #13dafb;
+          color: #000000;
+        }
       }
     }
   }
@@ -38,20 +101,89 @@
     color: #13dafb;
     text-align: left;
     div {
-      // text-align: left;
       font-size: 16px;
       display: flex;
       flex-direction: column;
       #searchLabel {
-        padding: 0;
+        padding-bottom: 10px;
       }
       #movieSearch {
         width: 80%;
-        // font-size: 24px;
         font-size: 16px;
+        padding: 5px;
+        border: 1px;
+        border-style: solid;
+        border-color: #13dafb;
       }
-      label {
-        padding-top: 10px;
+      #movieSearch:focus {
+        outline: none;
+        border: 1px solid #13dafb;
+        box-shadow: 0 0 10px #13dafb;
+      }
+    }
+    #showCollapsible {
+      padding: 10px 10px 10px 0px;
+      .showCollapsible {
+        text-align: left;
+        background-color: #000000;
+        color: #13dafb;
+        font-size: 16px;
+        padding: 5px;
+        border: 1px;
+        border-color: #13dafb;
+        border-style: solid;
+        width: 85%;
+      }
+      .showCollapsible:hover {
+        background-color: #13dafb;
+        color: #000000;
+      }
+    }
+    #hideCollapsible {
+      padding: 10px 10px 10px 0px;
+      .hideCollapsible {
+        text-align: left;
+        background-color: #000000;
+        color: #13dafb;
+        font-size: 16px;
+        padding: 5px;
+        border: 1px;
+        border-color: #13dafb;
+        border-style: solid;
+        width: 85%;
+      }
+      .hideCollapsible:hover {
+        background-color: #13dafb;
+        color: #000000;
+      }
+      .checkBoxDiv {
+        padding: 10px 0px 10px 0px;
+        label {
+          font-size: 16px;
+          padding: 1px 0px 1px 0px;
+          input {
+            accent-color: #13dafb;
+          }
+        }
+        label:last-child {
+          padding-top: 9px;
+        }
+        .clearCheckBox {
+          button {
+            padding: 5px;
+            text-align: left;
+            background-color: #000000;
+            color: #13dafb;
+            font-size: 16px;
+            border: 1px;
+            border-color: #13dafb;
+            border-style: solid;
+          }
+          button:hover {
+            background-color: #13dafb;
+            color: #000000;
+          }
+        }
       }
     }
   }

@@ -1,7 +1,9 @@
 @media only screen and (max-width: 899px) {
   .modalContainer {
-    width: 300px;
-    height: 188px;
+    // width: 300px;
+    // height: 188px;
+    max-width: 90%;
+    aspect-ratio: 25/14;
     background-color: white;
     border-style: solid;
     position: absolute;
@@ -12,12 +14,13 @@
     margin: auto;
     z-index: 2;
     .modal {
+      background-color: #000000;
       .btnContainer {
         height: 20px;
       }
       .video {
-        width: 300px;
-        height: 168px;
+        width: 100%;
+        aspect-ratio: 25/14;
         border: 0;
       }
     }
@@ -26,8 +29,8 @@
 
 @media only screen and (min-width: 900px) {
   .modalContainer {
-    width: 560px;
-    height: 335px;
+    max-width: 90%;
+    aspect-ratio: 25/14;
     background-color: white;
     border-style: solid;
     position: absolute;
@@ -38,12 +41,13 @@
     margin: auto;
     z-index: 2;
     .modal {
+      background-color: #000000;
       .btnContainer {
         height: 20px;
       }
       .video {
-        width: 560px;
-        height: 315px;
+        width: 100%;
+        aspect-ratio: 25/14;
         border: 0;
       }
     }

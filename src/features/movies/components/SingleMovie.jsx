@@ -185,8 +185,8 @@ const SingleMovie = (props) => {
   }
   return (
     <>
+      {isOpen && <Modal trailerKey={trailerKey} />}
       <div id="masterContainer">
-        {isOpen && <Modal trailerKey={trailerKey} />}
         <div className="backDropContainer">
           <img
             className="backDrop"

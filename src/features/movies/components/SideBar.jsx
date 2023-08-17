@@ -50,7 +50,12 @@ const SideBar = (props) => {
       <button onClick={() => dispatch(setToggle())} className="hideCollapsible">
         Genres △{" "}
       </button>
-      <div className="checkBoxDiv">{checkBoxes}</div>
+      <div className="checkBoxDiv">
+        {checkBoxes}
+        <label className="clearCheckBox">
+          <button onClick={() => dispatch(setClearCheck())}>Clear</button>
+        </label>
+      </div>
     </div>
   );
 
@@ -74,10 +79,6 @@ const SideBar = (props) => {
               />
             </div>
             {!toggle ? showCollapsible : hideCollapsible}
-
-            <label className="clearCheckBox">
-              <button onClick={() => dispatch(setClearCheck())}>Clear</button>
-            </label>
           </>
         )}
         {screenMode === 1 && (
