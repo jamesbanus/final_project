@@ -71,7 +71,7 @@ const SingleMovie = (props) => {
               { data: videoData },
               { data: recData }
             ) => {
-              console.log({ recData });
+              // console.log({ videoData });
               dispatch(setMovie(movieData));
               dispatch(setCert(certData.results));
               dispatch(setVideos(videoData.results));
@@ -171,10 +171,9 @@ const SingleMovie = (props) => {
     }
     const keys = Object.keys(videosResults);
     const indexof = keys.findIndex((item) => item.includes("Trailer"));
-    if (indexof) {
+    if (indexof !== -1) {
       return videosResults[keys[indexof]];
     }
-    console.log(keys, indexof);
     return null;
   };
 
@@ -245,15 +244,10 @@ const SingleMovie = (props) => {
         </div>
         <div className="userControls">Play Fave Rate</div>
       </div>
-      <div id="relFilmHeading">
-        <p>Other Films For You</p>
-      </div>
-      <div className="relatedFilmsDiv">
-        <RecMovies
-          recommendations={recommendations}
-          changeScreen={changeScreen}
-        />
-      </div>
+      <RecMovies
+        recommendations={recommendations}
+        changeScreen={changeScreen}
+      />
     </>
   );
 };

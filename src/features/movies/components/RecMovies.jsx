@@ -9,24 +9,41 @@ const RecMovies = (props) => {
     return el.poster_path !== null && el.backdrop_path !== null;
   });
 
-  return (
-    <>
-      {newArray?.map((item) => {
-        return (
-          <div className="movie" key={item.id}>
-            <img
-              className="moviePoster"
-              src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
-              alt={item.title}
-              id={item.id}
-              onClick={changeScreen}
-            />
-            <h1 className="movieTitle">{item.title}</h1>
-          </div>
-        );
-      })}
-    </>
-  );
+  console.log(newArray.length);
+
+  if (newArray?.length === 0) {
+    return (
+      <>
+        <div id="relFilmHeading">
+          <p>Sorry, no recommendations!</p>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <div id="relFilmHeading">
+          <p>Other recommendations</p>
+        </div>
+        <div className="relatedFilmsDiv">
+          {newArray?.map((item) => {
+            return (
+              <div className="movie" key={item.id}>
+                <img
+                  className="moviePoster"
+                  src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
+                  alt={item.title}
+                  id={item.id}
+                  onClick={changeScreen}
+                />
+                <h1 className="movieTitle">{item.title}</h1>
+              </div>
+            );
+          })}
+        </div>
+      </>
+    );
+  }
 };
 
 export default RecMovies;
