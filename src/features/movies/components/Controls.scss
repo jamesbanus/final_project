@@ -2,7 +2,14 @@
   padding: 10px 10px 10px 10px;
   display: flex;
   flex-direction: row;
+  background-color: #000000;
   .button {
     padding: 1px 1px 1px 1px;
+    button {
+      background-color: #000000;
+      outline: none;
+      border: 1px solid #13dafb;
+      color: #13dafb;
+    }
   }
 }

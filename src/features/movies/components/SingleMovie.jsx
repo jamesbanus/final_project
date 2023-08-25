@@ -23,6 +23,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "./Modal";
 import RecMovies from "./RecMovies";
+import Interaction from "./Interaction";
 import { openModal, selectOpen } from "../modalSlice";
 
 const SingleMovie = (props) => {
@@ -226,15 +227,7 @@ const SingleMovie = (props) => {
             <div className="movieOverviewDiv">
               <p className="movieOverview">{movie?.overview}</p>
             </div>
-            <div className="playButtonDiv">
-              <button
-                type="button"
-                className="playButton"
-                onClick={() => dispatch(openModal())}
-              >
-                Play Trailer
-              </button>
-            </div>
+            <Interaction />
           </div>
         </div>
         <div className="overviewTitleDiv2">
@@ -243,7 +236,7 @@ const SingleMovie = (props) => {
         <div className="movieOverviewDiv2">
           <p id="movieOverview2">{movie?.overview}</p>
         </div>
-        <div className="userControls">Play Fave Rate</div>
+        <Interaction />
       </div>
       <RecMovies
         recommendations={recommendations}
