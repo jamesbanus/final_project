@@ -83,8 +83,11 @@ export const moviesSlice = createSlice({
     setRecommendationsApiResults: (state, action) => {
       state.recommendationApiResults = action.payload;
     },
-    setClearCheck: (state, action) => {
+    setClearCheck: (state) => {
       state.checkedGenreArray = [];
+    },
+    setClearSearch: (state) => {
+      state.search = "";
     },
   },
 });
@@ -107,6 +110,7 @@ export const {
   setCheckedGenres,
   setRecommendationsApiResults,
   setClearCheck,
+  setClearSearch,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;

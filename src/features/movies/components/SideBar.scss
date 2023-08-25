@@ -15,18 +15,28 @@
         text-align: center;
         padding-right: 10px;
       }
-      #movieSearch {
-        width: 30%;
-        font-size: 16px;
-        padding: 5px;
-        border: 1px;
-        border-style: solid;
-        border-color: #13dafb;
-      }
-      #movieSearch:focus {
-        outline: none;
-        border: 1px solid #13dafb;
-        box-shadow: 0 0 10px #13dafb;
+      .searchInputs {
+        display: flex;
+        flex-direction: row;
+        #movieSearch {
+          width: 30%;
+          font-size: 16px;
+          padding: 5px;
+          border: 1px;
+          border-style: solid;
+          border-color: #13dafb;
+        }
+        #movieSearch:focus {
+          outline: none;
+          border: 1px solid #13dafb;
+          box-shadow: 0 0 10px #13dafb;
+        }
+        #searchReset {
+          background-color: #000000;
+          outline: none;
+          border: 1px solid #13dafb;
+          color: #13dafb;
+        }
       }
     }
     #showCollapsible {
@@ -100,25 +110,35 @@
     background-color: #000000;
     color: #13dafb;
     text-align: left;
-    div {
+    .searchBoxDiv {
       font-size: 16px;
       display: flex;
       flex-direction: column;
       #searchLabel {
         padding-bottom: 10px;
       }
-      #movieSearch {
-        width: 80%;
-        font-size: 16px;
-        padding: 5px;
-        border: 1px;
-        border-style: solid;
-        border-color: #13dafb;
-      }
-      #movieSearch:focus {
-        outline: none;
-        border: 1px solid #13dafb;
-        box-shadow: 0 0 10px #13dafb;
+      .searchInputs {
+        display: flex;
+        flex-direction: row;
+        #movieSearch {
+          width: 80%;
+          font-size: 16px;
+          padding: 5px;
+          border: 1px;
+          border-style: solid;
+          border-color: #13dafb;
+        }
+        #movieSearch:focus {
+          outline: none;
+          border: 1px solid #13dafb;
+          box-shadow: 0 0 10px #13dafb;
+        }
+        #searchReset {
+          background-color: #000000;
+          outline: none;
+          border: 1px solid #13dafb;
+          color: #13dafb;
+        }
       }
     }
     #showCollapsible {

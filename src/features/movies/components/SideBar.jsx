@@ -3,6 +3,7 @@ import {
   selectCheckedGenreArray,
   setCheckedGenres,
   setClearCheck,
+  setClearSearch,
 } from "../moviesSlice";
 import { setToggle, selectToggle } from "../controlsSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,7 +60,6 @@ const SideBar = (props) => {
     </div>
   );
 
-  console.log(toggle);
   return (
     <>
       <div id="sideBar">
@@ -69,14 +69,22 @@ const SideBar = (props) => {
               <label htmlFor="movie" id="searchLabel">
                 Search
               </label>
-
-              <input
-                value={search || ""}
-                onInput={onSearchInput}
-                type="search"
-                name="movie"
-                id="movieSearch"
-              />
+              <div className="searchInputs">
+                <input
+                  value={search || ""}
+                  onInput={onSearchInput}
+                  // type="search"
+                  name="movie"
+                  id="movieSearch"
+                />
+                <input
+                  type="reset"
+                  value="X"
+                  alt="Clear the search form"
+                  id="searchReset"
+                  onClick={() => dispatch(setClearSearch())}
+                />
+              </div>
             </div>
             {!toggle ? showCollapsible : hideCollapsible}
           </>
