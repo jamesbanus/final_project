@@ -107,23 +107,64 @@
         .interactionContainer {
           display: flex;
           flex-direction: row;
-          justify-content: center;
+          justify-content: space-between;
           align-items: center;
           height: 50px;
           background-color: #000000;
-          padding: 10px;
+          padding: 10px 20px 10px 20px;
+          .ratingsDiv {
+            height: 40%;
+            position: relative;
+            .ratings {
+              height: 100%;
+            }
+            .ratings:hover {
+              transform: scale(1.1);
+            }
+            .ratingsInnerDiv {
+              height: 100%;
+              position: absolute;
+              top: 0;
+              left: 0;
+              .ratingsFilled {
+                height: 100%;
+              }
+              .ratingsFilled:hover {
+                transform: scale(1.1);
+              }
+            }
+          }
+          .favouriteDiv {
+            height: 40%;
+            .favourite {
+              height: 100%;
+            }
+          }
+          .favouriteDiv:hover {
+            transform: scale(1.1);
+          }
           .playButtonDiv {
-            height: 100%;
+            height: 40%;
             display: flex;
             flex-direction: row;
             .playButton {
               height: 100%;
               cursor: pointer;
             }
-            p {
-              cursor: pointer;
-              color: #13dafb;
+            .wording {
+              height: 100%;
+              p {
+                color: #13dafb;
+                cursor: pointer;
+                margin: 0;
+                height: 100%;
+                padding: 0 0 0 2px;
+                font-size: 16px;
+              }
             }
+          }
+          .playButtonDiv:hover {
+            transform: scale(1.1);
           }
         }
       }
@@ -271,11 +312,41 @@
     .interactionContainer {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       height: 50px;
       background-color: #000000;
-      padding: 10px;
+      padding: 10px 20px 10px 20px;
+      .ratingsDiv {
+        height: 100%;
+        position: relative;
+        .ratings {
+          height: 100%;
+          color: #13dafb;
+        }
+        .ratings:hover {
+          transform: scale(1.1);
+        }
+        .ratingsInnerDiv {
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          .ratingsFilled {
+            height: 100%;
+          }
+        }
+      }
+
+      .favouriteDiv {
+        height: 100%;
+        .favourite {
+          height: 100%;
+        }
+      }
+      .favouriteDiv:hover {
+        transform: scale(1.1);
+      }
       .playButtonDiv {
         height: 100%;
         display: flex;
@@ -288,6 +359,9 @@
           color: #13dafb;
           cursor: pointer;
         }
+      }
+      .playButtonDiv:hover {
+        transform: scale(1.1);
       }
     }
   }

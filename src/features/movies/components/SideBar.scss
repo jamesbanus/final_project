@@ -37,6 +37,10 @@
           border: 1px solid #13dafb;
           color: #13dafb;
         }
+        #searchReset:hover {
+          background-color: #13dafb;
+          color: #000000;
+        }
       }
     }
     #showCollapsible {
@@ -138,6 +142,10 @@
           outline: none;
           border: 1px solid #13dafb;
           color: #13dafb;
+        }
+        #searchReset:hover {
+          background-color: #13dafb;
+          color: #000000;
         }
       }
     }
