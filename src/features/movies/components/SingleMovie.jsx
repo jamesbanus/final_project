@@ -21,7 +21,7 @@ import {
   selectRecommendations,
 } from "../moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import Modal from "./Modal";
+import TrailerModal from "./TrailerModal";
 import RecMovies from "./RecMovies";
 import Interaction from "./Interaction";
 import { openModal, selectOpen } from "../modalSlice";
@@ -186,7 +186,7 @@ const SingleMovie = (props) => {
   }
   return (
     <>
-      {isOpen && <Modal trailerKey={trailerKey} />}
+      {isOpen && <TrailerModal trailerKey={trailerKey} />}
       <div id="masterContainer">
         <div className="backDropContainer">
           <img

@@ -13,7 +13,7 @@ import {
   clearMovie,
 } from "../moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { closeModal } from "../modalSlice";
+import { closeModal, closeLogin } from "../modalSlice";
 
 const Interface = (props) => {
   const {
@@ -41,12 +41,13 @@ const Interface = (props) => {
       dispatch(clearCert());
       dispatch(clearMovie());
       dispatch(closeModal());
+      dispatch(closeLogin());
     }
   };
 
   return (
     <>
-      <Nav />
+      <Nav changeScreen={changeScreen} />
       <div id="sideAndMain">
         <SideBar
           onSearchInput={onSearchInput}

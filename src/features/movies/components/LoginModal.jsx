@@ -1,34 +1,31 @@
-import "./Modal.scss";
-import { closeModal } from "../modalSlice";
+import "./LoginModal.scss";
+import { closeLogin } from "../modalSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-const Modal = (props) => {
+const LoginModal = (props) => {
   const { trailerKey } = props;
   const dispatch = useDispatch();
 
   return (
     <>
-      <aside className="modalContainer">
+      <aside className="loginModalContainer">
         <div className="modal">
           <div className="btnContainer">
             <button
               type="button"
               className="exitButton"
-              onClick={() => dispatch(closeModal())}
+              onClick={() => dispatch(closeLogin())}
             >
               X
             </button>
           </div>
-          <iframe
-            className="video"
-            title="Youtube player"
-            allowFullScreen
-            src={`https://youtube.com/embed/${trailerKey}?autoplay=0`}
-          ></iframe>
+          <div className="formTitle">
+            <p>Welcome! Log In</p>
+          </div>
         </div>
       </aside>
     </>
   );
 };
 
-export default Modal;
+export default LoginModal;
