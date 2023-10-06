@@ -1,24 +1,29 @@
 const allMoviesURL =
   "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&&sort_by=popularity.desc&with_genres=12";
 
-const popularListURL = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=`;
-const popularListURL2 = `&with_genres=`;
+const getPopular = (page, genreApiString) => {
+  return `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}&with_genres=${genreApiString}`;
+};
 
-const searchMoviebyTitleURL1 = `https://api.themoviedb.org/3/search/movie?query=`;
-const searchMoviebyTitleURL2 = `&include_adult=false&language=en-US&page=`;
-
-const movieByID1 = `https://api.themoviedb.org/3/movie/`;
-const movieByID2 = `?language=en-US`;
+const getSearch = (search, page) => {
+  return `https://api.themoviedb.org/3/search/movie?query=${search}&include_adult=false&language=en-US&page=${page}`;
+};
 
 const getMoviebyID = (id) => {
   return `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
 };
 
-const recommendationsApi = `/recommendations`;
+const getReleaseDate = (id) => {
+  return `https://api.themoviedb.org/3/movie/${id}/release_dates`;
+};
 
-const releaseDate2 = `/release_dates`;
+const getTrailers = (id) => {
+  return `https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`;
+};
 
-const apiVideos = `/videos?language=en-US`;
+const getRecommendations = (id) => {
+  return `https://api.themoviedb.org/3/movie/${id}/recommendations`;
+};
 
 const genreList = `https://api.themoviedb.org/3/genre/movie/list?language=en`;
 
@@ -27,16 +32,11 @@ const apiAuth =
 
 export {
   apiAuth,
-  allMoviesURL,
-  popularListURL,
-  searchMoviebyTitleURL1,
-  searchMoviebyTitleURL2,
-  movieByID1,
-  movieByID2,
-  releaseDate2,
-  apiVideos,
-  popularListURL2,
   genreList,
-  recommendationsApi,
+  getPopular,
+  getSearch,
   getMoviebyID,
+  getReleaseDate,
+  getTrailers,
+  getRecommendations,
 };

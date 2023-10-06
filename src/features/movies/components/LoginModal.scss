@@ -56,6 +56,51 @@
           color: #000000;
         }
       }
+      .formTitle {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .loginContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+        padding: 10px;
+        .unameLabel {
+          font-weight: bold;
+          padding: 10px 0px 10px 0px;
+        }
+        .unameInput {
+          width: 80%;
+          font-size: 16px;
+        }
+        .pswLabel {
+          font-weight: bold;
+          padding: 10px 0px 10px 0px;
+        }
+        .pswInput {
+          width: 80%;
+          font-size: 16px;
+        }
+        .loginButtonDiv {
+          padding: 20px 0px 10px 0px;
+          width: 60%;
+          .loginButton {
+            font-weight: bold;
+            background-color: #000000;
+            color: #13dafb;
+            outline: none;
+            border: 1px solid #13dafb;
+            width: 100%;
+            font-size: 16px;
+          }
+          .loginButton:hover {
+            background-color: #13dafb;
+            color: #000000;
+          }
+        }
+      }
     }
   }
 }

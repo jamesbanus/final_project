@@ -18,14 +18,7 @@ import {
   selectCheckedGenreArray,
 } from "./features/movies/moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  apiAuth,
-  popularListURL,
-  searchMoviebyTitleURL1,
-  searchMoviebyTitleURL2,
-  popularListURL2,
-  genreList,
-} from "./utils";
+import { apiAuth, genreList, getPopular, getSearch } from "./utils";
 
 const App = () => {
   let movies = useSelector(selectMovies);
@@ -39,21 +32,32 @@ const App = () => {
 
   const genreString = genre?.toString();
   let genreApiString = genreString?.replace(/\,/g, "|");
-  // console.log(genreString, genreApiString);
+  console.log(genreString, genreApiString);
+
+  const send = async () => {
+    try {
+      const { data } = await axios.get(`http://localhost:6001/home/${[page]}`);
+      if (data.status) {
+        alert("Everything Worked");
+        // return data;
+      } else {
+        alert(data.reason);
+      }
+    } catch (error) {
+      alert("Server issue");
+      console.log(error);
+    }
+  };
 
   // set endpointns for the api (URLS from utils)
 
   let endpoints = [
-    popularListURL + page + popularListURL2 + genreApiString,
-    searchMoviebyTitleURL1 + search + searchMoviebyTitleURL2 + page,
+    getPopular(page, genreApiString),
+    getSearch(search, page),
     genreList,
   ];
 
-  // console.log(endpoints);
-
-  // console.log(endpoints);
-
-  // create an insteance with headers so we only have to authorise once
+  // create an instance with headers so we only have to authorise once
 
   const axiosInstance = axios.create({
     headers: {
@@ -88,6 +92,7 @@ const App = () => {
 
   useEffect(() => {
     getMainData();
+    send();
   }, [getMainData]);
 
   const onSearchInput = async (e) => {

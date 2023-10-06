@@ -1,12 +1,10 @@
 import "./SingleMovie.scss";
 import {
   apiAuth,
-  movieByID1,
-  movieByID2,
-  releaseDate2,
-  apiVideos,
-  recommendationsApi,
   getMoviebyID,
+  getReleaseDate,
+  getTrailers,
+  getRecommendations,
 } from "../../../utils";
 import React, { useEffect, useCallback } from "react";
 import axios from "axios";
@@ -43,9 +41,9 @@ const SingleMovie = (props) => {
 
   let endpoints = [
     getMoviebyID(id),
-    movieByID1 + id + releaseDate2,
-    movieByID1 + id + apiVideos,
-    movieByID1 + id + recommendationsApi,
+    getReleaseDate(id),
+    getTrailers(id),
+    getRecommendations(id),
   ];
 
   // create an insteance with headers so we only have to authorise once
