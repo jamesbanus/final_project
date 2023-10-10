@@ -9,8 +9,6 @@ const RecMovies = (props) => {
     return el.poster_path !== null && el.backdrop_path !== null;
   });
 
-  console.log(newArray.length);
-
   if (newArray?.length === 0) {
     return (
       <>

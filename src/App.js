@@ -32,24 +32,8 @@ const App = () => {
 
   const genreString = genre?.toString();
   let genreApiString = genreString?.replace(/\,/g, "|");
-  console.log(genreString, genreApiString);
 
-  const send = async () => {
-    try {
-      const { data } = await axios.get(`http://localhost:6001/home/${[page]}`);
-      if (data.status) {
-        alert("Everything Worked");
-        // return data;
-      } else {
-        alert(data.reason);
-      }
-    } catch (error) {
-      alert("Server issue");
-      console.log(error);
-    }
-  };
-
-  // set endpointns for the api (URLS from utils)
+  // set endpoints for the api (URLS from utils)
 
   let endpoints = [
     getPopular(page, genreApiString),
@@ -92,7 +76,6 @@ const App = () => {
 
   useEffect(() => {
     getMainData();
-    send();
   }, [getMainData]);
 
   const onSearchInput = async (e) => {
