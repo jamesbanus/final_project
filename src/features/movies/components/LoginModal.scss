@@ -83,8 +83,12 @@
           width: 80%;
           font-size: 16px;
         }
+        .message {
+          margin: 10px 0px 0px 0px;
+          color: #ff0000;
+        }
         .loginButtonDiv {
-          padding: 20px 0px 10px 0px;
+          padding: 10px 0px 10px 0px;
           width: 60%;
           .loginButton {
             font-weight: bold;
@@ -96,6 +100,26 @@
             font-size: 16px;
           }
           .loginButton:hover {
+            background-color: #13dafb;
+            color: #000000;
+          }
+        }
+        p {
+          margin: 0;
+        }
+        .registerButtonDiv {
+          padding: 10px 0px 10px 0px;
+          width: 60%;
+          .registerButton {
+            font-weight: bold;
+            background-color: #000000;
+            color: #13dafb;
+            outline: none;
+            border: 1px solid #13dafb;
+            width: 100%;
+            font-size: 16px;
+          }
+          .registerButton:hover {
             background-color: #13dafb;
             color: #000000;
           }

@@ -48,11 +48,7 @@ const encodedGenreList = btoa(
 );
 const genreList = `http://localhost:6001/proxy?url=${encodedGenreList}`;
 
-const apiAuth =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZDNjYzk1ZWE4Zjk5MWYxMDhkZWQxMjJhM2YwMzA3MCIsInN1YiI6IjY0OGM2ZDEwYzNjODkxMDBhZTUwMWJkNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LX3gcqEZAqxOq0UVFVSm_L9rWNhXF4JgEn48pkSa9Rg";
-
 export {
-  apiAuth,
   genreList,
   getPopular,
   getSearch,

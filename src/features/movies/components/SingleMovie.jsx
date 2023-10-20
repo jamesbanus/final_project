@@ -1,6 +1,5 @@
 import "./SingleMovie.scss";
 import {
-  apiAuth,
   getMoviebyID,
   getReleaseDate,
   getTrailers,
@@ -46,14 +45,6 @@ const SingleMovie = (props) => {
     getRecommendations(id),
   ];
 
-  // create an insteance with headers so we only have to authorise once
-
-  const axiosInstance = axios.create({
-    headers: {
-      Authorization: apiAuth,
-    },
-  });
-
   // call the apis
 
   const getMovieData = useCallback(async () => {
@@ -61,24 +52,22 @@ const SingleMovie = (props) => {
       return;
     }
     try {
-      axios
-        .all(endpoints.map((endpoints) => axiosInstance.get(endpoints)))
-        .then(
-          axios.spread(
-            (
-              { data: movieData },
-              { data: certData },
-              { data: videoData },
-              { data: recData }
-            ) => {
-              // console.log({ videoData });
-              dispatch(setMovie(movieData));
-              dispatch(setCert(certData.results));
-              dispatch(setVideos(videoData.results));
-              dispatch(setRecommendationsApiResults(recData));
-            }
-          )
-        );
+      axios.all(endpoints.map((endpoints) => axios.get(endpoints))).then(
+        axios.spread(
+          (
+            { data: movieData },
+            { data: certData },
+            { data: videoData },
+            { data: recData }
+          ) => {
+            // console.log({ videoData });
+            dispatch(setMovie(movieData));
+            dispatch(setCert(certData.results));
+            dispatch(setVideos(videoData.results));
+            dispatch(setRecommendationsApiResults(recData));
+          }
+        )
+      );
     } catch (error) {
       console.log(error, id);
     }

@@ -18,7 +18,7 @@ import {
   selectCheckedGenreArray,
 } from "./features/movies/moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { apiAuth, genreList, getPopular, getSearch } from "./utils";
+import { genreList, getPopular, getSearch } from "./utils";
 
 const App = () => {
   let movies = useSelector(selectMovies);
@@ -41,34 +41,20 @@ const App = () => {
     genreList,
   ];
 
-  // create an instance with headers so we only have to authorise once
-
-  const axiosInstance = axios.create({
-    headers: {
-      Authorization: apiAuth,
-    },
-  });
-
   // call the apis
 
   const getMainData = useCallback(async () => {
     try {
-      axios
-        .all(endpoints.map((endpoints) => axiosInstance.get(endpoints)))
-        .then(
-          axios.spread(
-            (
-              { data: movieData },
-              { data: searchData },
-              { data: genreData }
-            ) => {
-              // console.log({ genreData });
-              dispatch(setMovies(movieData));
-              dispatch(setSearchResults(searchData));
-              dispatch(setGenreApiResults(genreData));
-            }
-          )
-        );
+      axios.all(endpoints.map((endpoints) => axios.get(endpoints))).then(
+        axios.spread(
+          ({ data: movieData }, { data: searchData }, { data: genreData }) => {
+            // console.log({ genreData });
+            dispatch(setMovies(movieData));
+            dispatch(setSearchResults(searchData));
+            dispatch(setGenreApiResults(genreData));
+          }
+        )
+      );
     } catch (error) {
       console.log(error);
     }
