@@ -2,12 +2,7 @@ import "./Nav.scss";
 import logo from "./../../../assets/Logo.png";
 import login from "./../../../assets/login.png";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  openLogin,
-  selectLoginOpen,
-  openLogout,
-  selectLogoutOpen,
-} from "../modalSlice";
+import { openLogin, selectLoginOpen } from "../modalSlice";
 import { selectLogin } from "../accountSlice";
 import LoginModal from "./LoginModal";
 import LogoutModal from "./LogoutModal";
