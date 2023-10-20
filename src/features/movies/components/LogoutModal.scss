@@ -1,0 +1,78 @@
+@media only screen and (max-width: 899px) {
+  .logoutModalContainer {
+    max-width: 90%;
+    aspect-ratio: 25/14;
+    background-color: white;
+    border-style: solid;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
+    .modal {
+      .btnContainer {
+        height: 20px;
+        button {
+          background-color: #000000;
+          outline: none;
+          border: 1px solid #13dafb;
+          color: #13dafb;
+        }
+        button:hover {
+          background-color: #13dafb;
+          color: #000000;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .logoutModalContainer {
+    max-width: 30%;
+    max-height: 60%;
+    background-color: #ffffff;
+    border-style: solid;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
+    .modal {
+      .btnContainer {
+        height: 20px;
+        button {
+          background-color: #000000;
+          outline: none;
+          border: 1px solid #13dafb;
+          color: #13dafb;
+        }
+        button:hover {
+          background-color: #13dafb;
+          color: #000000;
+        }
+      }
+      .logoutButtonDiv {
+        padding: 10px 0px 10px 0px;
+        width: 60%;
+        .logoutButton {
+          font-weight: bold;
+          background-color: #000000;
+          color: #13dafb;
+          outline: none;
+          border: 1px solid #13dafb;
+          width: 100%;
+          font-size: 16px;
+        }
+        .logoutButton:hover {
+          background-color: #13dafb;
+          color: #000000;
+        }
+      }
+    }
+  }
+}

@@ -32,20 +32,14 @@ const LoginModal = (props) => {
         `http://localhost:4000/account/register`,
         accountInfo
       );
-      const status = registerResult.data.status;
-      console.log(status);
-      dispatch(setMessage(status));
-      if (status === 1) {
+      const registerStatus = registerResult.data.status;
+      console.log(registerStatus);
+      dispatch(setMessage(registerStatus));
+      if (registerStatus === 1) {
         dispatch(setLogIn());
         dispatch(clearInputs());
         dispatch(closeLogin());
       }
-      // if (status === 0) {
-      //   dispatch(setMessage(status));
-      // }
-      // if (status === 2) {
-      //   dispatch(setMessage(status));
-      // }
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +51,14 @@ const LoginModal = (props) => {
         `http://localhost:4000/account/login`,
         accountInfo
       );
-      console.log(loginResult.data);
+      const loginStatus = loginResult.data.status;
+      console.log(loginStatus);
+      dispatch(setMessage(loginStatus));
+      if (loginStatus === 1) {
+        dispatch(setLogIn());
+        dispatch(clearInputs());
+        dispatch(closeLogin());
+      }
     } catch (error) {
       console.log(error);
     }

@@ -41,5 +41,6 @@ export const { setEmail, setPassword, setLogIn, clearInputs, setMessage } =
 export const selectEmail = (state) => state.account.email;
 export const selectPassword = (state) => state.account.password;
 export const selectMessage = (state) => state.account.message;
+export const selectLogin = (state) => state.account.loggedIn;
 
 export default accountSlice.reducer;
