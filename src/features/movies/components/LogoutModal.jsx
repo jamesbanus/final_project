@@ -1,6 +1,6 @@
 import "./LogoutModal.scss";
 import { closeLogin } from "../modalSlice";
-import { setLogIn } from "../accountSlice";
+import { setLogIn, clearToken } from "../accountSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 const LogoutModal = () => {
@@ -28,6 +28,7 @@ const LogoutModal = () => {
               onClick={() => {
                 dispatch(setLogIn());
                 dispatch(closeLogin());
+                dispatch(clearToken());
               }}
             >
               Log Out

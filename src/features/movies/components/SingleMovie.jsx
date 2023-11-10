@@ -21,7 +21,9 @@ import { useSelector, useDispatch } from "react-redux";
 import TrailerModal from "./TrailerModal";
 import RecMovies from "./RecMovies";
 import Interaction from "./Interaction";
-import { openModal, selectOpen } from "../modalSlice";
+import { selectOpen } from "../modalSlice";
+import { selectToken, selectLogin } from "../accountSlice";
+import { setFavouriteImage } from "../controlsSlice";
 
 const SingleMovie = (props) => {
   const { changeScreen, id } = props;
@@ -35,6 +37,8 @@ const SingleMovie = (props) => {
   const videos = useSelector(selectVideos);
   const isOpen = useSelector(selectOpen);
   const recommendations = useSelector(selectRecommendations);
+  const token = useSelector(selectToken);
+  const isLoggedIn = useSelector(selectLogin);
 
   // set endpointns for the api (URLS from utils)
 
@@ -168,9 +172,37 @@ const SingleMovie = (props) => {
 
   const trailerKey = getTrailerKey();
 
+  // stuff for the interaction component //
+
+  const grabFavouriteStatus = async () => {
+    try {
+      const favouriteResult = await axios.get(
+        `http://localhost:4000/useractions/actions/${id}`,
+        { headers: { token: token } }
+      );
+      const favouriteStatus = favouriteResult.data.status;
+      console.log(favouriteStatus);
+      if (favouriteStatus === 1) {
+        dispatch(setFavouriteImage(true));
+      } else {
+        dispatch(setFavouriteImage(false));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    grabFavouriteStatus();
+    console.log("I fire once", Date.now());
+  }, [id, isLoggedIn]);
+
+  /////////////////////////////////////////
+
   if (!movie | !cert) {
     return;
   }
+
   return (
     <>
       {isOpen && <TrailerModal trailerKey={trailerKey} />}
@@ -223,7 +255,6 @@ const SingleMovie = (props) => {
         <div className="movieOverviewDiv2">
           <p id="movieOverview2">{movie?.overview}</p>
         </div>
-        <Interaction />
       </div>
       <RecMovies
         recommendations={recommendations}

@@ -10,6 +10,8 @@ import {
   clearInputs,
   setMessage,
   selectMessage,
+  setToken,
+  selectToken,
 } from "../accountSlice";
 import axios from "axios";
 // import { fontAwesome } from "react-fontawesome";
@@ -18,13 +20,14 @@ const LoginModal = (props) => {
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
   const message = useSelector(selectMessage);
+  const token = useSelector(selectToken);
   const dispatch = useDispatch();
 
-  console.log(message);
+  // console.log(message);
 
   const accountInfo = { email: email, password: password };
 
-  console.log(accountInfo);
+  // console.log(accountInfo);
 
   const register = async () => {
     try {
@@ -33,7 +36,7 @@ const LoginModal = (props) => {
         accountInfo
       );
       const registerStatus = registerResult.data.status;
-      console.log(registerStatus);
+      // console.log(registerStatus);
       dispatch(setMessage(registerStatus));
       if (registerStatus === 1) {
         dispatch(setLogIn());
@@ -52,17 +55,21 @@ const LoginModal = (props) => {
         accountInfo
       );
       const loginStatus = loginResult.data.status;
-      console.log(loginStatus);
+      const loginToken = loginResult.data.token;
+      // console.log(loginStatus, token);
       dispatch(setMessage(loginStatus));
       if (loginStatus === 1) {
         dispatch(setLogIn());
         dispatch(clearInputs());
         dispatch(closeLogin());
+        dispatch(setToken(loginToken));
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  console.log(token);
 
   return (
     <>

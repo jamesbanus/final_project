@@ -24,7 +24,7 @@ const accountSlice = createSlice({
       state.message = "";
     },
     setMessage: (state, action) => {
-      console.log(action.payload);
+      //   console.log(action.payload);
       if (action.payload === 0) {
         state.message = "Bad E-mail or Password";
       }
@@ -32,15 +32,29 @@ const accountSlice = createSlice({
         state.message = "Already Registered! Please Log In";
       }
     },
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
+    clearToken: (state) => {
+      state.token = "";
+    },
   },
 });
 
-export const { setEmail, setPassword, setLogIn, clearInputs, setMessage } =
-  accountSlice.actions;
+export const {
+  setEmail,
+  setPassword,
+  setLogIn,
+  clearInputs,
+  setMessage,
+  setToken,
+  clearToken,
+} = accountSlice.actions;
 
 export const selectEmail = (state) => state.account.email;
 export const selectPassword = (state) => state.account.password;
 export const selectMessage = (state) => state.account.message;
 export const selectLogin = (state) => state.account.loggedIn;
+export const selectToken = (state) => state.account.token;
 
 export default accountSlice.reducer;
