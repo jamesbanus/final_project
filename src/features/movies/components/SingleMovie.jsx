@@ -198,12 +198,14 @@ const SingleMovie = (props) => {
         { headers: { token: token } }
       );
       const ratingStatus = ratingResult.data.status;
+      console.log(ratingStatus);
       if (ratingStatus === 1) {
         const storedRating = ratingResult.data.results[0].rating;
         dispatch(checkHasRating(true));
         dispatch(setRating(storedRating));
       } else {
         dispatch(checkHasRating(false));
+        dispatch(setRating(0));
       }
     } catch (error) {
       console.log(error);
