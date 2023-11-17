@@ -23,7 +23,7 @@ import RecMovies from "./RecMovies";
 import Interaction from "./Interaction";
 import { selectOpen } from "../modalSlice";
 import { selectToken, selectLogin } from "../accountSlice";
-import { setFavouriteImage } from "../controlsSlice";
+import { checkIfFavourite, checkHasRating, setRating } from "../controlsSlice";
 
 const SingleMovie = (props) => {
   const { changeScreen, id } = props;
@@ -177,15 +177,33 @@ const SingleMovie = (props) => {
   const grabFavouriteStatus = async () => {
     try {
       const favouriteResult = await axios.get(
-        `http://localhost:4000/useractions/actions/${id}`,
+        `http://localhost:4000/useractions/checkFavourite/${id}`,
         { headers: { token: token } }
       );
       const favouriteStatus = favouriteResult.data.status;
-      console.log(favouriteStatus);
       if (favouriteStatus === 1) {
-        dispatch(setFavouriteImage(true));
+        dispatch(checkIfFavourite(true));
       } else {
-        dispatch(setFavouriteImage(false));
+        dispatch(checkIfFavourite(false));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const grabRatingStatus = async () => {
+    try {
+      const ratingResult = await axios.get(
+        `http://localhost:4000/useractions/checkRating/${id}`,
+        { headers: { token: token } }
+      );
+      const ratingStatus = ratingResult.data.status;
+      if (ratingStatus === 1) {
+        const storedRating = ratingResult.data.results[0].rating;
+        dispatch(checkHasRating(true));
+        dispatch(setRating(storedRating));
+      } else {
+        dispatch(checkHasRating(false));
       }
     } catch (error) {
       console.log(error);
@@ -194,7 +212,8 @@ const SingleMovie = (props) => {
 
   useEffect(() => {
     grabFavouriteStatus();
-    console.log("I fire once", Date.now());
+    grabRatingStatus();
+    // console.log("I fire once", Date.now());
   }, [id, isLoggedIn]);
 
   /////////////////////////////////////////
@@ -246,7 +265,7 @@ const SingleMovie = (props) => {
             <div className="movieOverviewDiv">
               <p className="movieOverview">{movie?.overview}</p>
             </div>
-            <Interaction />
+            <Interaction movieid={id} />
           </div>
         </div>
         <div className="overviewTitleDiv2">

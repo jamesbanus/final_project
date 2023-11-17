@@ -117,27 +117,17 @@
             position: relative;
             .ratings {
               height: 100%;
+              cursor: pointer;
             }
             .ratings:hover {
               transform: scale(1.1);
-            }
-            .ratingsInnerDiv {
-              height: 100%;
-              position: absolute;
-              top: 0;
-              left: 0;
-              .ratingsFilled {
-                height: 100%;
-              }
-              .ratingsFilled:hover {
-                transform: scale(1.1);
-              }
             }
           }
           .favouriteDiv {
             height: 40%;
             .favourite {
               height: 100%;
+              cursor: pointer;
             }
           }
           .favouriteDiv:hover {
@@ -150,6 +140,7 @@
             .playButton {
               height: 100%;
               cursor: pointer;
+              color: #13dafb;
             }
             .wording {
               height: 100%;
@@ -323,27 +314,17 @@
         position: relative;
         .ratings {
           height: 100%;
+          cursor: pointer;
         }
         .ratings:hover {
           transform: scale(1.1);
-        }
-        .ratingsInnerDiv {
-          height: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          .ratingsFilled {
-            height: 100%;
-          }
-          .ratingsFilled:hover {
-            transform: scale(1.1);
-          }
         }
       }
       .favouriteDiv {
         height: 60%;
         .favourite {
           height: 100%;
+          cursor: pointer;
         }
       }
       .favouriteDiv:hover {
@@ -356,6 +337,7 @@
         .playButton {
           height: 100%;
           cursor: pointer;
+          color: #13dafb;
         }
         .wording {
           height: 100%;

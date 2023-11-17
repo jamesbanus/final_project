@@ -1,38 +1,56 @@
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { openModal } from "../modalSlice";
-import play from "./../../../assets/play.png";
-import favourite from "./../../../assets/favourite.png";
-import favouriteFilled from "./../../../assets/favouriteFilled.png";
-import star from "./../../../assets/star.png";
-import starFilled from "./../../../assets/starFilled.png";
-import { setFavouriteImage, selectFavouriteImage } from "../controlsSlice";
+import {
+  checkIfFavourite,
+  selectIfFavourite,
+  setRating,
+  selectRating,
+  setHover,
+  selectHover,
+  selectHasRating,
+} from "../controlsSlice";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { selectLogin, selectToken } from "../accountSlice";
 import { selectID } from "../moviesSlice";
+import { FaStar, FaHeart, FaPlay } from "react-icons/fa";
 
-const Interaction = () => {
-  const faveToggle = useSelector(selectFavouriteImage);
+const Interaction = (props) => {
+  const { movieid } = props;
+
+  const faveToggle = useSelector(selectIfFavourite);
   const isLoggedIn = useSelector(selectLogin);
   const movieID = useSelector(selectID);
   const token = useSelector(selectToken);
+  const rating = useSelector(selectRating);
+  const hover = useSelector(selectHover);
+  const hasRating = useSelector(selectHasRating);
+
   const dispatch = useDispatch();
 
-  console.log(faveToggle);
+  const notify = (message) => toast(`Please Log In to set ${message}!`);
 
-  const favouriteImageName = faveToggle ? favouriteFilled : favourite;
+  /// Favourite Functions //////////////////////////
 
-  const notify = () => toast("Please Log In to set Favourites!");
+  let fave;
 
-  const faveInfo = { movie_id: movieID, favourite: faveToggle };
+  if (faveToggle) {
+    fave = 0;
+  } else {
+    fave = 1;
+  }
+
+  const favouriteImageColour = faveToggle ? "#13dafb" : "#ffffff";
+
+  const faveInfo = { movie_id: movieID, favourite: fave };
 
   const setFavourite = async () => {
     try {
       const registerFavourite = await axios.post(
         `http://localhost:4000/useractions/add`,
-        faveInfo
+        faveInfo,
+        { headers: { token: token } }
       );
       const registerFavouriteStatus = registerFavourite.data.status;
       console.log(registerFavouriteStatus);
@@ -41,47 +59,148 @@ const Interaction = () => {
     }
   };
 
+  const updateFavourite = async () => {
+    try {
+      const updateFavourite = await axios.patch(
+        `http://localhost:4000/useractions/update/${movieid}`,
+        faveInfo,
+        { headers: { token: token } }
+      );
+      const updateFavouriteStatus = updateFavourite.data.status;
+      console.log(updateFavouriteStatus);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkFavouriteExists = async () => {
+    try {
+      const favouriteResult = await axios.get(
+        `http://localhost:4000/useractions/actions/${movieid}`,
+        { headers: { token: token } }
+      );
+      const favouriteStatus = favouriteResult.data.status;
+      console.log("status", favouriteStatus);
+      if (favouriteStatus === 1) {
+        updateFavourite();
+      } else {
+        setFavourite();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  ///////////////////////////////////////
+
+  /// Ratings Functions /////////////////
+
+  console.log(hasRating);
+
+  const addRating = async (currentRating) => {
+    const ratingInfo = { movie_id: movieID, rating: currentRating };
+    try {
+      const registerRating = await axios.post(
+        `http://localhost:4000/useractions/add`,
+        ratingInfo,
+        { headers: { token: token } }
+      );
+      const registerRatingStatus = registerRating.data.status;
+      console.log(registerRatingStatus);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateRating = async (currentRating) => {
+    const ratingInfo = { movie_id: movieID, rating: currentRating };
+    try {
+      const updateRating = await axios.patch(
+        `http://localhost:4000/useractions/update/${movieid}`,
+        ratingInfo,
+        { headers: { token: token } }
+      );
+      const updateRatingStatus = updateRating.data.status;
+      console.log(updateRatingStatus);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkRatingExists = async (currentRating) => {
+    try {
+      const ratingResult = await axios.get(
+        `http://localhost:4000/useractions/actions/${movieid}`,
+        { headers: { token: token } }
+      );
+      const ratingStatus = ratingResult.data.status;
+      console.log("rstatus", ratingStatus);
+      if (ratingStatus === 1) {
+        updateRating(currentRating);
+      } else {
+        addRating(currentRating);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log(rating);
+
   return (
     <>
       <div className="interactionContainer">
         <div className="ratingsDiv">
-          <img src={star} alt="star" className="ratings" />
-          <img src={star} alt="star" className="ratings" />
-          <img src={star} alt="star" className="ratings" />
-          <img src={star} alt="star" className="ratings" />
-          <img src={star} alt="star" className="ratings" />
-          <div className="ratingsInnerDiv">
-            <img src={starFilled} alt="starFilled" className="ratingsFilled" />
-            <img src={starFilled} alt="starFilled" className="ratingsFilled" />
-            <img src={starFilled} alt="starFilled" className="ratingsFilled" />
-            <img src={starFilled} alt="starFilled" className="ratingsFilled" />
-            <img src={starFilled} alt="starFilled" className="ratingsFilled" />
-          </div>
+          {[...Array(5)].map((star, index) => {
+            const currentRating = index + 1;
+            return (
+              <FaStar
+                key={index}
+                size={30}
+                className="ratings"
+                // value={currentRating}
+                onClick={() => {
+                  if (!isLoggedIn) {
+                    notify("Ratings");
+                  } else {
+                    dispatch(setRating(currentRating));
+                    checkRatingExists(currentRating);
+                  }
+                }}
+                color={
+                  currentRating <= (hover || rating) ? "#13dafb" : "#ffffff"
+                }
+                onMouseEnter={() => dispatch(setHover(currentRating))}
+                onMouseLeave={() => dispatch(setHover(null))}
+              />
+            );
+          })}
         </div>
         <div className="favouriteDiv">
-          <img
+          <FaHeart
+            size={30}
             onClick={() => {
               if (!isLoggedIn) {
-                notify();
+                notify("Favourites");
               } else {
-                dispatch(setFavouriteImage(!faveToggle));
-                setFavourite();
+                dispatch(checkIfFavourite(!faveToggle));
+                checkFavouriteExists();
               }
             }}
-            src={favouriteImageName}
+            color={favouriteImageColour}
             alt="favourite"
             className="favourite"
           />
           <ToastContainer />
         </div>
         <div className="playButtonDiv">
-          <img
+          <FaPlay
+            size={30}
             className="playButton"
             onClick={() => dispatch(openModal())}
-            src={play}
           />
           <div className="wording">
-            <p onClick={() => dispatch(openModal())}>Play Trailer</p>
+            <p onClick={() => dispatch(openModal())}> Play Trailer </p>
           </div>
         </div>
       </div>
