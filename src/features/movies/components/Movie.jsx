@@ -5,6 +5,8 @@ const Movie = (props) => {
 
   const obj = movies?.results;
 
+  console.log(obj);
+
   const newArray = obj?.filter((el) => {
     return el.poster_path !== null && el.backdrop_path !== null;
   });

@@ -13,6 +13,11 @@
         flex-direction: row;
         overflow: scroll;
       }
+      #favouriteMovies {
+        display: flex;
+        flex-direction: row;
+        overflow: scroll;
+      }
     }
   }
 }
@@ -32,6 +37,11 @@
         font-size: 16px;
       }
       #popularMovies {
+        display: flex;
+        flex-direction: row;
+        overflow: scroll;
+      }
+      #favouriteMovies {
         display: flex;
         flex-direction: row;
         overflow: scroll;

@@ -48,7 +48,7 @@ const App = () => {
       axios.all(endpoints.map((endpoints) => axios.get(endpoints))).then(
         axios.spread(
           ({ data: movieData }, { data: searchData }, { data: genreData }) => {
-            // console.log({ genreData });
+            // console.log({ movieData });
             dispatch(setMovies(movieData));
             dispatch(setSearchResults(searchData));
             dispatch(setGenreApiResults(genreData));

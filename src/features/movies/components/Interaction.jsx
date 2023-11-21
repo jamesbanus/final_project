@@ -41,8 +41,6 @@ const Interaction = (props) => {
     fave = 1;
   }
 
-  const favouriteImageColour = faveToggle ? "#13dafb" : "#ffffff";
-
   const faveInfo = { movie_id: movieID, favourite: fave };
 
   const setFavourite = async () => {
@@ -53,7 +51,7 @@ const Interaction = (props) => {
         { headers: { token: token } }
       );
       const registerFavouriteStatus = registerFavourite.data.status;
-      console.log(registerFavouriteStatus);
+      console.log("set fave", registerFavouriteStatus);
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +65,7 @@ const Interaction = (props) => {
         { headers: { token: token } }
       );
       const updateFavouriteStatus = updateFavourite.data.status;
-      console.log(updateFavouriteStatus);
+      console.log("update fave", updateFavouriteStatus);
     } catch (error) {
       console.log(error);
     }
@@ -80,7 +78,7 @@ const Interaction = (props) => {
         { headers: { token: token } }
       );
       const favouriteStatus = favouriteResult.data.status;
-      console.log("status", favouriteStatus);
+      //   console.log("status", favouriteStatus);
       if (favouriteStatus === 1) {
         updateFavourite();
       } else {
@@ -95,7 +93,7 @@ const Interaction = (props) => {
 
   /// Ratings Functions /////////////////
 
-  console.log(hasRating);
+  //   console.log(hasRating);
 
   const addRating = async (currentRating) => {
     const ratingInfo = { movie_id: movieID, rating: currentRating };
@@ -145,7 +143,7 @@ const Interaction = (props) => {
     }
   };
 
-  console.log(rating);
+  //   console.log(rating);
 
   return (
     <>
@@ -187,7 +185,7 @@ const Interaction = (props) => {
                 checkFavouriteExists();
               }
             }}
-            color={favouriteImageColour}
+            color={faveToggle ? "#13dafb" : "#ffffff"}
             alt="favourite"
             className="favourite"
           />

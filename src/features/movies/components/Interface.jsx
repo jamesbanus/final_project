@@ -3,6 +3,7 @@ import Nav from "./Nav";
 import SideBar from "./SideBar";
 import Controls from "./Controls";
 import SingleMovie from "./SingleMovie";
+import Favourites from "./Favourites";
 import "./Interface.scss";
 import {
   setScreenMode,
@@ -71,6 +72,9 @@ const Interface = (props) => {
                 totalPages={totalPages}
               />
               <h1 className="subHeading">Favourites</h1>
+              <div id="favouriteMovies">
+                <Favourites />
+              </div>
             </>
           )}
           {screenMode === 1 && (

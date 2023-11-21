@@ -89,6 +89,9 @@ export const moviesSlice = createSlice({
     setClearSearch: (state) => {
       state.search = "";
     },
+    setFavourites: (state, action) => {
+      state.favourites = action.payload;
+    },
   },
 });
 
@@ -111,6 +114,7 @@ export const {
   setRecommendationsApiResults,
   setClearCheck,
   setClearSearch,
+  setFavourites,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
@@ -127,5 +131,6 @@ export const selectCheckedGenreArray = (state) =>
   state.movies.checkedGenreArray;
 export const selectRecommendations = (state) =>
   state.movies.recommendationApiResults;
+export const selectFavourites = (state) => state.movies.favourites;
 
 export default moviesSlice.reducer;
