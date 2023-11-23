@@ -7,7 +7,7 @@ import { selectFavourites, setFavourites } from "../moviesSlice";
 import "./Favourites.scss";
 
 const Favourite = (props) => {
-  const { id } = props;
+  const { id, changeScreen } = props;
   const token = useSelector(selectToken);
   const isLoggedIn = useSelector(selectLogin);
   const favourite = useSelector(selectFavourites);
@@ -20,7 +20,7 @@ const Favourite = (props) => {
   const getFavouritesData = useCallback(
     async (favouriteResults) => {
       try {
-        const favouritesObject = {};
+        const favouritesObject = [];
         let n = 0;
         for (let index = 0; index < favouriteResults.length; index++) {
           let id = favouriteResults[index];
@@ -54,17 +54,24 @@ const Favourite = (props) => {
         { headers: { token: token } }
       );
       const favouriteList = favouriteResult.data.results;
-      const favouriteResults = [];
-      let n = 0;
-      for (let index = 0; index < favouriteList.length; index++) {
-        const element = favouriteList[index];
-        if (element.movie_id) {
-          favouriteResults[n] = element.movie_id;
-          n++;
+      const favouriteStatus = favouriteResult.data.status;
+      console.log(favouriteStatus);
+      if (favouriteStatus === 0) {
+        dispatchFavourites(null);
+        return;
+      } else {
+        const favouriteResults = [];
+        let n = 0;
+        for (let index = 0; index < favouriteList.length; index++) {
+          const element = favouriteList[index];
+          if (element.movie_id) {
+            favouriteResults[n] = element.movie_id;
+            n++;
+          }
         }
+        getFavouritesData(favouriteResults);
       }
       //   console.log(favouriteResults);
-      getFavouritesData(favouriteResults);
     } catch (error) {
       console.log(error);
     }
@@ -75,16 +82,31 @@ const Favourite = (props) => {
     console.log("I fire once", Date.now());
   }, [isLoggedIn]);
 
-  const faveArray = Object.values(favourite);
-
-  console.log(faveArray);
+  console.log(favourite);
 
   if (!isLoggedIn) {
-    return <></>;
+    return (
+      <>
+        <div className="favouritesError">
+          <h1 className="errorMessage">Please Log In to see Favourites!</h1>
+        </div>
+      </>
+    );
+  }
+  if (!favourite) {
+    return (
+      <>
+        <div className="favouritesError">
+          <h1 className="errorMessage">
+            Get Favouriting to Populate this Section!
+          </h1>
+        </div>
+      </>
+    );
   }
   return (
     <>
-      {faveArray.map((item) => {
+      {favourite.map((item) => {
         return (
           <div className="favouriteMovie" key={item.id}>
             <img
@@ -92,7 +114,7 @@ const Favourite = (props) => {
               src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
               alt={item.title}
               id={item.id}
-              //   onClick={changeScreen}
+              onClick={changeScreen}
             />
             <h1 className="fMovieTitle">{item.title}</h1>
           </div>

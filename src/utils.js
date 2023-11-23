@@ -3,7 +3,8 @@
 
 const getPopular = (page, genreApiString) => {
   const encodedGetPopular = btoa(
-    `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}&with_genres=${genreApiString}`
+    `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_genres=${genreApiString}`
+    // `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}&with_genres=${genreApiString}`
   );
   return `http://localhost:6001/proxy?url=${encodedGetPopular}`;
 };

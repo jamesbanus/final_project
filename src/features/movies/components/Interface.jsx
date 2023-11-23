@@ -73,7 +73,7 @@ const Interface = (props) => {
               />
               <h1 className="subHeading">Favourites</h1>
               <div id="favouriteMovies">
-                <Favourites />
+                <Favourites changeScreen={changeScreen} />
               </div>
             </>
           )}
