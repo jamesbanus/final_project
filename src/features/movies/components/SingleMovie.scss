@@ -112,6 +112,27 @@
           height: 50px;
           background-color: #000000;
           padding: 10px 20px 10px 20px;
+          #ratingBar {
+            width: 50px;
+            height: 50px;
+            .CircularProgressbar {
+              stroke: #13dafb;
+              .CircularProgressbar-background {
+                fill: #000000;
+              }
+              .CircularProgressbar-trail {
+                stroke: #000000;
+              }
+              .CircularProgressbar-path {
+                stroke: #13dafb;
+              }
+              .CircularProgressbar-text {
+                stroke: #13dafb;
+                fill: #13dafb;
+                font-size: 16px;
+              }
+            }
+          }
           .ratingsDiv {
             height: 40%;
             position: relative;
@@ -214,9 +235,10 @@
       .moviePosterDiv {
         max-width: 35%;
         padding: 10px 10px 10px 0;
+        position: relative;
         .moviePoster {
           max-width: 300px;
-          position: relative;
+
           width: 100%;
           height: auto;
           z-index: 1;
@@ -224,6 +246,7 @@
           box-shadow: 5px 5px 5px #000000;
         }
       }
+
       .singleMovieInfoContainer {
         padding: 10px 10px 10px 10px;
         display: flex;
@@ -309,6 +332,27 @@
       height: 50px;
       background-color: #000000;
       padding: 10px 20px 10px 20px;
+      #ratingBar {
+        width: 50px;
+        height: 50px;
+        .CircularProgressbar {
+          stroke: #13dafb;
+          .CircularProgressbar-background {
+            fill: #000000;
+          }
+          .CircularProgressbar-trail {
+            stroke: #000000;
+          }
+          .CircularProgressbar-path {
+            stroke: #13dafb;
+          }
+          .CircularProgressbar-text {
+            stroke: #13dafb;
+            fill: #13dafb;
+            font-size: 16px;
+          }
+        }
+      }
       .ratingsDiv {
         height: 60%;
         position: relative;

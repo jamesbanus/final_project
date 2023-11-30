@@ -33,8 +33,6 @@ const App = () => {
   const genreString = genre?.toString();
   let genreApiString = genreString?.replace(/\,/g, "|");
 
-  console.log(genreApiString);
-
   // set endpoints for the api (URLS from utils)
 
   let endpoints = [
@@ -64,7 +62,7 @@ const App = () => {
 
   useEffect(() => {
     getMainData();
-  }, [getMainData, genreApiString]);
+  }, [getMainData]);
 
   const onSearchInput = async (e) => {
     dispatch(setSearch(e.target.value));

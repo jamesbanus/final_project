@@ -92,6 +92,16 @@ export const moviesSlice = createSlice({
     setFavourites: (state, action) => {
       state.favourites = action.payload;
     },
+    setRating: (state, action) => {
+      const index = state.movies.results.findIndex((item) => {
+        if (item.id === action.payload.id) {
+          return true;
+        }
+      });
+      if (index > -1) {
+        state.movies.results[index].rating = action.payload.avgRating;
+      }
+    },
   },
 });
 
@@ -115,6 +125,7 @@ export const {
   setClearCheck,
   setClearSearch,
   setFavourites,
+  setRating,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;

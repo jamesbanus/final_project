@@ -79,10 +79,7 @@ const Favourite = (props) => {
 
   useEffect(() => {
     grabFavouriteList();
-    console.log("I fire once", Date.now());
   }, [isLoggedIn]);
-
-  console.log(favourite);
 
   if (!isLoggedIn) {
     return (

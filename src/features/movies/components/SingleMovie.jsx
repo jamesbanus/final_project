@@ -152,6 +152,8 @@ const SingleMovie = (props) => {
     }
   }
 
+  console.log(videosResults);
+
   const getTrailerKey = () => {
     if (videosResults["Official Trailer"]) {
       return videosResults["Official Trailer"];
@@ -243,6 +245,7 @@ const SingleMovie = (props) => {
               alt={movie?.title}
             />
           </div>
+
           <div className="singleMovieInfoContainer">
             <div className="movieTitleDiv">
               <h1 className="movieTitle">
@@ -267,7 +270,7 @@ const SingleMovie = (props) => {
             <div className="movieOverviewDiv">
               <p className="movieOverview">{movie?.overview}</p>
             </div>
-            <Interaction movieid={id} />
+            <Interaction movieid={id} avgrating={movie?.rating} />
           </div>
         </div>
         <div className="overviewTitleDiv2">

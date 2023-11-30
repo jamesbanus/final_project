@@ -15,9 +15,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { selectLogin, selectToken } from "../accountSlice";
 import { selectID } from "../moviesSlice";
 import { FaStar, FaHeart, FaPlay } from "react-icons/fa";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const Interaction = (props) => {
-  const { movieid } = props;
+  const { movieid, avgrating } = props;
 
   const faveToggle = useSelector(selectIfFavourite);
   const isLoggedIn = useSelector(selectLogin);
@@ -148,6 +150,13 @@ const Interaction = (props) => {
   return (
     <>
       <div className="interactionContainer">
+        <div id="ratingBar">
+          <CircularProgressbar
+            value={avgrating}
+            text={`${avgrating}%`}
+            background={true}
+          />
+        </div>
         <div className="ratingsDiv">
           {[...Array(5)].map((star, index) => {
             const currentRating = index + 1;
