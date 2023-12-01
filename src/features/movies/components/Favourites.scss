@@ -4,6 +4,8 @@
     flex-direction: column;
     text-align: center;
     padding: 5px 5px 5px 5px;
+    max-width: 100px;
+    position: relative;
     .fMoviePoster {
       max-width: 100px;
       height: auto;
@@ -11,7 +13,31 @@
       box-shadow: 5px 5px 5px #000000;
     }
     .fMovieTitle {
+      padding-top: 10px;
       font-size: 12px;
+    }
+  }
+  .favRatingBar {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 148px;
+    left: 5px;
+    .CircularProgressbar {
+      stroke: #13dafb;
+      .CircularProgressbar-background {
+        fill: #000000;
+      }
+      .CircularProgressbar-trail {
+        stroke: #000000;
+      }
+      .CircularProgressbar-path {
+        stroke: #13dafb;
+      }
+      .CircularProgressbar-text {
+        stroke: #13dafb;
+        font-size: 24px;
+      }
     }
   }
 }
@@ -23,6 +49,7 @@
     text-align: center;
     padding: 10px 10px 10px 10px;
     max-width: 185px;
+    position: relative;
     .fMoviePoster {
       max-width: 185px;
       max-height: 278px;
@@ -31,6 +58,30 @@
     }
     .fMovieTitle {
       font-size: 16px;
+      padding-top: 10px;
+    }
+  }
+  .favRatingBar {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 270px;
+    left: 5px;
+    .CircularProgressbar {
+      stroke: #13dafb;
+      .CircularProgressbar-background {
+        fill: #000000;
+      }
+      .CircularProgressbar-trail {
+        stroke: #000000;
+      }
+      .CircularProgressbar-path {
+        stroke: #13dafb;
+      }
+      .CircularProgressbar-text {
+        stroke: #13dafb;
+        font-size: 24px;
+      }
     }
   }
 }

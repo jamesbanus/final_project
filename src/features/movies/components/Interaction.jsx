@@ -151,11 +151,15 @@ const Interaction = (props) => {
     <>
       <div className="interactionContainer">
         <div id="ratingBar">
-          <CircularProgressbar
-            value={avgrating}
-            text={`${avgrating}%`}
-            background={true}
-          />
+          {avgrating === undefined ? (
+            <CircularProgressbar value={0} text={`?`} background={true} />
+          ) : (
+            <CircularProgressbar
+              value={avgrating}
+              text={`${avgrating}%`}
+              background={true}
+            />
+          )}
         </div>
         <div className="ratingsDiv">
           {[...Array(5)].map((star, index) => {

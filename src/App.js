@@ -16,6 +16,8 @@ import {
   setGenreApiResults,
   genreApiResults,
   selectCheckedGenreArray,
+  setRatingsData,
+  selectRatingsData,
 } from "./features/movies/moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { genreList, getPopular, getSearch } from "./utils";
@@ -27,6 +29,7 @@ const App = () => {
   const searchResults = useSelector(selectSearchResults);
   const genreApiList = useSelector(genreApiResults);
   const genre = useSelector(selectCheckedGenreArray);
+  const ratingsData = useSelector(selectRatingsData);
 
   const dispatch = useDispatch();
 
@@ -63,6 +66,27 @@ const App = () => {
   useEffect(() => {
     getMainData();
   }, [getMainData]);
+
+  const getRatingsData = useCallback(async () => {
+    try {
+      const avgRating = await axios.get(
+        `http://localhost:4000/account/returnAllAvgRating`
+      );
+      const avgRatingStatus = avgRating.data.status;
+      if (avgRatingStatus === 1) {
+        console.log("firing");
+        const avgRatingData = avgRating.data.results;
+        dispatch(setRatingsData(avgRatingData));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getRatingsData();
+    console.log("fire getRatingsData");
+  }, []);
 
   const onSearchInput = async (e) => {
     dispatch(setSearch(e.target.value));
@@ -103,6 +127,7 @@ const App = () => {
         page={page}
         totalPages={totalPages}
         genreApiList={genreApiList}
+        ratingsData={ratingsData}
       />
     </>
   );

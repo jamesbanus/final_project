@@ -20,7 +20,7 @@
   }
 }
 
-@media only screen and (max-width: 899px) {
+@media only screen and (max-width: 649px) {
   #masterContainer {
     max-width: 100%;
     position: relative;
@@ -49,6 +49,7 @@
           box-shadow: 5px 5px 5px #000000;
         }
       }
+
       .singleMovieInfoContainer {
         max-width: 100%;
         .movieTitleDiv {
@@ -113,25 +114,7 @@
           background-color: #000000;
           padding: 10px 20px 10px 20px;
           #ratingBar {
-            width: 50px;
-            height: 50px;
-            .CircularProgressbar {
-              stroke: #13dafb;
-              .CircularProgressbar-background {
-                fill: #000000;
-              }
-              .CircularProgressbar-trail {
-                stroke: #000000;
-              }
-              .CircularProgressbar-path {
-                stroke: #13dafb;
-              }
-              .CircularProgressbar-text {
-                stroke: #13dafb;
-                fill: #13dafb;
-                font-size: 16px;
-              }
-            }
+            display: none;
           }
           .ratingsDiv {
             height: 40%;
@@ -205,7 +188,7 @@
   }
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 650px) {
   #masterContainer {
     width: 100%;
     position: relative;

@@ -102,6 +102,35 @@ export const moviesSlice = createSlice({
         state.movies.results[index].rating = action.payload.avgRating;
       }
     },
+    setSingleMovieRating: (state, action) => {
+      if (state.movie) {
+        state.movie.rating = action.payload;
+      }
+    },
+    setRecommendationsRating: (state, action) => {
+      const index = state.recommendationApiResults.results.findIndex((item) => {
+        if (item.id === action.payload.id) {
+          return true;
+        }
+      });
+      if (index > -1) {
+        state.recommendationApiResults.results[index].rating =
+          action.payload.avgRating;
+      }
+    },
+    setFavouritesRating: (state, action) => {
+      const index = state.favourites.findIndex((item) => {
+        if (item.id === action.payload.id) {
+          return true;
+        }
+      });
+      if (index > -1) {
+        state.favourites[index].rating = action.payload.avgRating;
+      }
+    },
+    setRatingsData: (state, action) => {
+      state.ratingsData = action.payload;
+    },
   },
 });
 
@@ -126,6 +155,10 @@ export const {
   setClearSearch,
   setFavourites,
   setRating,
+  setRatingsData,
+  setSingleMovieRating,
+  setRecommendationsRating,
+  setFavouritesRating,
 } = moviesSlice.actions;
 
 export const selectMovies = (state) => state.movies.movies;
@@ -143,5 +176,6 @@ export const selectCheckedGenreArray = (state) =>
 export const selectRecommendations = (state) =>
   state.movies.recommendationApiResults;
 export const selectFavourites = (state) => state.movies.favourites;
+export const selectRatingsData = (state) => state.movies.ratingsData;
 
 export default moviesSlice.reducer;

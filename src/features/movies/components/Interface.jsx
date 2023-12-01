@@ -27,6 +27,7 @@ const Interface = (props) => {
     search,
     totalPages,
     genreApiList,
+    ratingsData,
   } = props;
 
   const screenMode = useSelector(selectScreen);
@@ -62,7 +63,11 @@ const Interface = (props) => {
             <>
               <h1 className="subHeading">Popular</h1>
               <div id="popularMovies">
-                <Movie movies={movies} changeScreen={changeScreen} />
+                <Movie
+                  movies={movies}
+                  changeScreen={changeScreen}
+                  ratingsData={ratingsData}
+                />
               </div>
               <Controls
                 onPageNext={onPageNext}
@@ -73,13 +78,20 @@ const Interface = (props) => {
               />
               <h1 className="subHeading">Favourites</h1>
               <div id="favouriteMovies">
-                <Favourites changeScreen={changeScreen} />
+                <Favourites
+                  changeScreen={changeScreen}
+                  ratingsData={ratingsData}
+                />
               </div>
             </>
           )}
           {screenMode === 1 && (
             <>
-              <SingleMovie changeScreen={changeScreen} id={id} />
+              <SingleMovie
+                changeScreen={changeScreen}
+                id={id}
+                ratingsData={ratingsData}
+              />
             </>
           )}
         </div>

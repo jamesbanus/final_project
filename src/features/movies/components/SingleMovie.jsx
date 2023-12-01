@@ -16,6 +16,7 @@ import {
   setVideos,
   setRecommendationsApiResults,
   selectRecommendations,
+  setSingleMovieRating,
 } from "../moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import TrailerModal from "./TrailerModal";
@@ -24,9 +25,11 @@ import Interaction from "./Interaction";
 import { selectOpen } from "../modalSlice";
 import { selectToken, selectLogin } from "../accountSlice";
 import { checkIfFavourite, checkHasRating, setRating } from "../controlsSlice";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const SingleMovie = (props) => {
-  const { changeScreen, id } = props;
+  const { changeScreen, id, ratingsData } = props;
 
   const dispatch = useDispatch();
 
@@ -152,8 +155,6 @@ const SingleMovie = (props) => {
     }
   }
 
-  console.log(videosResults);
-
   const getTrailerKey = () => {
     if (videosResults["Official Trailer"]) {
       return videosResults["Official Trailer"];
@@ -173,6 +174,20 @@ const SingleMovie = (props) => {
   };
 
   const trailerKey = getTrailerKey();
+
+  // get the films Rating //
+
+  useEffect(() => {
+    for (let index = 0; index < ratingsData?.length; index++) {
+      const element = ratingsData[index];
+      const ratingID = element.movie_id;
+      const avgRating = element.avgRating;
+      if (id == ratingID) {
+        dispatch(setSingleMovieRating(avgRating));
+        return;
+      }
+    }
+  });
 
   // stuff for the interaction component //
 
@@ -200,7 +215,6 @@ const SingleMovie = (props) => {
         { headers: { token: token } }
       );
       const ratingStatus = ratingResult.data.status;
-      console.log(ratingStatus);
       if (ratingStatus === 1) {
         const storedRating = ratingResult.data.results[0].rating;
         dispatch(checkHasRating(true));
@@ -244,6 +258,17 @@ const SingleMovie = (props) => {
               src={`https://image.tmdb.org/t/p/w780${movie?.poster_path}`}
               alt={movie?.title}
             />
+            {/* <div className="ratingBar">
+              {movie?.rating === undefined ? (
+                <CircularProgressbar value={0} text={`?`} background={true} />
+              ) : (
+                <CircularProgressbar
+                  value={movie?.rating}
+                  text={`${movie?.rating}%`}
+                  background={true}
+                />
+              )}
+            </div> */}
           </div>
 
           <div className="singleMovieInfoContainer">
@@ -273,6 +298,7 @@ const SingleMovie = (props) => {
             <Interaction movieid={id} avgrating={movie?.rating} />
           </div>
         </div>
+        <Interaction movieid={id} avgrating={movie?.rating} />
         <div className="overviewTitleDiv2">
           <h2 id="overview2">Overview</h2>
         </div>
@@ -283,6 +309,7 @@ const SingleMovie = (props) => {
       <RecMovies
         recommendations={recommendations}
         changeScreen={changeScreen}
+        ratingsData={ratingsData}
       />
     </>
   );

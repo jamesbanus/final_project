@@ -3,11 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState, useCallback } from "react";
 import { selectToken, selectLogin } from "../accountSlice";
 import { getMoviebyID } from "../../../utils";
-import { selectFavourites, setFavourites } from "../moviesSlice";
+import {
+  selectFavourites,
+  setFavourites,
+  setFavouritesRating,
+} from "../moviesSlice";
 import "./Favourites.scss";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const Favourite = (props) => {
-  const { id, changeScreen } = props;
+  const { id, changeScreen, ratingsData } = props;
   const token = useSelector(selectToken);
   const isLoggedIn = useSelector(selectLogin);
   const favourite = useSelector(selectFavourites);
@@ -81,6 +87,22 @@ const Favourite = (props) => {
     grabFavouriteList();
   }, [isLoggedIn]);
 
+  useEffect(() => {
+    for (let index = 0; index < favourite?.length; index++) {
+      const element = favourite[index];
+      const id = element.id;
+      for (let index = 0; index < ratingsData?.length; index++) {
+        const element = ratingsData[index];
+        const ratingID = element.movie_id;
+        const avgRating = element.avgRating;
+        if (id === ratingID) {
+          console.log("true");
+          dispatch(setFavouritesRating({ id, avgRating }));
+        }
+      }
+    }
+  });
+
   if (!isLoggedIn) {
     return (
       <>
@@ -114,6 +136,17 @@ const Favourite = (props) => {
               onClick={changeScreen}
             />
             <h1 className="fMovieTitle">{item.title}</h1>
+            <div className="favRatingBar">
+              {item.rating === undefined ? (
+                <CircularProgressbar value={0} text={`?`} background={true} />
+              ) : (
+                <CircularProgressbar
+                  value={item.rating}
+                  text={`${item.rating}%`}
+                  background={true}
+                />
+              )}
+            </div>
           </div>
         );
       })}
