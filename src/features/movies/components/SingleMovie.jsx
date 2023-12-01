@@ -24,7 +24,7 @@ import RecMovies from "./RecMovies";
 import Interaction from "./Interaction";
 import { selectOpen } from "../modalSlice";
 import { selectToken, selectLogin } from "../accountSlice";
-import { checkIfFavourite, checkHasRating, setRating } from "../controlsSlice";
+import { checkIfFavourite, setRating } from "../controlsSlice";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -45,12 +45,12 @@ const SingleMovie = (props) => {
 
   // set endpointns for the api (URLS from utils)
 
-  let endpoints = [
-    getMoviebyID(id),
-    getReleaseDate(id),
-    getTrailers(id),
-    getRecommendations(id),
-  ];
+  // const endpoints = [
+  //   getMoviebyID(id),
+  //   getReleaseDate(id),
+  //   getTrailers(id),
+  //   getRecommendations(id),
+  // ];
 
   // call the apis
 
@@ -58,6 +58,12 @@ const SingleMovie = (props) => {
     if (!id) {
       return;
     }
+    const endpoints = [
+      getMoviebyID(id),
+      getReleaseDate(id),
+      getTrailers(id),
+      getRecommendations(id),
+    ];
     try {
       axios.all(endpoints.map((endpoints) => axios.get(endpoints))).then(
         axios.spread(
@@ -182,7 +188,7 @@ const SingleMovie = (props) => {
       const element = ratingsData[index];
       const ratingID = element.movie_id;
       const avgRating = element.avgRating;
-      if (id == ratingID) {
+      if (Number(id) === ratingID) {
         dispatch(setSingleMovieRating(avgRating));
         return;
       }
@@ -191,7 +197,7 @@ const SingleMovie = (props) => {
 
   // stuff for the interaction component //
 
-  const grabFavouriteStatus = async () => {
+  const grabFavouriteStatus = useCallback(async () => {
     try {
       const favouriteResult = await axios.get(
         `http://localhost:4000/useractions/checkFavourite/${id}`,
@@ -206,9 +212,9 @@ const SingleMovie = (props) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [dispatch, id, token]);
 
-  const grabRatingStatus = async () => {
+  const grabRatingStatus = useCallback(async () => {
     try {
       const ratingResult = await axios.get(
         `http://localhost:4000/useractions/checkRating/${id}`,
@@ -217,22 +223,22 @@ const SingleMovie = (props) => {
       const ratingStatus = ratingResult.data.status;
       if (ratingStatus === 1) {
         const storedRating = ratingResult.data.results[0].rating;
-        dispatch(checkHasRating(true));
+        // dispatch(checkHasRating(true));
         dispatch(setRating(storedRating));
       } else {
-        dispatch(checkHasRating(false));
+        // dispatch(checkHasRating(false));
         dispatch(setRating(0));
       }
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [dispatch, id, token]);
 
   useEffect(() => {
     grabFavouriteStatus();
     grabRatingStatus();
     // console.log("I fire once", Date.now());
-  }, [id, isLoggedIn]);
+  }, [id, isLoggedIn, grabFavouriteStatus, grabRatingStatus]);
 
   /////////////////////////////////////////
 
@@ -258,7 +264,7 @@ const SingleMovie = (props) => {
               src={`https://image.tmdb.org/t/p/w780${movie?.poster_path}`}
               alt={movie?.title}
             />
-            {/* <div className="ratingBar">
+            <div className="singleMratingBar">
               {movie?.rating === undefined ? (
                 <CircularProgressbar value={0} text={`?`} background={true} />
               ) : (
@@ -268,7 +274,7 @@ const SingleMovie = (props) => {
                   background={true}
                 />
               )}
-            </div> */}
+            </div>
           </div>
 
           <div className="singleMovieInfoContainer">

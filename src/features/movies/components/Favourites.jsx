@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { selectToken, selectLogin } from "../accountSlice";
 import { getMoviebyID } from "../../../utils";
 import {
@@ -19,38 +19,39 @@ const Favourite = (props) => {
   const favourite = useSelector(selectFavourites);
   const dispatch = useDispatch();
 
-  const dispatchFavourites = (favouritesObject) => {
-    dispatch(setFavourites(favouritesObject));
-  };
+  const dispatchFavourites = useCallback(
+    async (favouritesObject) => {
+      dispatch(setFavourites(favouritesObject));
+    },
+    [dispatch]
+  );
 
   const getFavouritesData = useCallback(
     async (favouriteResults) => {
       try {
         const favouritesObject = [];
         let n = 0;
-        for (let index = 0; index < favouriteResults.length; index++) {
-          let id = favouriteResults[index];
-          let endpoints = [getMoviebyID(id)];
+        favouriteResults.forEach((id) => {
+          const endpoints = [getMoviebyID(id)];
           axios.all(endpoints.map((endpoints) => axios.get(endpoints))).then(
             axios.spread(({ data: favouritesData }) => {
               favouritesObject[n] = favouritesData;
               n++;
-              if (n == favouriteResults.length) {
+              if (n === favouriteResults.length) {
                 dispatchFavourites(favouritesObject);
               }
             })
           );
-        }
+        });
       } catch (error) {
         console.log(error, id);
       }
     },
-    [dispatch, id]
+    [id, dispatchFavourites]
   );
-
   // get list of favourite IDs for user //
 
-  const grabFavouriteList = async () => {
+  const grabFavouriteList = useCallback(async () => {
     if (!isLoggedIn) {
       return;
     }
@@ -61,7 +62,6 @@ const Favourite = (props) => {
       );
       const favouriteList = favouriteResult.data.results;
       const favouriteStatus = favouriteResult.data.status;
-      console.log(favouriteStatus);
       if (favouriteStatus === 0) {
         dispatchFavourites(null);
         return;
@@ -81,11 +81,11 @@ const Favourite = (props) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [token, isLoggedIn, getFavouritesData, dispatchFavourites]);
 
   useEffect(() => {
     grabFavouriteList();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, grabFavouriteList]);
 
   useEffect(() => {
     for (let index = 0; index < favourite?.length; index++) {
@@ -96,7 +96,6 @@ const Favourite = (props) => {
         const ratingID = element.movie_id;
         const avgRating = element.avgRating;
         if (id === ratingID) {
-          console.log("true");
           dispatch(setFavouritesRating({ id, avgRating }));
         }
       }

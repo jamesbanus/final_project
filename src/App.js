@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import axios from "axios";
 import Interface from ".//features/movies/components/Interface";
 import "./App.css";
@@ -19,6 +19,7 @@ import {
   setRatingsData,
   selectRatingsData,
 } from "./features/movies/moviesSlice";
+import { selectCallRatingsonChange } from "./features/movies/controlsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { genreList, getPopular, getSearch } from "./utils";
 
@@ -30,28 +31,33 @@ const App = () => {
   const genreApiList = useSelector(genreApiResults);
   const genre = useSelector(selectCheckedGenreArray);
   const ratingsData = useSelector(selectRatingsData);
+  const ratingChange = useSelector(selectCallRatingsonChange);
 
   const dispatch = useDispatch();
 
   const genreString = genre?.toString();
-  let genreApiString = genreString?.replace(/\,/g, "|");
+  let genreApiString = genreString?.replace(/,/g, "|");
 
   // set endpoints for the api (URLS from utils)
 
-  let endpoints = [
-    getPopular(page, genreApiString),
-    getSearch(search, page),
-    genreList,
-  ];
+  // const endpoints = [
+  //   getPopular(page, genreApiString),
+  //   getSearch(search, page),
+  //   genreList,
+  // ];
 
   // call the apis
 
   const getMainData = useCallback(async () => {
+    const endpoints = [
+      getPopular(page, genreApiString),
+      getSearch(search, page),
+      genreList,
+    ];
     try {
       axios.all(endpoints.map((endpoints) => axios.get(endpoints))).then(
         axios.spread(
           ({ data: movieData }, { data: searchData }, { data: genreData }) => {
-            // console.log({ movieData });
             dispatch(setMovies(movieData));
             dispatch(setSearchResults(searchData));
             dispatch(setGenreApiResults(genreData));
@@ -61,7 +67,7 @@ const App = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch, page, search, genre]);
+  }, [dispatch, page, search, genreApiString]);
 
   useEffect(() => {
     getMainData();
@@ -74,19 +80,17 @@ const App = () => {
       );
       const avgRatingStatus = avgRating.data.status;
       if (avgRatingStatus === 1) {
-        console.log("firing");
         const avgRatingData = avgRating.data.results;
         dispatch(setRatingsData(avgRatingData));
       }
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     getRatingsData();
-    console.log("fire getRatingsData");
-  }, []);
+  }, [getRatingsData, ratingChange]);
 
   const onSearchInput = async (e) => {
     dispatch(setSearch(e.target.value));
@@ -107,9 +111,7 @@ const App = () => {
 
   //choose what api to display depending on if there is a search result
 
-  if (!search) {
-    movies = movies;
-  } else {
+  if (search) {
     movies = searchResults;
   }
 

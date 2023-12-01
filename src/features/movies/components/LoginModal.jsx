@@ -11,7 +11,6 @@ import {
   setMessage,
   selectMessage,
   setToken,
-  selectToken,
 } from "../accountSlice";
 import axios from "axios";
 // import { fontAwesome } from "react-fontawesome";
@@ -20,7 +19,6 @@ const LoginModal = (props) => {
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
   const message = useSelector(selectMessage);
-  const token = useSelector(selectToken);
   const dispatch = useDispatch();
 
   // console.log(message);
@@ -68,8 +66,6 @@ const LoginModal = (props) => {
       console.log(error);
     }
   };
-
-  console.log(token);
 
   return (
     <>

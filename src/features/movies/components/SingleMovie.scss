@@ -48,6 +48,29 @@
           border-radius: 10px;
           box-shadow: 5px 5px 5px #000000;
         }
+        .singleMratingBar {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          top: 135px;
+          left: 5px;
+          .CircularProgressbar {
+            stroke: #13dafb;
+            .CircularProgressbar-background {
+              fill: #000000;
+            }
+            .CircularProgressbar-trail {
+              stroke: #000000;
+            }
+            .CircularProgressbar-path {
+              stroke: #13dafb;
+            }
+            .CircularProgressbar-text {
+              stroke: #13dafb;
+              font-size: 24px;
+            }
+          }
+        }
       }
 
       .singleMovieInfoContainer {
@@ -227,6 +250,9 @@
           z-index: 1;
           border-radius: 10px;
           box-shadow: 5px 5px 5px #000000;
+        }
+        .singleMratingBar {
+          display: none;
         }
       }
 

@@ -4,10 +4,11 @@ import {
   checkIfFavourite,
   selectIfFavourite,
   setRating,
+  callRatingsonChange,
   selectRating,
   setHover,
   selectHover,
-  selectHasRating,
+  selectCallRatingsonChange,
 } from "../controlsSlice";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -27,7 +28,7 @@ const Interaction = (props) => {
   const token = useSelector(selectToken);
   const rating = useSelector(selectRating);
   const hover = useSelector(selectHover);
-  const hasRating = useSelector(selectHasRating);
+  const callRating = useSelector(selectCallRatingsonChange);
 
   const dispatch = useDispatch();
 
@@ -106,6 +107,9 @@ const Interaction = (props) => {
         { headers: { token: token } }
       );
       const registerRatingStatus = registerRating.data.status;
+      if (registerRatingStatus === 1) {
+        dispatch(callRatingsonChange(!callRating));
+      }
       console.log(registerRatingStatus);
     } catch (error) {
       console.log(error);
@@ -121,7 +125,9 @@ const Interaction = (props) => {
         { headers: { token: token } }
       );
       const updateRatingStatus = updateRating.data.status;
-      console.log(updateRatingStatus);
+      if (updateRatingStatus === 1) {
+        dispatch(callRatingsonChange(!callRating));
+      }
     } catch (error) {
       console.log(error);
     }
@@ -134,7 +140,6 @@ const Interaction = (props) => {
         { headers: { token: token } }
       );
       const ratingStatus = ratingResult.data.status;
-      console.log("rstatus", ratingStatus);
       if (ratingStatus === 1) {
         updateRating(currentRating);
       } else {
