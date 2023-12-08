@@ -62,13 +62,13 @@ const Interaction = (props) => {
 
   const updateFavourite = async () => {
     try {
-      const updateFavourite = await axios.patch(
+      //   const updateFavourite =
+      await axios.patch(
         `http://localhost:4000/useractions/update/${movieid}`,
         faveInfo,
         { headers: { token: token } }
       );
-      const updateFavouriteStatus = updateFavourite.data.status;
-      console.log("update fave", updateFavouriteStatus);
+      //   const updateFavouriteStatus = updateFavourite.data.status;
     } catch (error) {
       console.log(error);
     }
