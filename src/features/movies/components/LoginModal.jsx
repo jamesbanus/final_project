@@ -12,6 +12,7 @@ import {
   selectMessage,
   setToken,
 } from "../accountSlice";
+import { loginUser, registerUser } from "../../../utils/apis";
 import axios from "axios";
 // import { fontAwesome } from "react-fontawesome";
 
@@ -23,23 +24,21 @@ const LoginModal = (props) => {
 
   // console.log(message);
 
-  const accountInfo = { email: email, password: password };
-
   // console.log(accountInfo);
 
   const register = async () => {
+    const api = registerUser(email, password);
     try {
-      const registerResult = await axios.post(
-        `http://localhost:4000/account/register`,
-        accountInfo
-      );
+      const registerResult = await axios.post(api);
       const registerStatus = registerResult.data.status;
+      const loginToken = registerResult.data.token;
       // console.log(registerStatus);
       dispatch(setMessage(registerStatus));
       if (registerStatus === 1) {
         dispatch(setLogIn());
         dispatch(clearInputs());
         dispatch(closeLogin());
+        dispatch(setToken(loginToken));
       }
     } catch (error) {
       console.log(error);
@@ -47,11 +46,9 @@ const LoginModal = (props) => {
   };
 
   const login = async () => {
+    const api = loginUser(email, password);
     try {
-      const loginResult = await axios.post(
-        `http://localhost:4000/account/login`,
-        accountInfo
-      );
+      const loginResult = await axios.post(api);
       const loginStatus = loginResult.data.status;
       const loginToken = loginResult.data.token;
       // console.log(loginStatus, token);

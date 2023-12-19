@@ -4,7 +4,7 @@ import {
   getReleaseDate,
   getTrailers,
   getRecommendations,
-} from "../../../utils";
+} from "../../../utils/apis";
 import React, { useEffect, useCallback } from "react";
 import axios from "axios";
 import {
@@ -42,15 +42,6 @@ const SingleMovie = (props) => {
   const recommendations = useSelector(selectRecommendations);
   const token = useSelector(selectToken);
   const isLoggedIn = useSelector(selectLogin);
-
-  // set endpointns for the api (URLS from utils)
-
-  // const endpoints = [
-  //   getMoviebyID(id),
-  //   getReleaseDate(id),
-  //   getTrailers(id),
-  //   getRecommendations(id),
-  // ];
 
   // call the apis
 

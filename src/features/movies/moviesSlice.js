@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchCount } from "./moviesAPI";
+import { createSlice } from "@reduxjs/toolkit";
+// import { fetchCount } from "./moviesAPI";
 
 const initialState = {
   value: 1,
@@ -13,14 +13,14 @@ const initialState = {
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
-export const incrementAsync = createAsyncThunk(
-  "counter/fetchCount",
-  async (amount) => {
-    const response = await fetchCount(amount);
-    // The value we return becomes the `fulfilled` action payload
-    return response.data;
-  }
-);
+// export const incrementAsync = createAsyncThunk(
+//   "counter/fetchCount",
+//   async (amount) => {
+//     const response = await fetchCount(amount);
+//     // The value we return becomes the `fulfilled` action payload
+//     return response.data;
+//   }
+// );
 
 export const moviesSlice = createSlice({
   name: "movies",
@@ -96,6 +96,8 @@ export const moviesSlice = createSlice({
       const index = state.movies.results.findIndex((item) => {
         if (item.id === action.payload.id) {
           return true;
+        } else {
+          return false;
         }
       });
       if (index > -1) {
@@ -111,6 +113,8 @@ export const moviesSlice = createSlice({
       const index = state.recommendationApiResults.results.findIndex((item) => {
         if (item.id === action.payload.id) {
           return true;
+        } else {
+          return false;
         }
       });
       if (index > -1) {
@@ -122,6 +126,8 @@ export const moviesSlice = createSlice({
       const index = state.favourites.findIndex((item) => {
         if (item.id === action.payload.id) {
           return true;
+        } else {
+          return false;
         }
       });
       if (index > -1) {

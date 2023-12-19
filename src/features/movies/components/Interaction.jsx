@@ -14,17 +14,22 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { selectLogin, selectToken } from "../accountSlice";
-import { selectID } from "../moviesSlice";
 import { FaStar, FaHeart, FaPlay } from "react-icons/fa";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import {
+  checkUserData,
+  setFavourites,
+  setRatings,
+  updateFavourites,
+  updateRatings,
+} from "../../../utils/apis";
 
 const Interaction = (props) => {
   const { movieid, avgrating } = props;
 
   const faveToggle = useSelector(selectIfFavourite);
   const isLoggedIn = useSelector(selectLogin);
-  const movieID = useSelector(selectID);
   const token = useSelector(selectToken);
   const rating = useSelector(selectRating);
   const hover = useSelector(selectHover);
@@ -44,44 +49,29 @@ const Interaction = (props) => {
     fave = 1;
   }
 
-  const faveInfo = { movie_id: movieID, favourite: fave };
-
   const setFavourite = async () => {
+    const api = setFavourites(token, movieid, fave);
     try {
-      const registerFavourite = await axios.post(
-        `http://localhost:4000/useractions/add`,
-        faveInfo,
-        { headers: { token: token } }
-      );
-      const registerFavouriteStatus = registerFavourite.data.status;
-      console.log("set fave", registerFavouriteStatus);
+      await axios.post(api);
     } catch (error) {
       console.log(error);
     }
   };
 
   const updateFavourite = async () => {
+    const api = updateFavourites(token, movieid, fave);
     try {
-      //   const updateFavourite =
-      await axios.patch(
-        `http://localhost:4000/useractions/update/${movieid}`,
-        faveInfo,
-        { headers: { token: token } }
-      );
-      //   const updateFavouriteStatus = updateFavourite.data.status;
+      await axios.patch(api);
     } catch (error) {
       console.log(error);
     }
   };
 
   const checkFavouriteExists = async () => {
+    const api = checkUserData(token, movieid);
     try {
-      const favouriteResult = await axios.get(
-        `http://localhost:4000/useractions/actions/${movieid}`,
-        { headers: { token: token } }
-      );
+      const favouriteResult = await axios.get(api);
       const favouriteStatus = favouriteResult.data.status;
-      //   console.log("status", favouriteStatus);
       if (favouriteStatus === 1) {
         updateFavourite();
       } else {
@@ -96,16 +86,10 @@ const Interaction = (props) => {
 
   /// Ratings Functions /////////////////
 
-  //   console.log(hasRating);
-
   const addRating = async (currentRating) => {
-    const ratingInfo = { movie_id: movieID, rating: currentRating };
+    const api = setRatings(token, movieid, currentRating);
     try {
-      const registerRating = await axios.post(
-        `http://localhost:4000/useractions/add`,
-        ratingInfo,
-        { headers: { token: token } }
-      );
+      const registerRating = await axios.post(api);
       const registerRatingStatus = registerRating.data.status;
       if (registerRatingStatus === 1) {
         dispatch(callRatingsonChange(!callRating));
@@ -117,13 +101,9 @@ const Interaction = (props) => {
   };
 
   const updateRating = async (currentRating) => {
-    const ratingInfo = { movie_id: movieID, rating: currentRating };
+    const api = updateRatings(token, movieid, currentRating);
     try {
-      const updateRating = await axios.patch(
-        `http://localhost:4000/useractions/update/${movieid}`,
-        ratingInfo,
-        { headers: { token: token } }
-      );
+      const updateRating = await axios.patch(api);
       const updateRatingStatus = updateRating.data.status;
       if (updateRatingStatus === 1) {
         dispatch(callRatingsonChange(!callRating));
@@ -134,11 +114,9 @@ const Interaction = (props) => {
   };
 
   const checkRatingExists = async (currentRating) => {
+    const api = checkUserData(token, movieid);
     try {
-      const ratingResult = await axios.get(
-        `http://localhost:4000/useractions/actions/${movieid}`,
-        { headers: { token: token } }
-      );
+      const ratingResult = await axios.get(api);
       const ratingStatus = ratingResult.data.status;
       if (ratingStatus === 1) {
         updateRating(currentRating);

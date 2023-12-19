@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import axios from "axios";
 import Interface from ".//features/movies/components/Interface";
-import "./App.css";
 import {
   selectMovies,
   setMovies,
@@ -21,7 +20,12 @@ import {
 } from "./features/movies/moviesSlice";
 import { selectCallRatingsonChange } from "./features/movies/controlsSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { genreList, getPopular, getSearch } from "./utils";
+import {
+  genreList,
+  getPopular,
+  getSearch,
+  getAllAvgRatings,
+} from "../src/utils/apis";
 
 const App = () => {
   let movies = useSelector(selectMovies);
@@ -39,12 +43,6 @@ const App = () => {
   let genreApiString = genreString?.replace(/,/g, "|");
 
   // set endpoints for the api (URLS from utils)
-
-  // const endpoints = [
-  //   getPopular(page, genreApiString),
-  //   getSearch(search, page),
-  //   genreList,
-  // ];
 
   // call the apis
 
@@ -74,10 +72,9 @@ const App = () => {
   }, [getMainData]);
 
   const getRatingsData = useCallback(async () => {
+    const api = getAllAvgRatings();
     try {
-      const avgRating = await axios.get(
-        `http://localhost:4000/account/returnAllAvgRating`
-      );
+      const avgRating = await axios.get(api);
       const avgRatingStatus = avgRating.data.status;
       if (avgRatingStatus === 1) {
         const avgRatingData = avgRating.data.results;

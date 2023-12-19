@@ -2,7 +2,7 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useCallback } from "react";
 import { selectToken, selectLogin } from "../accountSlice";
-import { getMoviebyID } from "../../../utils";
+import { getMoviebyID, userFavourites } from "../../../utils/apis";
 import {
   selectFavourites,
   setFavourites,
@@ -55,11 +55,12 @@ const Favourite = (props) => {
     if (!isLoggedIn) {
       return;
     }
+    const api = userFavourites(token);
     try {
-      const favouriteResult = await axios.get(
-        `http://localhost:4000/useractions/returnFavourites`,
-        { headers: { token: token } }
-      );
+      const favouriteResult = await axios.get(api);
+      //   , {
+      //     headers: { token: token },
+      //   });
       const favouriteList = favouriteResult.data.results;
       const favouriteStatus = favouriteResult.data.status;
       if (favouriteStatus === 0) {
