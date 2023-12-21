@@ -24,12 +24,12 @@ const accountSlice = createSlice({
       state.message = "";
     },
     setMessage: (state, action) => {
-      //   console.log(action.payload);
       if (action.payload === 0) {
         state.message = "Bad E-mail or Password";
-      }
-      if (action.payload === 2) {
+      } else if (action.payload === 2) {
         state.message = "Already Registered! Please Log In";
+      } else {
+        state.message = action.payload;
       }
     },
     setToken: (state, action) => {

@@ -32,7 +32,7 @@
 @media only screen and (min-width: 900px) {
   .logoutModalContainer {
     max-width: 30%;
-    max-height: 60%;
+    max-height: 40%;
     background-color: #ffffff;
     border-style: solid;
     position: absolute;
@@ -56,21 +56,67 @@
           color: #000000;
         }
       }
-      .logoutButtonDiv {
-        padding: 10px 0px 10px 0px;
-        width: 60%;
-        .logoutButton {
-          font-weight: bold;
-          background-color: #000000;
-          color: #13dafb;
-          outline: none;
-          border: 1px solid #13dafb;
-          width: 100%;
-          font-size: 16px;
+      .formTitle {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .logoutContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+        padding: 10px;
+        .logoutButtonDiv {
+          padding: 10px 0px 10px 0px;
+          width: 60%;
+          .logoutButton {
+            font-weight: bold;
+            background-color: #000000;
+            color: #13dafb;
+            outline: none;
+            border: 1px solid #13dafb;
+            width: 100%;
+            font-size: 16px;
+          }
+          .logoutButton:hover {
+            background-color: #13dafb;
+            color: #000000;
+          }
         }
-        .logoutButton:hover {
-          background-color: #13dafb;
-          color: #000000;
+        .changePasswordButtonDiv {
+          padding: 10px 0px 10px 0px;
+          width: 60%;
+          .changePasswordButton {
+            font-weight: bold;
+            background-color: #000000;
+            color: #13dafb;
+            outline: none;
+            border: 1px solid #13dafb;
+            width: 100%;
+            font-size: 16px;
+          }
+          .changePasswordButton:hover {
+            background-color: #13dafb;
+            color: #000000;
+          }
+        }
+        .deleteAccountButtonDiv {
+          padding: 10px 0px 10px 0px;
+          width: 60%;
+          .deleteAccountButton {
+            font-weight: bold;
+            background-color: #000000;
+            color: #13dafb;
+            outline: none;
+            border: 1px solid #13dafb;
+            width: 100%;
+            font-size: 16px;
+          }
+          .deleteAccountButton:hover {
+            background-color: #13dafb;
+            color: #000000;
+          }
         }
       }
     }

@@ -17,13 +17,8 @@ import { selectLogin, selectToken } from "../accountSlice";
 import { FaStar, FaHeart, FaPlay } from "react-icons/fa";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import {
-  checkUserData,
-  setFavourites,
-  setRatings,
-  updateFavourites,
-  updateRatings,
-} from "../../../utils/apis";
+import { checkUserData, setRatings, updateRatings } from "../../../utils/apis";
+import { checkFavouriteExists } from "../../../utils/interaction";
 
 const Interaction = (props) => {
   const { movieid, avgrating } = props;
@@ -39,8 +34,6 @@ const Interaction = (props) => {
 
   const notify = (message) => toast(`Please Log In to set ${message}!`);
 
-  /// Favourite Functions //////////////////////////
-
   let fave;
 
   if (faveToggle) {
@@ -49,42 +42,7 @@ const Interaction = (props) => {
     fave = 1;
   }
 
-  const setFavourite = async () => {
-    const api = setFavourites(token, movieid, fave);
-    try {
-      await axios.post(api);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const updateFavourite = async () => {
-    const api = updateFavourites(token, movieid, fave);
-    try {
-      await axios.patch(api);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const checkFavouriteExists = async () => {
-    const api = checkUserData(token, movieid);
-    try {
-      const favouriteResult = await axios.get(api);
-      const favouriteStatus = favouriteResult.data.status;
-      if (favouriteStatus === 1) {
-        updateFavourite();
-      } else {
-        setFavourite();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  ///////////////////////////////////////
-
-  /// Ratings Functions /////////////////
+  //////////////////////// Ratings Functions /////////////////
 
   const addRating = async (currentRating) => {
     const api = setRatings(token, movieid, currentRating);
@@ -158,7 +116,7 @@ const Interaction = (props) => {
                     notify("Ratings");
                   } else {
                     dispatch(setRating(currentRating));
-                    checkRatingExists(currentRating);
+                    checkRatingExists(currentRating, token, movieid);
                   }
                 }}
                 color={
@@ -178,7 +136,7 @@ const Interaction = (props) => {
                 notify("Favourites");
               } else {
                 dispatch(checkIfFavourite(!faveToggle));
-                checkFavouriteExists();
+                checkFavouriteExists(token, movieid, fave);
               }
             }}
             color={faveToggle ? "#13dafb" : "#ffffff"}

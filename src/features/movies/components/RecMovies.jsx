@@ -1,6 +1,6 @@
 import "./RecMovies.scss";
-import React, { useEffect, useCallback, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { setRecommendationsRating } from "../moviesSlice";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";

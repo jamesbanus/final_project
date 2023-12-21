@@ -14,7 +14,7 @@ import {
   clearMovie,
 } from "../moviesSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { closeModal, closeLogin } from "../modalSlice";
+import { closeModal, closeLogin, selectLoginOpen } from "../modalSlice";
 
 const Interface = (props) => {
   const {
@@ -32,6 +32,7 @@ const Interface = (props) => {
 
   const screenMode = useSelector(selectScreen);
   const id = useSelector(selectID);
+  const isLoginOpen = useSelector(selectLoginOpen);
 
   const dispatch = useDispatch();
 
@@ -58,7 +59,10 @@ const Interface = (props) => {
           changeScreen={changeScreen}
           genreApiList={genreApiList}
         />
-        <div id="mainContent">
+        <div
+          id="mainContent"
+          style={isLoginOpen ? { opacity: 0.2 } : { opacity: 1 }}
+        >
           {screenMode === 0 && (
             <>
               <h1 className="subHeading">Popular</h1>

@@ -58,9 +58,6 @@ const Favourite = (props) => {
     const api = userFavourites(token);
     try {
       const favouriteResult = await axios.get(api);
-      //   , {
-      //     headers: { token: token },
-      //   });
       const favouriteList = favouriteResult.data.results;
       const favouriteStatus = favouriteResult.data.status;
       if (favouriteStatus === 0) {

@@ -4,6 +4,8 @@ import {
   getReleaseDate,
   getTrailers,
   getRecommendations,
+  faveStatus,
+  ratingStatus,
 } from "../../../utils/apis";
 import React, { useEffect, useCallback } from "react";
 import axios from "axios";
@@ -27,6 +29,14 @@ import { selectToken, selectLogin } from "../accountSlice";
 import { checkIfFavourite, setRating } from "../controlsSlice";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import {
+  genres,
+  getAge,
+  hours,
+  minutes,
+  releaseDate,
+  trailerKey,
+} from "../../../utils/singleMovie";
 
 const SingleMovie = (props) => {
   const { changeScreen, id, ratingsData } = props;
@@ -81,99 +91,6 @@ const SingleMovie = (props) => {
     getMovieData();
   }, [getMovieData]);
 
-  // Find the release date year
-
-  const releaseDate = new Date(movie?.release_date).getFullYear();
-
-  // Calculate movie runtime in hours and minutes
-
-  const runTime = movie?.runtime;
-  const hours = Math.floor(runTime / 60);
-  const minutes = runTime % 60;
-
-  // create empty object to store stripped out certification results
-
-  const certificateResults = {};
-
-  // loop through each country of the results, and then through the inner results. If there is a certificate add it to the above object
-
-  for (let index = 0; index < cert?.length; index++) {
-    const element = cert[index];
-    const country = element.iso_3166_1;
-    for (let index = 0; index < element?.release_dates.length; index++) {
-      const innerElement = element.release_dates[index];
-      if (innerElement.certification) {
-        certificateResults[country] = innerElement.certification;
-      }
-    }
-  }
-
-  // if our object has an age rating for GB, use that. If not then US, and if not then the first one.
-
-  const getAge = () => {
-    if (certificateResults["GB"]) {
-      return certificateResults["GB"];
-    }
-    if (certificateResults["US"]) {
-      return certificateResults["US"];
-    }
-    const array = Object.values(certificateResults);
-    return array[0];
-  };
-
-  // Create empty array to store the genres, n will be the index
-
-  const genresResults = [];
-  let n = 0;
-
-  // loop over the movie data and store each genre
-
-  for (let index = 0; index < movie?.genres.length; index++) {
-    const element = movie.genres[index];
-    if (element.name) {
-      genresResults[n] = element.name;
-      n++;
-    }
-  }
-
-  // convert array to string
-
-  const genres = genresResults.join(", ");
-
-  // create empty object to store stripped out video results
-
-  const videosResults = {};
-
-  for (let index = 0; index < videos?.length; index++) {
-    const element = videos[index];
-    const videoName = element.name;
-    if (element.key) {
-      videosResults[videoName] = element.key;
-    }
-  }
-
-  const getTrailerKey = () => {
-    if (videosResults["Official Trailer"]) {
-      return videosResults["Official Trailer"];
-    }
-    if (videosResults["Main Trailer"]) {
-      return videosResults["Main Trailer"];
-    }
-    if (videosResults["Teaser Trailer"]) {
-      return videosResults["Teaser Trailer"];
-    }
-    const keys = Object.keys(videosResults);
-    const indexof = keys.findIndex((item) => item.includes("Trailer"));
-    if (indexof !== -1) {
-      return videosResults[keys[indexof]];
-    }
-    return null;
-  };
-
-  const trailerKey = getTrailerKey();
-
-  // get the films Rating //
-
   useEffect(() => {
     for (let index = 0; index < ratingsData?.length; index++) {
       const element = ratingsData[index];
@@ -189,11 +106,9 @@ const SingleMovie = (props) => {
   // stuff for the interaction component //
 
   const grabFavouriteStatus = useCallback(async () => {
+    const api = faveStatus(token, id);
     try {
-      const favouriteResult = await axios.get(
-        `http://localhost:4000/useractions/checkFavourite/${id}`,
-        { headers: { token: token } }
-      );
+      const favouriteResult = await axios.get(api);
       const favouriteStatus = favouriteResult.data.status;
       if (favouriteStatus === 1) {
         dispatch(checkIfFavourite(true));
@@ -206,18 +121,14 @@ const SingleMovie = (props) => {
   }, [dispatch, id, token]);
 
   const grabRatingStatus = useCallback(async () => {
+    const api = ratingStatus(token, id);
     try {
-      const ratingResult = await axios.get(
-        `http://localhost:4000/useractions/checkRating/${id}`,
-        { headers: { token: token } }
-      );
+      const ratingResult = await axios.get(api);
       const ratingStatus = ratingResult.data.status;
       if (ratingStatus === 1) {
         const storedRating = ratingResult.data.results[0].rating;
-        // dispatch(checkHasRating(true));
         dispatch(setRating(storedRating));
       } else {
-        // dispatch(checkHasRating(false));
         dispatch(setRating(0));
       }
     } catch (error) {
@@ -228,7 +139,6 @@ const SingleMovie = (props) => {
   useEffect(() => {
     grabFavouriteStatus();
     grabRatingStatus();
-    // console.log("I fire once", Date.now());
   }, [id, isLoggedIn, grabFavouriteStatus, grabRatingStatus]);
 
   /////////////////////////////////////////
@@ -239,7 +149,7 @@ const SingleMovie = (props) => {
 
   return (
     <>
-      {isOpen && <TrailerModal trailerKey={trailerKey} />}
+      {isOpen && <TrailerModal trailerKey={trailerKey(videos)} />}
       <div id="masterContainer">
         <div className="backDropContainer">
           <img
@@ -271,14 +181,14 @@ const SingleMovie = (props) => {
           <div className="singleMovieInfoContainer">
             <div className="movieTitleDiv">
               <h1 className="movieTitle">
-                {movie?.title + " (" + releaseDate + ")"}
+                {movie?.title + " (" + releaseDate(movie) + ")"}
               </h1>
             </div>
             <div className="subInfoDiv">
-              <h3 className="cert">{getAge()}</h3>
+              <h3 className="cert">{getAge(cert)}</h3>
               <ul className="moreInfo">
-                <li>{genres}</li>
-                <li>{hours + "h " + minutes + "m"}</li>
+                <li>{genres(movie)}</li>
+                <li>{hours(movie) + "h " + minutes(movie) + "m"}</li>
               </ul>
             </div>
             {movie?.tagline && (

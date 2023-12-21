@@ -1,6 +1,6 @@
 import "./TrailerModal.scss";
 import { closeModal } from "../modalSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const TrailerModal = (props) => {
   const { trailerKey } = props;

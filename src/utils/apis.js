@@ -105,6 +105,20 @@ const updateRatings = (token, movieid, currentRating) => {
   return `http://localhost:6001/proxy/databasePatchRating/${token}/${movieid}/${currentRating}?url=${encodedUpdateRatings}`;
 };
 
+const faveStatus = (token, id) => {
+  const encodedFaveStatus = btoa(
+    `http://localhost:4000/useractions/checkFavourite/${id}`
+  );
+  return `http://localhost:6001/proxy/database/${token}?url=${encodedFaveStatus}`;
+};
+
+const ratingStatus = (token, id) => {
+  const encodedRatingStatus = btoa(
+    `http://localhost:4000/useractions/checkRating/${id}`
+  );
+  return `http://localhost:6001/proxy/database/${token}?url=${encodedRatingStatus}`;
+};
+
 export {
   genreList,
   getPopular,
@@ -122,4 +136,6 @@ export {
   updateRatings,
   registerUser,
   loginUser,
+  faveStatus,
+  ratingStatus,
 };

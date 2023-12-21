@@ -16,17 +16,23 @@ import { loginUser, registerUser } from "../../../utils/apis";
 import axios from "axios";
 // import { fontAwesome } from "react-fontawesome";
 
-const LoginModal = (props) => {
+const LoginModal = () => {
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
   const message = useSelector(selectMessage);
   const dispatch = useDispatch();
 
-  // console.log(message);
-
-  // console.log(accountInfo);
-
   const register = async () => {
+    if (!email || email.length === 0) {
+      const message = "Enter Email";
+      dispatch(setMessage(message));
+      return;
+    }
+    if (!password || password.length === 0) {
+      const message = "Enter Password";
+      dispatch(setMessage(message));
+      return;
+    }
     const api = registerUser(email, password);
     try {
       const registerResult = await axios.post(api);
@@ -46,6 +52,16 @@ const LoginModal = (props) => {
   };
 
   const login = async () => {
+    if (!email || email.length === 0) {
+      const message = "Enter Email";
+      dispatch(setMessage(message));
+      return;
+    }
+    if (!password || password.length === 0) {
+      const message = "Enter Password";
+      dispatch(setMessage(message));
+      return;
+    }
     const api = loginUser(email, password);
     try {
       const loginResult = await axios.post(api);
