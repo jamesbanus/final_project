@@ -1,10 +1,30 @@
 import "./LogoutModal.scss";
 import { closeLogin } from "../modalSlice";
 import { setLogIn, clearToken } from "../accountSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteUser } from "../../../utils/apis";
+import axios from "axios";
+import { selectToken } from "../accountSlice";
 
 const LogoutModal = () => {
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
+
+  const deleteAccount = async () => {
+    const api = deleteUser(token);
+    try {
+      const deleteResult = await axios.delete(api);
+      const deleteStatus = deleteResult.data.status;
+      console.log(deleteResult.data.status);
+      //   dispatch(setMessage(loginStatus));
+      if (deleteStatus === 1) {
+        dispatch(setLogIn());
+        dispatch(closeLogin());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -55,14 +75,37 @@ const LogoutModal = () => {
               <button
                 type="submit"
                 className="deleteAccountButton"
-                //   onClick={() => {
-                //     dispatch(setLogIn());
-                //     dispatch(closeLogin());
-                //     dispatch(clearToken());
-                //   }}
+                // onClick={() => {
+                //   deleteAccount();
+                //   // dispatch(setLogIn());
+                //   // dispatch(closeLogin());
+                //   // dispatch(clearToken());
+                // }}
+                onClick={deleteAccount}
               >
                 Delete Account
               </button>
+            </div>
+            <div className="checkDeleteTitle">
+              <p>Enter password to confirm account deletion</p>
+              <input
+                // value={password || ""}
+                type="password"
+                placeholder="Enter Password"
+                name="psw"
+                required
+                className="pswDeleteInput"
+                // onInput={(e) => dispatch(setPassword(e.target.value))}
+              />
+              <div className="deleteButtonDiv">
+                <button
+                  type="submit"
+                  className="deleteAccountConfirmButton"
+                  //   onClick={register}
+                >
+                  Delete Account
+                </button>
+              </div>
             </div>
           </div>
         </div>

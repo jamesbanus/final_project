@@ -19,6 +19,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { checkUserData, setRatings, updateRatings } from "../../../utils/apis";
 import { checkFavouriteExists } from "../../../utils/interaction";
+import { selectLoginOpen } from "../modalSlice";
 
 const Interaction = (props) => {
   const { movieid, avgrating } = props;
@@ -29,6 +30,7 @@ const Interaction = (props) => {
   const rating = useSelector(selectRating);
   const hover = useSelector(selectHover);
   const callRating = useSelector(selectCallRatingsonChange);
+  const isLoginOpen = useSelector(selectLoginOpen);
 
   const dispatch = useDispatch();
 
@@ -86,8 +88,6 @@ const Interaction = (props) => {
     }
   };
 
-  //   console.log(rating);
-
   return (
     <>
       <div className="interactionContainer">
@@ -124,6 +124,11 @@ const Interaction = (props) => {
                 }
                 onMouseEnter={() => dispatch(setHover(currentRating))}
                 onMouseLeave={() => dispatch(setHover(null))}
+                style={
+                  isLoginOpen
+                    ? { pointerEvents: "none" }
+                    : { pointerEvents: "auto" }
+                }
               />
             );
           })}
@@ -142,6 +147,11 @@ const Interaction = (props) => {
             color={faveToggle ? "#13dafb" : "#ffffff"}
             alt="favourite"
             className="favourite"
+            style={
+              isLoginOpen
+                ? { pointerEvents: "none" }
+                : { pointerEvents: "auto" }
+            }
           />
           <ToastContainer />
         </div>
@@ -150,9 +160,24 @@ const Interaction = (props) => {
             size={30}
             className="playButton"
             onClick={() => dispatch(openModal())}
+            style={
+              isLoginOpen
+                ? { pointerEvents: "none" }
+                : { pointerEvents: "auto" }
+            }
           />
           <div className="wording">
-            <p onClick={() => dispatch(openModal())}> Play Trailer </p>
+            <p
+              onClick={() => dispatch(openModal())}
+              style={
+                isLoginOpen
+                  ? { pointerEvents: "none" }
+                  : { pointerEvents: "auto" }
+              }
+            >
+              {" "}
+              Play Trailer{" "}
+            </p>
           </div>
         </div>
       </div>

@@ -52,12 +52,12 @@ const genreList = `http://localhost:6001/proxy?url=${encodedGenreList}`;
 
 const registerUser = (email, password) => {
   const encodedRegister = btoa(`http://localhost:4000/account/register`);
-  return `http://localhost:6001/proxy/databasePost/${email}/${password}?url=${encodedRegister}`;
+  return `http://localhost:6001/proxy/databasePostRegister/${email}/${password}?url=${encodedRegister}`;
 };
 
 const loginUser = (email, password) => {
   const encodedLogin = btoa(`http://localhost:4000/account/login`);
-  return `http://localhost:6001/proxy/databasePost/${email}/${password}?url=${encodedLogin}`;
+  return `http://localhost:6001/proxy/databasePostLogin/${email}/${password}?url=${encodedLogin}`;
 };
 
 const getAllAvgRatings = () => {
@@ -119,6 +119,11 @@ const ratingStatus = (token, id) => {
   return `http://localhost:6001/proxy/database/${token}?url=${encodedRatingStatus}`;
 };
 
+const deleteUser = (token) => {
+  const encodedDeleteUser = btoa(`http://localhost:4000/useractions/delete`);
+  return `http://localhost:6001/proxy/database/${token}?url=${encodedDeleteUser}`;
+};
+
 export {
   genreList,
   getPopular,
@@ -138,4 +143,5 @@ export {
   loginUser,
   faveStatus,
   ratingStatus,
+  deleteUser,
 };
