@@ -119,9 +119,16 @@ const ratingStatus = (token, id) => {
   return `http://localhost:6001/proxy/database/${token}?url=${encodedRatingStatus}`;
 };
 
-const deleteUser = (token) => {
+const deleteUser = (token, password) => {
   const encodedDeleteUser = btoa(`http://localhost:4000/useractions/delete`);
-  return `http://localhost:6001/proxy/database/${token}?url=${encodedDeleteUser}`;
+  return `http://localhost:6001/proxy/databaseDelete/${token}/${password}?url=${encodedDeleteUser}`;
+};
+
+const updatePassword = (token, password, password2) => {
+  const encodedChangePassword = btoa(
+    `http://localhost:4000/useractions/changePassword`
+  );
+  return `http://localhost:6001/proxy/database/${token}/${password}/${password2}?url=${encodedChangePassword}`;
 };
 
 export {
@@ -144,4 +151,5 @@ export {
   faveStatus,
   ratingStatus,
   deleteUser,
+  updatePassword,
 };

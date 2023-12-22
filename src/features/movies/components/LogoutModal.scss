@@ -1,37 +1,6 @@
-@media only screen and (max-width: 899px) {
+@media only screen and (min-width: 1px) {
   .logoutModalContainer {
-    max-width: 90%;
-    aspect-ratio: 25/14;
-    background-color: white;
-    border-style: solid;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: 2;
-    .modal {
-      .btnContainer {
-        height: 20px;
-        button {
-          background-color: #000000;
-          outline: none;
-          border: 1px solid #13dafb;
-          color: #13dafb;
-        }
-        button:hover {
-          background-color: #13dafb;
-          color: #000000;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (min-width: 900px) {
-  .logoutModalContainer {
-    max-width: 30%;
+    max-width: 80%;
     max-height: 40%;
     background-color: #ffffff;
     border-style: solid;
@@ -101,6 +70,58 @@
             color: #000000;
           }
         }
+        .passwordChangeDiv {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+          padding: 0px 10px 10px 10px;
+          .psw1Label {
+            font-weight: bold;
+            padding: 10px 0px 10px 0px;
+          }
+          .enterOldPswInput {
+            width: 80%;
+            font-size: 16px;
+          }
+          .psw2Label {
+            font-weight: bold;
+            padding: 10px 0px 10px 0px;
+          }
+          .enterNewPswInput {
+            width: 80%;
+            font-size: 16px;
+          }
+          .psw3Label {
+            font-weight: bold;
+            padding: 10px 0px 10px 0px;
+          }
+          .confirmNewPswInput {
+            width: 80%;
+            font-size: 16px;
+          }
+          .message {
+            margin: 10px 0px 0px 0px;
+            color: #ff0000;
+          }
+          .confirmChangePswButtonDiv {
+            padding: 10px 0px 10px 0px;
+            width: 60%;
+            .confirmChangePswButton {
+              font-weight: bold;
+              background-color: #000000;
+              color: #13dafb;
+              outline: none;
+              border: 1px solid #13dafb;
+              width: 100%;
+              font-size: 16px;
+            }
+            .confirmChangePswButton:hover {
+              background-color: #13dafb;
+              color: #000000;
+            }
+          }
+        }
         .deleteAccountButtonDiv {
           padding: 10px 0px 10px 0px;
           width: 60%;
@@ -118,12 +139,80 @@
             color: #000000;
           }
         }
-        .checkDeleteTitle {
-          text-align: center;
-          font-size: 24px;
-          font-weight: bold;
+        .deleteConfirmDiv {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          max-width: 100%;
+          padding: 0px 10px 0px 10px;
+
+          .checkDeleteTitle {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+          }
+          .pswDeleteInputDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0px 10px 0px;
+            width: 100%;
+            .pswDeleteInput {
+              width: 80%;
+              font-size: 16px;
+            }
+          }
+          .message {
+            margin: 10px 0px 0px 0px;
+            color: #ff0000;
+          }
+          .deleteButtonDiv {
+            padding: 10px 0px 10px 0px;
+            width: 60%;
+            .deleteAccountConfirmButton {
+              font-weight: bold;
+              background-color: #000000;
+              color: #13dafb;
+              outline: none;
+              border: 1px solid #13dafb;
+              width: 100%;
+              font-size: 16px;
+            }
+            .deleteAccountConfirmButton:hover {
+              background-color: #13dafb;
+              color: #000000;
+            }
+          }
         }
       }
     }
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .logoutModalContainer {
+    max-width: 60%;
+    max-height: 40%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .logoutModalContainer {
+    max-width: 50%;
+    max-height: 40%;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .logoutModalContainer {
+    max-width: 40%;
+    max-height: 40%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .logoutModalContainer {
+    max-width: 30%;
+    max-height: 40%;
   }
 }

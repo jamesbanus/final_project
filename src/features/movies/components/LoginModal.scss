@@ -1,37 +1,6 @@
-@media only screen and (max-width: 899px) {
+@media only screen and (min-width: 1px) {
   .loginModalContainer {
-    max-width: 90%;
-    aspect-ratio: 25/14;
-    background-color: white;
-    border-style: solid;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: 2;
-    .modal {
-      .btnContainer {
-        height: 20px;
-        button {
-          background-color: #000000;
-          outline: none;
-          border: 1px solid #13dafb;
-          color: #13dafb;
-        }
-        button:hover {
-          background-color: #13dafb;
-          color: #000000;
-        }
-      }
-    }
-  }
-}
-
-@media only screen and (min-width: 900px) {
-  .loginModalContainer {
-    max-width: 30%;
+    max-width: 80%;
     max-height: 40%;
     background-color: #ffffff;
     border-style: solid;
@@ -126,5 +95,33 @@
         }
       }
     }
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .loginModalContainer {
+    max-width: 60%;
+    max-height: 40%;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .loginModalContainer {
+    max-width: 50%;
+    max-height: 40%;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .loginModalContainer {
+    max-width: 40%;
+    max-height: 40%;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .loginModalContainer {
+    max-width: 30%;
+    max-height: 40%;
   }
 }

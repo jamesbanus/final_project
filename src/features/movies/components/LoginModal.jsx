@@ -11,16 +11,28 @@ import {
   setMessage,
   selectMessage,
   setToken,
+  deleteConfirm,
+  changePassword,
+  checkDelete,
+  checkPasswordChange,
 } from "../accountSlice";
 import { loginUser, registerUser } from "../../../utils/apis";
 import axios from "axios";
-// import { fontAwesome } from "react-fontawesome";
+import Joi from "joi";
 
 const LoginModal = () => {
   const email = useSelector(selectEmail);
   const password = useSelector(selectPassword);
   const message = useSelector(selectMessage);
   const dispatch = useDispatch();
+  const isDeleteClicked = useSelector(checkDelete);
+  const changePasswordSelected = useSelector(checkPasswordChange);
+
+  const schema = Joi.object({
+    Email: Joi.string().email({
+      tlds: { allow: false },
+    }),
+  });
 
   const register = async () => {
     if (!email || email.length === 0) {
@@ -33,21 +45,26 @@ const LoginModal = () => {
       dispatch(setMessage(message));
       return;
     }
-    const api = registerUser(email, password);
     try {
-      const registerResult = await axios.post(api);
-      const registerStatus = registerResult.data.status;
-      const loginToken = registerResult.data.token;
-      // console.log(registerStatus);
-      dispatch(setMessage(registerStatus));
-      if (registerStatus === 1) {
-        dispatch(setLogIn());
-        dispatch(clearInputs());
-        dispatch(closeLogin());
-        dispatch(setToken(loginToken));
+      await schema.validateAsync({ Email: email });
+      const api = registerUser(email, password);
+      try {
+        const registerResult = await axios.post(api);
+        const registerStatus = registerResult.data.status;
+        const loginToken = registerResult.data.token;
+        dispatch(setMessage(registerStatus));
+        if (registerStatus === 1) {
+          dispatch(setLogIn());
+          dispatch(clearInputs());
+          dispatch(closeLogin());
+          dispatch(setToken(loginToken));
+        }
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      dispatch(setMessage(err.message));
+      console.log(err.message);
     }
   };
 
@@ -74,6 +91,12 @@ const LoginModal = () => {
         dispatch(clearInputs());
         dispatch(closeLogin());
         dispatch(setToken(loginToken));
+        if (isDeleteClicked) {
+          dispatch(deleteConfirm());
+        }
+        if (changePasswordSelected) {
+          dispatch(changePassword());
+        }
       }
     } catch (error) {
       console.log(error);

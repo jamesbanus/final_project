@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   loggedIn: false,
   message: "",
+  delete: false,
 };
 
 const accountSlice = createSlice({
@@ -15,6 +16,12 @@ const accountSlice = createSlice({
     setPassword: (state, action) => {
       state.password = action.payload;
     },
+    setNewPassword: (state, action) => {
+      state.password2 = action.payload;
+    },
+    confirmNewPassword: (state, action) => {
+      state.password3 = action.payload;
+    },
     setLogIn: (state) => {
       state.loggedIn = !state.loggedIn;
     },
@@ -22,6 +29,8 @@ const accountSlice = createSlice({
       state.email = "";
       state.password = "";
       state.message = "";
+      state.password2 = "";
+      state.password3 = "";
     },
     setMessage: (state, action) => {
       if (action.payload === 0) {
@@ -38,6 +47,12 @@ const accountSlice = createSlice({
     clearToken: (state) => {
       state.token = "";
     },
+    deleteConfirm: (state) => {
+      state.delete = !state.delete;
+    },
+    changePassword: (state) => {
+      state.passwordChange = !state.passwordChange;
+    },
   },
 });
 
@@ -49,6 +64,10 @@ export const {
   setMessage,
   setToken,
   clearToken,
+  deleteConfirm,
+  changePassword,
+  setNewPassword,
+  confirmNewPassword,
 } = accountSlice.actions;
 
 export const selectEmail = (state) => state.account.email;
@@ -56,5 +75,9 @@ export const selectPassword = (state) => state.account.password;
 export const selectMessage = (state) => state.account.message;
 export const selectLogin = (state) => state.account.loggedIn;
 export const selectToken = (state) => state.account.token;
+export const checkDelete = (state) => state.account.delete;
+export const checkPasswordChange = (state) => state.account.passwordChange;
+export const selectPassword2 = (state) => state.account.password2;
+export const selectPassword3 = (state) => state.account.password3;
 
 export default accountSlice.reducer;
