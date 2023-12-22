@@ -70,6 +70,8 @@ const genres = (movie) => {
   return genresResults.join(", ");
 };
 
+//// get trailer key ///
+
 const trailerKey = (videos) => {
   const videosResults = {};
   for (let index = 0; index < videos?.length; index++) {

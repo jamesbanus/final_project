@@ -64,7 +64,6 @@ const LoginModal = () => {
       }
     } catch (err) {
       dispatch(setMessage(err.message));
-      console.log(err.message);
     }
   };
 
