@@ -54,7 +54,6 @@ const Interaction = (props) => {
       if (registerRatingStatus === 1) {
         dispatch(callRatingsonChange(!callRating));
       }
-      console.log(registerRatingStatus);
     } catch (error) {
       console.log(error);
     }
