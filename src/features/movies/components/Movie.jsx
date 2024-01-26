@@ -37,7 +37,7 @@ const Movie = (props) => {
         <div className="popular">
           <h1 className="subHeading">Popular</h1>
         </div>
-        <div className="favourite">
+        <div className="favourite" onClick={changeScreen}>
           <h1 className="subHeading">Favourites</h1>
         </div>
       </div>

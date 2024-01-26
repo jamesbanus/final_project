@@ -103,6 +103,14 @@ const Favourite = (props) => {
   if (!isLoggedIn) {
     return (
       <>
+        <div className="favouritesHeadersDiv">
+          <div className="popular" onClick={changeScreen}>
+            <h1 className="subHeading">Popular</h1>
+          </div>
+          <div className="favourite">
+            <h1 className="subHeading">Favourites</h1>
+          </div>
+        </div>
         <div className="favouritesError">
           <h1 className="errorMessage">Please Log In to see Favourites!</h1>
         </div>
@@ -112,6 +120,14 @@ const Favourite = (props) => {
   if (!favourite) {
     return (
       <>
+        <div className="favouritesHeadersDiv">
+          <div className="popular" onClick={changeScreen}>
+            <h1 className="subHeading">Popular</h1>
+          </div>
+          <div className="favourite">
+            <h1 className="subHeading">Favourites</h1>
+          </div>
+        </div>
         <div className="favouritesError">
           <h1 className="errorMessage">
             Get Favouriting to Populate this Section!
@@ -123,7 +139,7 @@ const Favourite = (props) => {
   return (
     <>
       <div className="favouritesHeadersDiv">
-        <div className="popular">
+        <div className="popular" onClick={changeScreen}>
           <h1 className="subHeading">Popular</h1>
         </div>
         <div className="favourite">

@@ -93,7 +93,7 @@ const SideBar = (props) => {
           <>
             <div id="backButtonDiv">
               <button className="backButton" onClick={changeScreen}>
-                Back
+                Home
               </button>
             </div>
           </>

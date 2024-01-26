@@ -5,15 +5,13 @@
     #mainContent {
       max-width: 100%;
       #popularMovies {
-        // display: flex;
-        // flex-direction: row;
-        // overflow: scroll;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+        overflow: scroll;
       }
       #favouriteMovies {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         overflow: scroll;
         .favouritesError {
           .errorMessage {
@@ -34,15 +32,13 @@
       max-width: 100%;
 
       #popularMovies {
-        // display: flex;
-        // flex-direction: row;
-        // overflow: scroll;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
+        overflow: scroll;
       }
       #favouriteMovies {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         overflow: scroll;
         .favouritesError {
           .errorMessage {
@@ -63,15 +59,13 @@
       max-width: 100%;
 
       #popularMovies {
-        // display: flex;
-        // flex-direction: row;
-        // overflow: scroll;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        overflow: scroll;
       }
       #favouriteMovies {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         overflow: scroll;
         .favouritesError {
           .errorMessage {
@@ -92,15 +86,13 @@
       max-width: 100%;
 
       #popularMovies {
-        // display: flex;
-        // flex-direction: row;
-        // overflow: scroll;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
+        overflow: scroll;
       }
       #favouriteMovies {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
         overflow: scroll;
         .favouritesError {
           .errorMessage {
@@ -140,6 +132,40 @@
             font-size: 16px;
           }
         }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  #sideAndMain {
+    #mainContent {
+      #popularMovies {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        overflow: scroll;
+      }
+      #favouriteMovies {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        overflow: scroll;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  #sideAndMain {
+    #mainContent {
+      #popularMovies {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        overflow: scroll;
+      }
+      #favouriteMovies {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        overflow: scroll;
       }
     }
   }

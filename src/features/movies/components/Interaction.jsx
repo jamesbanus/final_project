@@ -91,6 +91,8 @@ const Interaction = (props) => {
     <>
       <div className="interactionContainer">
         <div id="ratingBar">
+          {/* onMouseEnter={setHover(true)}
+          onMouseLeave={setHover(false)} */}
           {avgrating === undefined ? (
             <CircularProgressbar value={0} text={`?`} background={true} />
           ) : (
@@ -101,6 +103,12 @@ const Interaction = (props) => {
             />
           )}
         </div>
+        {hover && (
+          <div>
+            <h2>Only visible when hovering div</h2>
+            <h2>bobbyhadz.com</h2>
+          </div>
+        )}
         <div className="ratingsDiv">
           {[...Array(5)].map((star, index) => {
             const currentRating = index + 1;

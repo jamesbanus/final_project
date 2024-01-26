@@ -147,6 +147,8 @@ const SingleMovie = (props) => {
     return;
   }
 
+  console.log(movie);
+
   return (
     <>
       {isOpen && <TrailerModal trailerKey={trailerKey(videos)} />}
@@ -154,7 +156,7 @@ const SingleMovie = (props) => {
         <div className="backDropContainer">
           <img
             className="backDrop"
-            src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
+            src={`https://image.tmdb.org/t/p/w1280${movie?.backdrop_path}`}
             alt={movie?.title}
           />
         </div>

@@ -1,4 +1,28 @@
 @media only screen and (max-width: 899px) {
+  .popularHeadersDiv {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px 10px 10px;
+    font-size: 16px;
+
+    .popular {
+      background-color: #13dafb;
+
+      .subHeading {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+      }
+    }
+    .favourite {
+      .subHeading {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+      }
+    }
+    .favourite:hover {
+      transform: scale(1.1);
+    }
+  }
   .movie {
     display: flex;
     flex-direction: column;

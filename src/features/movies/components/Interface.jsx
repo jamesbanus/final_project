@@ -37,8 +37,11 @@ const Interface = (props) => {
   const dispatch = useDispatch();
 
   const changeScreen = (e) => {
+    console.log(e.target.id);
     if (e.target.id) {
       dispatch(setID(e.target.id));
+    } else if (e.target.innerHTML === "Favourites") {
+      dispatch(setScreenMode(2));
     } else {
       dispatch(setScreenMode(0));
       dispatch(clearCert());
@@ -47,6 +50,19 @@ const Interface = (props) => {
       dispatch(closeLogin());
     }
   };
+
+  // const changeScreen = (e) => {
+  //   console.log(e);
+  //   if (e.target.id) {
+  //     dispatch(setID(e.target.id));
+  //   } else {
+  //     dispatch(setScreenMode(0));
+  //     dispatch(clearCert());
+  //     dispatch(clearMovie());
+  //     dispatch(closeModal());
+  //     dispatch(closeLogin());
+  //   }
+  // };
 
   return (
     <>
