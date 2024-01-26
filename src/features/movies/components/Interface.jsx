@@ -65,14 +65,11 @@ const Interface = (props) => {
         >
           {screenMode === 0 && (
             <>
-              <h1 className="subHeading">Popular</h1>
-              <div id="popularMovies">
-                <Movie
-                  movies={movies}
-                  changeScreen={changeScreen}
-                  ratingsData={ratingsData}
-                />
-              </div>
+              <Movie
+                movies={movies}
+                changeScreen={changeScreen}
+                ratingsData={ratingsData}
+              />
               <Controls
                 onPageNext={onPageNext}
                 onPageBack={onPageBack}
@@ -80,13 +77,6 @@ const Interface = (props) => {
                 page={page}
                 totalPages={totalPages}
               />
-              <h1 className="subHeading">Favourites</h1>
-              <div id="favouriteMovies">
-                <Favourites
-                  changeScreen={changeScreen}
-                  ratingsData={ratingsData}
-                />
-              </div>
             </>
           )}
           {screenMode === 1 && (
@@ -94,6 +84,14 @@ const Interface = (props) => {
               <SingleMovie
                 changeScreen={changeScreen}
                 id={id}
+                ratingsData={ratingsData}
+              />
+            </>
+          )}
+          {screenMode === 2 && (
+            <>
+              <Favourites
+                changeScreen={changeScreen}
                 ratingsData={ratingsData}
               />
             </>

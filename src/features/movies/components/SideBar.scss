@@ -44,7 +44,7 @@
       }
     }
     #showCollapsible {
-      padding: 10px 10px 10px 5px;
+      padding: 10px 10px 10px 10px;
       .showCollapsible {
         text-align: left;
         background-color: #000000;
@@ -61,7 +61,7 @@
       }
     }
     #hideCollapsible {
-      padding: 10px 10px 10px 5px;
+      padding: 10px 10px 10px 10px;
       .hideCollapsible {
         text-align: left;
         background-color: #000000;
@@ -78,9 +78,30 @@
       }
       .checkBoxDiv {
         padding: 10px 10px 10px 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
         label {
           font-size: 16px;
           padding: 1px 1px 1px 1px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          margin-right: 10px;
+          input {
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border-radius: 50%;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+            appearance: none;
+            -webkit-appearance: none;
+            outline: none;
+            cursor: pointer;
+          }
+          input:checked {
+            background-color: #13dafb;
+          }
         }
       }
       .clearCheckBox {
@@ -186,11 +207,28 @@
       }
       .checkBoxDiv {
         padding: 10px 0px 10px 0px;
+        display: flex;
+        flex-direction: column;
         label {
           font-size: 16px;
           padding: 1px 0px 1px 0px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
           input {
-            accent-color: #13dafb;
+            width: 1.3em;
+            height: 1.3em;
+            background-color: white;
+            border-radius: 50%;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+            appearance: none;
+            -webkit-appearance: none;
+            outline: none;
+            cursor: pointer;
+          }
+          input:checked {
+            background-color: #13dafb;
           }
         }
         label:last-child {

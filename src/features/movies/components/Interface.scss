@@ -1,17 +1,102 @@
-@media only screen and (max-width: 899px) {
+@media only screen and (max-width: 359px) {
   #sideAndMain {
     display: flex;
     flex-direction: column;
     #mainContent {
       max-width: 100%;
-      .subHeading {
-        padding: 10px 10px 10px 10px;
-        font-size: 16px;
-      }
       #popularMovies {
+        // display: flex;
+        // flex-direction: row;
+        // overflow: scroll;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      #favouriteMovies {
         display: flex;
         flex-direction: row;
         overflow: scroll;
+        .favouritesError {
+          .errorMessage {
+            padding: 10px 10px 10px 10px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  #sideAndMain {
+    display: flex;
+    flex-direction: column;
+    #mainContent {
+      max-width: 100%;
+
+      #popularMovies {
+        // display: flex;
+        // flex-direction: row;
+        // overflow: scroll;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+      #favouriteMovies {
+        display: flex;
+        flex-direction: row;
+        overflow: scroll;
+        .favouritesError {
+          .errorMessage {
+            padding: 10px 10px 10px 10px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  #sideAndMain {
+    display: flex;
+    flex-direction: column;
+    #mainContent {
+      max-width: 100%;
+
+      #popularMovies {
+        // display: flex;
+        // flex-direction: row;
+        // overflow: scroll;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      #favouriteMovies {
+        display: flex;
+        flex-direction: row;
+        overflow: scroll;
+        .favouritesError {
+          .errorMessage {
+            padding: 10px 10px 10px 10px;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #sideAndMain {
+    display: flex;
+    flex-direction: column;
+    #mainContent {
+      max-width: 100%;
+
+      #popularMovies {
+        // display: flex;
+        // flex-direction: row;
+        // overflow: scroll;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
       }
       #favouriteMovies {
         display: flex;
@@ -32,24 +117,22 @@
   #sideAndMain {
     display: flex;
     flex-direction: row;
+    background-color: #000000;
     #mainContent {
       display: flex;
       flex-direction: column;
       width: 83vw;
       height: calc(100vh - 90px);
-      // border-top-left-radius: 10%;
-      .subHeading {
-        padding: 10px 10px 10px 10px;
-        font-size: 16px;
-      }
+      border-top-left-radius: 20px;
+      background-color: #ffffff;
       #popularMovies {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         overflow: scroll;
       }
       #favouriteMovies {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         overflow: scroll;
         .favouritesError {
           .errorMessage {

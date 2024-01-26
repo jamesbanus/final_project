@@ -33,39 +33,53 @@ const Movie = (props) => {
 
   return (
     <>
-      {newArray?.map((item) => {
-        return (
-          <Fragment key={item.id}>
-            <>
-              <div className="movie" key={item.id}>
-                <img
-                  className="moviePoster"
-                  src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
-                  alt={item.title}
-                  id={item.id}
-                  onClick={changeScreen}
-                />
-                <h1 className="movieTitle">{item.title}</h1>
-                <div className="ratingBar">
-                  {item.rating === undefined ? (
-                    <CircularProgressbar
-                      value={0}
-                      text={`?`}
-                      background={true}
+      <div className="popularHeadersDiv">
+        <div className="popular">
+          <h1 className="subHeading">Popular</h1>
+        </div>
+        <div className="favourite">
+          <h1 className="subHeading">Favourites</h1>
+        </div>
+      </div>
+      <div id="popularMovies">
+        {newArray?.map((item) => {
+          return (
+            <Fragment key={item.id}>
+              <>
+                <div className="movie" key={item.id}>
+                  <div>
+                    <img
+                      className="moviePoster"
+                      src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
+                      alt={item.title}
+                      id={item.id}
+                      onClick={changeScreen}
                     />
-                  ) : (
-                    <CircularProgressbar
-                      value={item.rating}
-                      text={`${item.rating}%`}
-                      background={true}
-                    />
-                  )}
+                  </div>
+                  <div>
+                    <h1 className="movieTitle">{item.title}</h1>
+                  </div>
+                  <div className="ratingBar">
+                    {item.rating === undefined ? (
+                      <CircularProgressbar
+                        value={0}
+                        text={`?`}
+                        background={true}
+                      />
+                    ) : (
+                      <CircularProgressbar
+                        value={item.rating}
+                        text={`${item.rating}%`}
+                        background={true}
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
-            </>
-          </Fragment>
-        );
-      })}
+              </>
+            </Fragment>
+          );
+        })}
+      </div>
     </>
   );
 };

@@ -43,6 +43,30 @@
 }
 
 @media only screen and (min-width: 900px) {
+  .favouritesHeadersDiv {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 10px 10px 10px;
+    font-size: 16px;
+
+    .popular {
+      border-top-left-radius: 20px;
+      .subHeading {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+      }
+    }
+    .popular:hover {
+      transform: scale(1.1);
+    }
+    .favourite {
+      background-color: #13dafb;
+      .subHeading {
+        padding: 10px 10px 10px 10px;
+        font-size: 16px;
+      }
+    }
+  }
   .favouriteMovie {
     display: flex;
     flex-direction: column;

@@ -39,10 +39,8 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  const genreString = genre?.toString();
-  let genreApiString = genreString?.replace(/,/g, "|");
-
-  // set endpoints for the api (URLS from utils)
+  const genreApiString = genre?.toString();
+  // let genreApiString = genreString?.replace(/,/g, "|");
 
   // call the apis
 

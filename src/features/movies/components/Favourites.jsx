@@ -122,31 +122,41 @@ const Favourite = (props) => {
   }
   return (
     <>
-      {favourite.map((item) => {
-        return (
-          <div className="favouriteMovie" key={item.id}>
-            <img
-              className="fMoviePoster"
-              src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
-              alt={item.title}
-              id={item.id}
-              onClick={changeScreen}
-            />
-            <h1 className="fMovieTitle">{item.title}</h1>
-            <div className="favRatingBar">
-              {item.rating === undefined ? (
-                <CircularProgressbar value={0} text={`?`} background={true} />
-              ) : (
-                <CircularProgressbar
-                  value={item.rating}
-                  text={`${item.rating}%`}
-                  background={true}
-                />
-              )}
+      <div className="favouritesHeadersDiv">
+        <div className="popular">
+          <h1 className="subHeading">Popular</h1>
+        </div>
+        <div className="favourite">
+          <h1 className="subHeading">Favourites</h1>
+        </div>
+      </div>
+      <div id="favouriteMovies">
+        {favourite.map((item) => {
+          return (
+            <div className="favouriteMovie" key={item.id}>
+              <img
+                className="fMoviePoster"
+                src={`https://image.tmdb.org/t/p/w780${item.poster_path}`}
+                alt={item.title}
+                id={item.id}
+                onClick={changeScreen}
+              />
+              <h1 className="fMovieTitle">{item.title}</h1>
+              <div className="favRatingBar">
+                {item.rating === undefined ? (
+                  <CircularProgressbar value={0} text={`?`} background={true} />
+                ) : (
+                  <CircularProgressbar
+                    value={item.rating}
+                    text={`${item.rating}%`}
+                    background={true}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </>
   );
 };
