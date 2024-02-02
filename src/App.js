@@ -17,6 +17,7 @@ import {
   selectCheckedGenreArray,
   setRatingsData,
   selectRatingsData,
+  fetchContent,
 } from "./features/movies/moviesSlice";
 import { selectCallRatingsonChange } from "./features/movies/controlsSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -43,6 +44,13 @@ const App = () => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchContent());
+  }, [dispatch]);
+
+  // const contents = useSelector((state) => state.movies.genreApiResults);
+  // console.log(contents);
+
   const genreApiString = genre?.toString();
   // let genreApiString = genreString?.replace(/,/g, "|");
 
@@ -68,7 +76,7 @@ const App = () => {
           ({ data: movieData }, { data: searchData }, { data: genreData }) => {
             dispatch(setMovies(movieData));
             dispatch(setSearchResults(searchData));
-            dispatch(setGenreApiResults(genreData));
+            // dispatch(setGenreApiResults(genreData));
           }
         )
       );

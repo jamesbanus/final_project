@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-// import { fetchCount } from "./moviesAPI";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import { genreList } from "../../utils/apis";
 
 const initialState = {
   value: 1,
@@ -21,6 +22,15 @@ const initialState = {
 //     return response.data;
 //   }
 // );
+
+export const fetchContent = createAsyncThunk(
+  "movies/fetchContent",
+  async () => {
+    const res = await axios(genreList);
+    const data = await res.data;
+    return data;
+  }
+);
 
 export const moviesSlice = createSlice({
   name: "movies",
@@ -67,9 +77,9 @@ export const moviesSlice = createSlice({
     setSearchResults: (state, action) => {
       state.searchResults = action.payload;
     },
-    setGenreApiResults: (state, action) => {
-      state.genreApiResults = action.payload;
-    },
+    // setGenreApiResults: (state, action) => {
+    //   state.genreApiResults = action.payload;
+    // },
     setCheckedGenres: (state, action) => {
       const genreId = action.payload;
       const indexOf = state.checkedGenreArray.indexOf(genreId);
@@ -137,6 +147,19 @@ export const moviesSlice = createSlice({
     setRatingsData: (state, action) => {
       state.ratingsData = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchContent.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchContent.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.genreApiResults = action.payload;
+    });
+    builder.addCase(fetchContent.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    });
   },
 });
 

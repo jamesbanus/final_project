@@ -4,6 +4,7 @@
     flex-direction: row;
     padding: 10px 10px 10px 10px;
     font-size: 16px;
+    cursor: default;
 
     .popular {
       background-color: #13dafb;
@@ -107,6 +108,9 @@
       max-height: 278px;
       border-radius: 5%;
       box-shadow: 5px 5px 5px #000000;
+    }
+    .moviePoster:hover {
+      transform: scale(1.1);
     }
     .movieTitle {
       font-size: 16px;
