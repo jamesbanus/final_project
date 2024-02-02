@@ -23,6 +23,7 @@ import axios from "axios";
 import { selectToken } from "../accountSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useCookies } from "react-cookie";
 
 const LogoutModal = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const LogoutModal = () => {
   const changePasswordSelected = useSelector(checkPasswordChange);
   const password2 = useSelector(selectPassword2);
   const password3 = useSelector(selectPassword3);
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   const notifyPswChg = () => toast(`Password Successfully Changed!`);
 
@@ -86,6 +88,7 @@ const LogoutModal = () => {
         dispatch(closeLogin());
         dispatch(clearInputs());
         dispatch(deleteConfirm());
+        removeCookie("user", { path: "/" });
       }
     } catch (error) {
       console.log(error);
@@ -128,6 +131,7 @@ const LogoutModal = () => {
                   dispatch(closeLogin());
                   dispatch(clearToken());
                   dispatch(clearInputs());
+                  removeCookie("user", { path: "/" });
                   if (isDeleteClicked) {
                     dispatch(deleteConfirm());
                   }

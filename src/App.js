@@ -26,6 +26,8 @@ import {
   getSearch,
   getAllAvgRatings,
 } from "../src/utils/apis";
+import { useCookies } from "react-cookie";
+import { setLogIn, setToken } from "../src/features/movies/accountSlice";
 
 const App = () => {
   let movies = useSelector(selectMovies);
@@ -36,11 +38,21 @@ const App = () => {
   const genre = useSelector(selectCheckedGenreArray);
   const ratingsData = useSelector(selectRatingsData);
   const ratingChange = useSelector(selectCallRatingsonChange);
+  const [cookies] = useCookies(["user"]);
+  const cookieToken = cookies.user;
 
   const dispatch = useDispatch();
 
   const genreApiString = genre?.toString();
   // let genreApiString = genreString?.replace(/,/g, "|");
+
+  useEffect(() => {
+    if (cookieToken) {
+      // console.log("running cookie check");
+      dispatch(setLogIn());
+      dispatch(setToken(cookieToken));
+    }
+  }, [dispatch]);
 
   // call the apis
 

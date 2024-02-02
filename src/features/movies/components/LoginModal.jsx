@@ -19,6 +19,7 @@ import {
 import { loginUser, registerUser } from "../../../utils/apis";
 import axios from "axios";
 import Joi from "joi";
+import { useCookies } from "react-cookie";
 
 const LoginModal = () => {
   const email = useSelector(selectEmail);
@@ -27,6 +28,7 @@ const LoginModal = () => {
   const dispatch = useDispatch();
   const isDeleteClicked = useSelector(checkDelete);
   const changePasswordSelected = useSelector(checkPasswordChange);
+  const [cookies, setCookie] = useCookies(["user"]);
 
   const schema = Joi.object({
     Email: Joi.string().email({
@@ -58,6 +60,7 @@ const LoginModal = () => {
           dispatch(clearInputs());
           dispatch(closeLogin());
           dispatch(setToken(loginToken));
+          setCookie("user", loginToken, { path: "/" });
         }
       } catch (error) {
         console.log(error);
@@ -90,6 +93,7 @@ const LoginModal = () => {
         dispatch(clearInputs());
         dispatch(closeLogin());
         dispatch(setToken(loginToken));
+        setCookie("user", loginToken, { path: "/" });
         if (isDeleteClicked) {
           dispatch(deleteConfirm());
         }
