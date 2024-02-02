@@ -14,14 +14,17 @@
     margin: auto;
     z-index: 2;
     .modal {
-      background-color: #000000;
+      background-color: #ffffff;
       .btnContainer {
-        height: 20px;
+        height: 40px;
         button {
           background-color: #000000;
           outline: none;
           border: 1px solid #13dafb;
           color: #13dafb;
+          height: 40px;
+          width: 40px;
+          font-size: 33px;
         }
         button:hover {
           background-color: #13dafb;
@@ -51,14 +54,17 @@
     margin: auto;
     z-index: 2;
     .modal {
-      background-color: #000000;
+      background-color: #ffffff;
       .btnContainer {
-        height: 20px;
+        height: 40px;
         button {
           background-color: #000000;
           outline: none;
           border: 1px solid #13dafb;
           color: #13dafb;
+          height: 40px;
+          width: 40px;
+          font-size: 33px;
         }
         button:hover {
           background-color: #13dafb;

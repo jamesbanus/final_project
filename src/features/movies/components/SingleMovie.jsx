@@ -147,8 +147,6 @@ const SingleMovie = (props) => {
     return;
   }
 
-  console.log(movie);
-
   return (
     <>
       {isOpen && <TrailerModal trailerKey={trailerKey(videos)} />}
@@ -179,7 +177,6 @@ const SingleMovie = (props) => {
               )}
             </div>
           </div>
-
           <div className="singleMovieInfoContainer">
             <div className="movieTitleDiv">
               <h1 className="movieTitle">
@@ -204,10 +201,18 @@ const SingleMovie = (props) => {
             <div className="movieOverviewDiv">
               <p className="movieOverview">{movie?.overview}</p>
             </div>
-            <Interaction movieid={id} avgrating={movie?.rating} />
+            <Interaction
+              trailerKey={trailerKey(videos)}
+              movieid={id}
+              avgrating={movie?.rating}
+            />
           </div>
         </div>
-        <Interaction movieid={id} avgrating={movie?.rating} />
+        <Interaction
+          trailerKey={trailerKey(videos)}
+          movieid={id}
+          avgrating={movie?.rating}
+        />
         <div className="overviewTitleDiv2">
           <h2 id="overview2">Overview</h2>
         </div>

@@ -20,9 +20,10 @@ import "react-circular-progressbar/dist/styles.css";
 import { checkUserData, setRatings, updateRatings } from "../../../utils/apis";
 import { checkFavouriteExists } from "../../../utils/interaction";
 import { selectLoginOpen } from "../modalSlice";
+import { Tooltip } from "react-tooltip";
 
 const Interaction = (props) => {
-  const { movieid, avgrating } = props;
+  const { movieid, avgrating, trailerKey } = props;
 
   const faveToggle = useSelector(selectIfFavourite);
   const isLoggedIn = useSelector(selectLogin);
@@ -91,24 +92,30 @@ const Interaction = (props) => {
     <>
       <div className="interactionContainer">
         <div id="ratingBar">
-          {/* onMouseEnter={setHover(true)}
-          onMouseLeave={setHover(false)} */}
           {avgrating === undefined ? (
-            <CircularProgressbar value={0} text={`?`} background={true} />
+            <div data-tooltip-id="ratingToolTip1">
+              <CircularProgressbar value={0} text={`?`} background={true} />
+            </div>
           ) : (
-            <CircularProgressbar
-              value={avgrating}
-              text={`${avgrating}%`}
-              background={true}
-            />
+            <div data-tooltip-id="ratingToolTip2">
+              <CircularProgressbar
+                value={avgrating}
+                text={`${avgrating}%`}
+                background={true}
+              />
+            </div>
           )}
         </div>
-        {hover && (
-          <div>
-            <h2>Only visible when hovering div</h2>
-            <h2>bobbyhadz.com</h2>
-          </div>
-        )}
+        <Tooltip
+          id="ratingToolTip1"
+          place="top"
+          content="Be The First to Rate this Movie"
+        />
+        <Tooltip
+          id="ratingToolTip2"
+          place="top"
+          content="Average User Rating"
+        />
         <div className="ratingsDiv">
           {[...Array(5)].map((star, index) => {
             const currentRating = index + 1;
@@ -162,29 +169,47 @@ const Interaction = (props) => {
           />
           <ToastContainer />
         </div>
+
         <div className="playButtonDiv">
-          <FaPlay
-            size={30}
-            className="playButton"
-            onClick={() => dispatch(openModal())}
-            style={
-              isLoginOpen
-                ? { pointerEvents: "none" }
-                : { pointerEvents: "auto" }
-            }
-          />
-          <div className="wording">
-            <p
+          {trailerKey ? (
+            <FaPlay
+              size={30}
+              className="playButton"
               onClick={() => dispatch(openModal())}
               style={
                 isLoginOpen
                   ? { pointerEvents: "none" }
                   : { pointerEvents: "auto" }
               }
-            >
-              {" "}
-              Play Trailer{" "}
-            </p>
+            />
+          ) : (
+            <div></div>
+          )}
+          <div className="wording">
+            {trailerKey ? (
+              <p
+                onClick={() => dispatch(openModal())}
+                style={
+                  isLoginOpen
+                    ? { pointerEvents: "none" }
+                    : { pointerEvents: "auto" }
+                }
+              >
+                {" "}
+                Play Trailer{" "}
+              </p>
+            ) : (
+              <p
+                style={
+                  isLoginOpen
+                    ? { pointerEvents: "none" }
+                    : { pointerEvents: "auto" }
+                }
+              >
+                {" "}
+                Trailer Unavailable{" "}
+              </p>
+            )}
           </div>
         </div>
       </div>
