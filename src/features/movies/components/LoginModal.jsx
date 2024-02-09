@@ -15,11 +15,14 @@ import {
   changePassword,
   checkDelete,
   checkPasswordChange,
+  checkLimitUser,
+  limitUser,
 } from "../accountSlice";
 import { loginUser, registerUser } from "../../../utils/apis";
 import axios from "axios";
 import Joi from "joi";
 import { useCookies } from "react-cookie";
+import { tlds } from "@hapi/tlds";
 
 const LoginModal = () => {
   const email = useSelector(selectEmail);
@@ -28,12 +31,24 @@ const LoginModal = () => {
   const dispatch = useDispatch();
   const isDeleteClicked = useSelector(checkDelete);
   const changePasswordSelected = useSelector(checkPasswordChange);
+  const limit = useSelector(checkLimitUser);
   const [cookies, setCookie] = useCookies(["user"]);
 
   const schema = Joi.object({
-    Email: Joi.string().email({
-      tlds: { allow: false },
-    }),
+    Email: Joi.string()
+      .email({
+        // minDomainSegments: 2,
+        tlds: { allow: tlds },
+      })
+      .required(),
+    Password: Joi.string()
+      .pattern(new RegExp("^[a-zA-Z0-9]{6,25}$"))
+      .required()
+      .messages({
+        "string.pattern.base": `Password should be between 6 to 25 characters and contain letters or numbers only`,
+        "string.empty": `Password cannot be empty`,
+        "any.required": `Password is required`,
+      }),
   });
 
   const register = async () => {
@@ -48,7 +63,7 @@ const LoginModal = () => {
       return;
     }
     try {
-      await schema.validateAsync({ Email: email });
+      await schema.validateAsync({ Email: email, Password: password });
       const api = registerUser(email, password);
       try {
         const registerResult = await axios.post(api);
@@ -86,8 +101,13 @@ const LoginModal = () => {
       const loginResult = await axios.post(api);
       const loginStatus = loginResult.data.status;
       const loginToken = loginResult.data.token;
-      // console.log(loginStatus, token);
       dispatch(setMessage(loginStatus));
+      if (loginStatus === 200) {
+        dispatch(limitUser());
+        setTimeout(() => {
+          dispatch(limitUser());
+        }, 60000);
+      }
       if (loginStatus === 1) {
         dispatch(setLogIn());
         dispatch(clearInputs());
@@ -153,7 +173,12 @@ const LoginModal = () => {
             <p className="message">{message}</p>
             <i className="far fa-eye" />
             <div className="loginButtonDiv">
-              <button type="submit" className="loginButton" onClick={login}>
+              <button
+                disabled={limit}
+                type="submit"
+                className="loginButton"
+                onClick={login}
+              >
                 Login
               </button>
             </div>

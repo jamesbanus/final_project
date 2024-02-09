@@ -12,7 +12,7 @@ import {
   selectSearch,
   setSearchResults,
   selectSearchResults,
-  setGenreApiResults,
+  // setGenreApiResults,
   genreApiResults,
   selectCheckedGenreArray,
   setRatingsData,

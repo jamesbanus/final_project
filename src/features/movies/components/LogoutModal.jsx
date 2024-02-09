@@ -78,7 +78,7 @@ const LogoutModal = () => {
     try {
       const deleteResult = await axios.delete(api);
       const deleteStatus = deleteResult.data.status;
-      console.log(deleteResult.data.status);
+      //   console.log(deleteResult.data.status);
       if (deleteStatus === 0) {
         dispatch(setMessage("Password Incorrect"));
       }

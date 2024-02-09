@@ -4,6 +4,7 @@ const initialState = {
   loggedIn: false,
   message: "",
   delete: false,
+  limitUser: false,
 };
 
 const accountSlice = createSlice({
@@ -37,6 +38,8 @@ const accountSlice = createSlice({
         state.message = "Bad E-mail or Password";
       } else if (action.payload === 2) {
         state.message = "Already Registered! Please Log In";
+      } else if (action.payload === 200) {
+        state.message = "Limit Exceeded, please wait 1 minute";
       } else {
         state.message = action.payload;
       }
@@ -53,6 +56,10 @@ const accountSlice = createSlice({
     changePassword: (state) => {
       state.passwordChange = !state.passwordChange;
     },
+    limitUser: (state, action) => {
+      state.limitUser = !state.limitUser;
+      console.log(state.limitUser);
+    },
   },
 });
 
@@ -68,6 +75,7 @@ export const {
   changePassword,
   setNewPassword,
   confirmNewPassword,
+  limitUser,
 } = accountSlice.actions;
 
 export const selectEmail = (state) => state.account.email;
@@ -79,5 +87,6 @@ export const checkDelete = (state) => state.account.delete;
 export const checkPasswordChange = (state) => state.account.passwordChange;
 export const selectPassword2 = (state) => state.account.password2;
 export const selectPassword3 = (state) => state.account.password3;
+export const checkLimitUser = (state) => state.account.limitUser;
 
 export default accountSlice.reducer;
