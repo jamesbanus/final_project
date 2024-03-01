@@ -17,6 +17,10 @@ import {
   checkPasswordChange,
   checkLimitUser,
   limitUser,
+  checkRegisterRequest,
+  registerRequest,
+  checkPassword,
+  checkPasswordMatch,
 } from "../accountSlice";
 import { loginUser, registerUser } from "../../../utils/apis";
 import axios from "axios";
@@ -33,6 +37,8 @@ const LoginModal = () => {
   const changePasswordSelected = useSelector(checkPasswordChange);
   const limit = useSelector(checkLimitUser);
   const [cookies, setCookie] = useCookies(["user"]);
+  const registerRequested = useSelector(checkRegisterRequest);
+  const passwordCheck = useSelector(checkPasswordMatch);
 
   const schema = Joi.object({
     Email: Joi.string()
@@ -62,6 +68,11 @@ const LoginModal = () => {
       dispatch(setMessage(message));
       return;
     }
+    if (passwordCheck !== password) {
+      const message = "Passwords do not match";
+      dispatch(setMessage(message));
+      return;
+    }
     try {
       await schema.validateAsync({ Email: email, Password: password });
       const api = registerUser(email, password);
@@ -75,6 +86,7 @@ const LoginModal = () => {
           dispatch(clearInputs());
           dispatch(closeLogin());
           dispatch(setToken(loginToken));
+          dispatch(registerRequest(false));
           setCookie("user", loginToken, { path: "/" });
         }
       } catch (error) {
@@ -112,6 +124,7 @@ const LoginModal = () => {
         dispatch(setLogIn());
         dispatch(clearInputs());
         dispatch(closeLogin());
+        dispatch(registerRequest(false));
         dispatch(setToken(loginToken));
         setCookie("user", loginToken, { path: "/" });
         if (isDeleteClicked) {
@@ -137,6 +150,7 @@ const LoginModal = () => {
               onClick={() => {
                 dispatch(closeLogin());
                 dispatch(clearInputs());
+                dispatch(registerRequest(false));
               }}
             >
               X
@@ -183,15 +197,45 @@ const LoginModal = () => {
               </button>
             </div>
             <p> or </p>
-            <div className="registerButtonDiv">
-              <button
-                type="submit"
-                className="registerButton"
-                onClick={register}
-              >
-                Register
-              </button>
-            </div>
+            {!registerRequested ? (
+              <div className="registerButtonDiv">
+                <button
+                  type="submit"
+                  className="registerButton"
+                  onClick={() => {
+                    dispatch(registerRequest(true));
+                  }}
+                >
+                  Register
+                </button>
+              </div>
+            ) : (
+              <>
+                <label htmlFor="psw2" className="pswLabel2">
+                  Re-Enter Password
+                </label>
+                <input
+                  value={passwordCheck || ""}
+                  type="password"
+                  placeholder="Enter Password"
+                  name="psw2"
+                  required
+                  className="pswInput2"
+                  onInput={(e) => dispatch(checkPassword(e.target.value))}
+                />
+                <p className="message2">{message}</p>
+                <i className="far fa-eye" />
+                <div className="registerButtonDiv">
+                  <button
+                    type="submit"
+                    className="registerButton"
+                    onClick={register}
+                  >
+                    Register
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </aside>

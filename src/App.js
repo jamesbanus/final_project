@@ -42,14 +42,13 @@ const App = () => {
   const [cookies] = useCookies(["user"]);
   const cookieToken = cookies.user;
 
+  // console.log(ratingsData);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchContent());
   }, [dispatch]);
-
-  // const contents = useSelector((state) => state.movies.genreApiResults);
-  // console.log(contents);
 
   const genreApiString = genre?.toString();
   // let genreApiString = genreString?.replace(/,/g, "|");

@@ -1,32 +1,38 @@
 @media only screen and (max-width: 899px) {
-  .movie {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: 5px 5px 5px 5px;
-    .moviePoster {
-      max-width: 100px;
-      height: auto;
-    }
-    .movieTitle {
-      font-size: 12px;
+  .relatedFilmsDiv {
+    overflow: hidden;
+    .movie {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 5px 5px 5px 5px;
+      .moviePoster {
+        max-width: 100px;
+        height: auto;
+      }
+      .movieTitle {
+        font-size: 12px;
+      }
     }
   }
 }
 
 @media only screen and (min-width: 900px) {
-  .movie {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding: 10px 10px 10px 10px;
-    max-width: 185px;
-    .moviePoster {
+  .relatedFilmsDiv {
+    overflow: hidden;
+    .movie {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      padding: 10px 10px 10px 10px;
       max-width: 185px;
-      max-height: 278px;
-    }
-    .movieTitle {
-      font-size: 16px;
+      .moviePoster {
+        max-width: 185px;
+        max-height: 278px;
+      }
+      .movieTitle {
+        font-size: 16px;
+      }
     }
   }
 }

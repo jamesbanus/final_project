@@ -5,6 +5,7 @@ const initialState = {
   message: "",
   delete: false,
   limitUser: false,
+  registerRequest: false,
 };
 
 const accountSlice = createSlice({
@@ -16,6 +17,9 @@ const accountSlice = createSlice({
     },
     setPassword: (state, action) => {
       state.password = action.payload;
+    },
+    checkPassword: (state, action) => {
+      state.passwordCheck = action.payload;
     },
     setNewPassword: (state, action) => {
       state.password2 = action.payload;
@@ -32,6 +36,7 @@ const accountSlice = createSlice({
       state.message = "";
       state.password2 = "";
       state.password3 = "";
+      state.passwordCheck = "";
     },
     setMessage: (state, action) => {
       if (action.payload === 0) {
@@ -58,7 +63,10 @@ const accountSlice = createSlice({
     },
     limitUser: (state, action) => {
       state.limitUser = !state.limitUser;
-      console.log(state.limitUser);
+      //   console.log(state.limitUser);
+    },
+    registerRequest: (state, action) => {
+      state.registerRequest = action.payload;
     },
   },
 });
@@ -66,6 +74,7 @@ const accountSlice = createSlice({
 export const {
   setEmail,
   setPassword,
+  checkPassword,
   setLogIn,
   clearInputs,
   setMessage,
@@ -76,6 +85,7 @@ export const {
   setNewPassword,
   confirmNewPassword,
   limitUser,
+  registerRequest,
 } = accountSlice.actions;
 
 export const selectEmail = (state) => state.account.email;
@@ -88,5 +98,7 @@ export const checkPasswordChange = (state) => state.account.passwordChange;
 export const selectPassword2 = (state) => state.account.password2;
 export const selectPassword3 = (state) => state.account.password3;
 export const checkLimitUser = (state) => state.account.limitUser;
+export const checkRegisterRequest = (state) => state.account.registerRequest;
+export const checkPasswordMatch = (state) => state.account.passwordCheck;
 
 export default accountSlice.reducer;

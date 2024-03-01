@@ -1,7 +1,7 @@
 @media only screen and (min-width: 1px) {
   .loginModalContainer {
     max-width: 80%;
-    max-height: 40%;
+    max-height: 50%;
     background-color: #ffffff;
     border-style: solid;
     position: absolute;
@@ -75,6 +75,18 @@
         }
         p {
           margin: 0;
+        }
+        .pswLabel2 {
+          font-weight: bold;
+          padding: 10px 0px 10px 0px;
+        }
+        .pswInput2 {
+          width: 80%;
+          font-size: 16px;
+        }
+        .message2 {
+          margin: 10px 0px 0px 0px;
+          color: #ff0000;
         }
         .registerButtonDiv {
           padding: 10px 0px 10px 0px;

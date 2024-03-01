@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { setRating } from "../moviesSlice";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { Tooltip } from "react-tooltip";
 
 const Movie = (props) => {
   const { movies, changeScreen, ratingsData } = props;
@@ -61,19 +62,33 @@ const Movie = (props) => {
                   </div>
                   <div className="ratingBar">
                     {item.rating === undefined ? (
-                      <CircularProgressbar
-                        value={0}
-                        text={`?`}
-                        background={true}
-                      />
+                      <div data-tooltip-id="ratingToolTip1">
+                        <CircularProgressbar
+                          value={0}
+                          text={`?`}
+                          background={true}
+                        />
+                      </div>
                     ) : (
-                      <CircularProgressbar
-                        value={item.rating}
-                        text={`${item.rating}%`}
-                        background={true}
-                      />
+                      <div data-tooltip-id="ratingToolTip2">
+                        <CircularProgressbar
+                          value={item.rating}
+                          text={`${item.rating}%`}
+                          background={true}
+                        />
+                      </div>
                     )}
                   </div>
+                  <Tooltip
+                    id="ratingToolTip1"
+                    place="top"
+                    content="Be The First to Rate this Movie"
+                  />
+                  <Tooltip
+                    id="ratingToolTip2"
+                    place="top"
+                    content="Average User Rating"
+                  />
                 </div>
               </>
             </Fragment>

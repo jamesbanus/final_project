@@ -11,6 +11,7 @@ import {
 import "./Favourites.scss";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { Tooltip } from "react-tooltip";
 
 const Favourite = (props) => {
   const { id, changeScreen, ratingsData } = props;
@@ -160,15 +161,33 @@ const Favourite = (props) => {
               <h1 className="fMovieTitle">{item.title}</h1>
               <div className="favRatingBar">
                 {item.rating === undefined ? (
-                  <CircularProgressbar value={0} text={`?`} background={true} />
+                  <div data-tooltip-id="ratingToolTip1">
+                    <CircularProgressbar
+                      value={0}
+                      text={`?`}
+                      background={true}
+                    />
+                  </div>
                 ) : (
-                  <CircularProgressbar
-                    value={item.rating}
-                    text={`${item.rating}%`}
-                    background={true}
-                  />
+                  <div data-tooltip-id="ratingToolTip2">
+                    <CircularProgressbar
+                      value={item.rating}
+                      text={`${item.rating}%`}
+                      background={true}
+                    />
+                  </div>
                 )}
               </div>
+              <Tooltip
+                id="ratingToolTip1"
+                place="top"
+                content="Be The First to Rate this Movie"
+              />
+              <Tooltip
+                id="ratingToolTip2"
+                place="top"
+                content="Average User Rating"
+              />
             </div>
           );
         })}

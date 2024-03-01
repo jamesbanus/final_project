@@ -110,8 +110,20 @@ export const moviesSlice = createSlice({
           return false;
         }
       });
+
+      const index2 = state.searchResults.results.findIndex((item) => {
+        if (item.id === action.payload.id) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
       if (index > -1) {
         state.movies.results[index].rating = action.payload.avgRating;
+      }
+      if (index2 > -1) {
+        state.searchResults.results[index2].rating = action.payload.avgRating;
       }
     },
     setSingleMovieRating: (state, action) => {
